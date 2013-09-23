@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>技术嘉年华</title>
+
+<link type="text/css" href="css/common.css" rel="stylesheet" />
+
+<!--[if IE 6]> 
+
+<link type="text/css" href="css/IE6.css" rel="stylesheet" />
+
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+</head>
+
+
+
+<body>
+
+<!--S:Header-->
+<!--E:Header-->
+
+
+
+<!--S:Navigation-->
+<!--E:Navigation-->
+
+
+
+<!--S:Container-->
+
+<div id="container">
+
+<div id="containerB">
+
+	<div class="home-bd-top">
+
+    	<div class="bdA">
+
+       
+
+            <div id="forceFeed" class="home-slide-eff">
+
+            	<div class="cont">
+
+                    <ul>
+
+						<li><img src="pic/10.jpg" /></li>
+
+                        <li style=" display:none;"><a href="/about/#works"><img src="pic/6.jpg" /></a></li>
+
+                        <li style=" display:none;"><img src="pic/1.jpg" /></li>                        
+
+                        <li style=" display:none;"><img src="pic/2.jpg" /></li>
+
+                        <li style=" display:none;"><img src="pic/3.jpg" /></li>
+
+                        <li style=" display:none;"><img src="pic/4.jpg" /></li>
+
+                        <li style=" display:none;"><img src="pic/5.jpg" /></li>
+
+                        
+
+                    </ul>
+
+                </div>
+
+                <div class="num">
+
+                	<ul>
+
+                    	<li class="cur"><span class="n1">1</span></li>
+
+                        <li><span class="n2">2</span></li>
+
+                        <li><span class="n3">3</span></li>
+
+                        <li><span class="n4">4</span></li>
+
+                        <li><span class="n5">5</span></li>
+
+						<li><span class="n6">6</span></li>
+
+                        <li><span class="n7">7</span></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="balloon">
+
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="140" height="190"> 
+
+                <param name="movie" value="images/balloon.swf"> 
+
+                <param name="wmode" value="transparent"> 
+
+                <!--[if !IE]>--> 
+
+                <object type="application/x-shockwave-flash" data="images/balloon.swf" width="140" height="190"> 
+
+                    <param name="wmode" value="transparent"> 
+
+                </object> 
+
+                <!--<![endif]--> 
+
+            </object>
+
+            <!--<embed src="images/balloon.swf" pluginspage="http://www.adobe.com/shockwave/download/" quality="high" wmode="transparent" width="140" height="190"></embed>-->
+
+            </div>
+
+        </div>
+
+        
+
+        <div class="bdB">
+
+        	<b class="hd79">7.9号</b>
+
+            <ul class="bd79 clr" style="margin-left:115px;">
+
+            	<li><a href="/about/?f=0" class="t1">D2</a></li>
+
+                <li></li>
+
+                <li><a href="/about/?f=1" class="t2">TCon</a></li>
+
+                <li></li>
+
+                <li><a href="/about/?f=5" class="t3">淘宝技术专场</a></li>
+
+                <!--<li></li>
+
+                <li><a href="#" class="t4">过程改进专场</a></li>-->
+
+            </ul>
+
+            <b class="hd710">7.10号</b>
+
+            <ul class="bd710 clr">
+
+            	<li><a href="/about/?f=2" class="t1">iConference</a></li>
+
+                <li></li>
+
+                <li><a href="/about/?f=3" class="t2">iDataForum</a></li>
+
+                <li></li>
+
+                <li><a href="/about/?f=4" class="t3">设计大会</a></li>
+
+                <li></li>
+
+                <li><a href="/about/?f=5" class="t4">淘宝技术专场</a></li>
+
+            </ul>
+
+        </div>
+
+        <b class="home-top-blank"></b>
+
+    </div>
+
+    
+
+    <!--S:Club基金-->
+
+    <div class="club-fund clr-text">
+
+    	Club基金来源于企业或者社会组织给予的赞助资金，Club基金将全部服务于工程师，是工程师技术创新、开放分享的基础支持。
+
+    </div>
+
+    <!--E:Club基金-->
+</div>
+</div>
+
+<!--E:Container-->
+<script type="text/javascript"> 
+    (function ($) {
+        $.fn.extend({
+            forceFeed: function () {
+                this0 = this;
+                this0.intval = '';
+                this0.Curent = 2;
+                timeOut = function () {
+                    if (isNaN(this0.Curent) || this0.Curent < 1) {
+                        this0.Curent = 1;
+                    }
+                    if (this0.Curent > 7) {
+                        this0.Curent = 1;
+                    }
+                    showCurent(this0.Curent);
+                    this0.Curent++;
+                }
+ 
+                showCurent = function (page) {
+                    if (isNaN(page)) return false;
+                    var imgLi = $("div.cont", this0).find("li");
+                    var iconLi = $("div.num", this0).get(0).getElementsByTagName('li');
+                    if (page < 1 || page > imgLi.length) return false;
+                    var i = 1;
+                    this0.Curent = page;
+                    imgLi.each(function () {
+                        if (this.style.display != "none") {
+                            if (i != page) {
+                                $(this).hide();
+                            }
+                        }
+                        if (i == page) {
+                            $(this).show().css({ opacity: 0.2 }).animate({ opacity: 1 }, 500);
+                            iconLi[i - 1].className = 'cur';
+                        } else {
+                            iconLi[i - 1].className = '';
+                        }
+                        i++;
+                    });
+                }
+                $("div.num", this0).find('li').click(function () {
+                    showCurent($.trim($(this).find("span").text()));
+                });
+                this0.hover(function () {
+                    clearInterval(this0.intval);
+                }, function () {
+                    this0.intval = setInterval('timeOut()', 3500);
+                }).trigger('mouseleave');
+            }
+        });
+    })(jQuery);
+ 
+ 
+    $(function () {
+        $("#forceFeed").forceFeed();
+        $('#followus li').each(function () {
+            var o = $(this);
+            o.find('a').click(function () {
+                $('#followus li').removeClass('cur');
+                o.toggleClass('cur');
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

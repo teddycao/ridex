@@ -1,0 +1,297 @@
+
+/** */
+x-accordion-hd img.add,
+.x-tree-node-leaf img.add,
+.x-tree-node-expanded img.add,
+.x-tree-node-collapsed img.add {
+    background: url('../images/icons/add.gif') no-repeat;
+}
+
+x-accordion-hd img.go,
+.x-tree-node-leaf img.go,
+.x-tree-node-expanded img.go,
+.x-tree-node-collapsed img.go {
+    background: url('../images/icons/application_go.png') no-repeat;
+}
+
+x-accordion-hd img.delete,
+.x-tree-node-leaf img.delete,
+.x-tree-node-expanded img.delete,
+.x-tree-node-collapsed img.delete {
+    background: url('../images/icons/delete.gif') no-repeat;
+}
+
+x-accordion-hd img.edit,
+.x-tree-node-leaf img.edit,
+.x-tree-node-expanded img.edit,
+.x-tree-node-collapsed img.edit {
+    background: url('../images/icons/cog_edit.png') no-repeat;
+}
+
+x-accordion-hd img.refresh,
+.x-tree-node-leaf img.refresh,
+.x-tree-node-expanded img.refresh,
+.x-tree-node-collapsed img.refresh {
+    background: url('../images/icons/table_refresh.png') no-repeat;
+}
+
+x-accordion-hd img.expand,
+.x-tree-node-leaf img.expand,
+.x-tree-node-expanded img.expand,
+.x-tree-node-collapsed img.expand {
+    background: url('../images/icons/folder_go.png') no-repeat;
+}
+
+x-accordion-hd img.collapse,
+.x-tree-node-leaf img.collapse,
+.x-tree-node-expanded img.collapse,
+.x-tree-node-collapsed img.collapse {
+    background: url('../images/icons/folder_wrench.png') no-repeat;
+}
+
+x-accordion-hd img.config,
+.x-tree-node-leaf img.config,
+.x-tree-node-expanded img.config,
+.x-tree-node-collapsed img.config {
+    background: url('../images/icons/plugin.gif') no-repeat;
+}
+
+x-accordion-hd img.save,
+.x-tree-node-leaf img.save,
+.x-tree-node-expanded img.save,
+.x-tree-node-collapsed img.save {
+    background: url('save.gif') no-repeat;
+}
+
+x-accordion-hd img.cog,
+.x-tree-node-leaf img.cog,
+.x-tree-node-expanded img.cog,
+.x-tree-node-collapsed img.cog {
+    background: url('../images/icons/cog.png') no-repeat;
+}
+
+x-accordion-hd img.student,
+.x-tree-node-leaf img.student,
+.x-tree-node-expanded img.student,
+.x-tree-node-collapsed img.student {
+    background: url('../images/icons/user.gif') no-repeat;
+}
+
+x-accordion-hd img.wrench,
+.x-tree-node-leaf img.wrench,
+.x-tree-node-expanded img.wrench,
+.x-tree-node-collapsed img.wrench {
+    background: url('../images/icons/folder_wrench.png') no-repeat;
+}
+
+x-accordion-hd img.user_delete,
+.x-tree-node-leaf img.user_delete,
+.x-tree-node-expanded img.user_delete,
+.x-tree-node-collapsed img.user_delete {
+    background: url('../images/icons/user_delete.png') no-repeat;
+}
+
+.welcome {
+    background: url('../login/home16.png') no-repeat;
+}
+
+
+
+
+
+.x-tree-node-checkbox-all {
+    padding:0px;
+    margin:0px;
+    width:16px;
+    vertical-align:middle;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image:url('../images/icons/checkboxchecked.gif');
+}
+.x-tree-node-checkbox-none {
+    padding:0px;
+    margin:0px;
+    width:16px;
+    vertical-align:middle;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image:url('../images/icons/checkbox.gif');
+}
+.x-tree-node-checkbox-some {
+    padding:0px;
+    margin:0px;
+    width:16px;
+    vertical-align:middle;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image:url('../images/icons/checkboxsomechecked.gif');
+}
+
+/* tree checkbox, height/width needed b/c of IE spacing weirdly, breaks lines */
+input.l-tcb {
+    height:13px;
+    width:13px;
+    margin-left:2px
+}
+
+
+/* fix scrolling issue with treeobj in a contentpanel
+ * and loss of icons when a node is expanded
+*/
+.ext-ie .x-tree {
+    position:static !important;
+}
+
+
+
+
+
+
+
+/**
+*
+*/
+
+
+
+
+.add, .x-btn .add {
+    background: url('../images/fam/add.gif');
+}
+
+.add, .x-btn .add {
+    background: url('../images/icons/easyui/edit_add.png');
+}
+
+.go, .x-btn .go {
+    background: url('../images/fam/application_go.png');
+}
+.delete, .x-btn .delete {
+    background: url('../images/fam/delete.gif');
+}
+
+.delete, .x-btn .delete {
+  background: url('../images/icons/easyui/edit_remove.png');
+}
+.edit, .x-btn .edit {
+    background: url('../images/fam/cog_edit.png');
+}
+
+.edit, .x-btn .edit {
+    background: url('../images/icons/easyui/pencil.png');
+}
+
+.holly {
+    background: url('../images/icons/sys/installer-box-icon.png');
+}
+
+.nav_magr {
+    background: url('../images/icons/sys/system-taskbar-start-menu-icon.png');
+}
+
+.refresh, .x-btn .refresh {
+    background: url('../images/fam/table_refresh.png');
+}
+.expand, .x-btn .expand {
+    background: url('../images/fam/folder_go.png');
+}
+.collapse, .x-btn .collapse {
+    background: url('../images/fam/folder_wrench.png');
+}
+.config, .x-btn .config {
+    background: url('../images/fam/plugin.gif');
+}
+.save, .x-btn .save {
+    background: url('login/save.gif');
+}
+.cog, .x-btn .cog {
+    background: url('../images/fam/cog.png');
+}
+.student, .x-btn .student {
+    background: url('../images/fam/user.gif');
+}
+.wrench, .x-btn .wrench {
+    background: url('../images/fam/folder_wrench.png');
+}
+.user_delete, .x-btn .user_delete {
+    background: url('../images/fam/user_delete.png');
+}
+
+.findIcon {
+    background: url('../images/icons/sys/Search-2-icon24.png');
+}
+
+.filter {
+    background: url('../images/icons/sys/file-explore-icon16.png');
+}
+
+.ref_all {
+    background: url('../images/refresh-icon24.png');
+}
+
+.form_tip {
+	background-image:url('../images/icons/sys/Girls-Red-Dress-icon128.png')!important;
+}
+
+
+/** */
+.user{
+    background:url("fam/user.gif") no-repeat 1px 2px;
+}
+.key{
+    background:url("login/key.gif") no-repeat 1px 2px;
+}
+.key, .user{
+    background-color: #FFFFFF;
+    padding-left: 20px;
+    font-weight: bold;
+    color: #000033;
+}
+.key.x-form-invalid, .user.x-form-invalid{
+    border:2px solid #dd7870;
+}
+
+/** */
+
+.loading-indicator {
+    font-size:11px;
+    background-image:url('login/loading.gif');
+    background-repeat: no-repeat;
+    background-position:top left;
+    padding-left:20px;
+    height:18px;
+    text-align:left;
+}
+#loading-mask{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:20000;
+    background-color:white;
+}
+#loading{
+    position:absolute;
+    left:45%;
+    top:40%;
+    padding:2px;
+    z-index:20001;
+    height:auto;
+}
+#loading img {
+    margin-bottom:5px;
+}
+#loading .loading-indicator{
+    background:white;
+    color:#555;
+    font:bold 13px tahoma,arial,helvetica;
+    padding:10px;
+    margin:0;
+    text-align:center;
+    height:auto;
+}
+
+
+
+

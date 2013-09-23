@@ -1,0 +1,147 @@
+<#import "/spring.ftl" as spring />
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<#include "/commons/meta.ftl" > 
+<script type="text/javascript">Ext.namespace("App");</script>
+<script src="${ctx}/scripts/ux/Ext.lingo.JsonGrid.js"></script>
+<script src="${ctx}/scripts/ux/Ext.ux.PageSizePlugin.js"></script>
+<script src="${ctx}/scripts/ux/Ext.lingo.TreeField.js"></script>
+<title>${meta.title}数据列表</title>
+</head>
+<body>
+<div id="contentview" align="center">
+</div>
+
+
+<script type="text/javascript">
+<!--
+//${RequestParameters.name}
+var qSPannel;
+var rescGrid;
+var dlgWidth = 500;
+var dlgHeight = 600;
+<#list meta.columnMetas as col>
+   <#if col.showInAddForm?exists>
+   <#if col.dictName?exists>
+	var sel_${col.colName} = new Ext.data.SimpleStore({
+          fields: ['name', 'val'],
+          data : [
+	         <#list col.dictMap?keys as itemKey>   
+		     <#assign item = col.dictMap[itemKey]>
+			['${item}','${itemKey}']
+			<#if itemKey_has_next>,</#if>
+		  </#list>
+	         ]
+      });
+
+   </#if>
+   </#if>
+</#list>
+
+
+ var formNewConfig ={
+            xtype:'fieldset',
+			layout:'form',
+            title: '${meta.title}维护',
+            collapsible: true,
+            autoHeight:true,
+            width:dlgWidth-50,
+            defaults: {width: 130},
+            defaultType: 'textfield', items :[
+	   { xtype:'textfield',id:'name', name:'name',value:'${meta.beanName}', hidden:true, hideLabel:true},
+	
+	    <#list meta.columnMetas as col>
+	       <#if col.showInEditForm?exists>
+		<@renderFormconfig col=col/>
+		
+		<#if col_has_next>,</#if>
+  	     </#if>
+			
+	    </#list>
+		
+    ]};
+
+<#macro renderFormconfig col param...>
+       <#switch col.viewType>
+		 <#case "combo">
+		{xtype: 'combo',fieldLabel: '${col.title}',hiddenName: '${col.colName}', value:'',
+			     typeAhead: true,triggerAction: 'all',displayField:'name',valueField:'val',
+			     store: sel_${col.colName}, mode: 'local',editable: false}
+		<#break>
+               <#default>
+		{xtype:'textfield',fieldLabel: '${col.title}', name: '${col.colName}',width: 180}
+ 		</#switch>
+		
+</#macro>
+/**
+ * 通用数据展示grid
+ */
+App.RescGrid = Ext.extend(Ext.lingo.HutJsonGrid, {
+    id: 'list_${meta.tableName}',
+	beanName:'${meta.beanName}',
+	primaryKey:primaryKey,
+	flex:1,
+	pageSize:20,
+    urlPagedQuery: "${ctx}/s/hut/loadPageData.do?name=${meta.beanName}",
+    urlLoadData: "${ctx}/s/hut/loadData.do",
+	loadOneData: '${ctx}/s/hut/loadOneData.do',
+    urlSave: "${ctx}/s/hut/add.do",
+    urlRemove: "${ctx}/s/hut/remove.do",
+	urlUpdate: "${ctx}/s/hut/update.do",
+    dlgWidth: dlgWidth,
+    dlgHeight: dlgHeight,
+    formConfig:formViewConfig,
+	formEditConfig:formEditConfig,
+	formNewConfig:formNewConfig,
+	recordMapping:recordMapping
+	
+});
+
+
+
+
+
+
+//----------------Grid上方查询栏-----------
+App.QPannel = Ext.extend(Ext.Panel, {
+	frame: false,
+	id: 'queryForm',
+	height: 40,
+    flex:2,
+	defaultType: 'textfield',
+    buildBar: function() {},
+	tbar: {
+		height:60,
+		items:[{
+                text: '操作设置',
+                iconCls: 'holly',
+                //scale: 'medium',
+                iconAlign: 'top',
+				menu: [{text: '文件导入'}]
+            },'-','&nbsp;']}
+
+});
+
+
+Ext.onReady(function(){
+   
+    Ext.QuickTips.init();
+    rescGrid = new App.RescGrid();
+	qSPannel = new App.QPannel();
+     var viewport = new Ext.Viewport({
+                layout: 'vbox',
+                anchorSize: {width:800, height:600},
+					items:[qSPannel,rescGrid]
+            });
+
+	//store.load({params:{start:0, limit:30}});
+});	
+
+//-->
+</script>
+</body>
+</html>

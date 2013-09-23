@@ -1,0 +1,54 @@
+SET DEFINE OFF;
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, MENU_NAME, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10033, '业务报表', 'T', 'MenuItem-10033', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10034, 10033, '国际业务部', 'T', 'MenuItem-10034', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION, RPT_ID)
+ Values
+   (10040, 10034, '结售汇情况统计表', '/index.jsp', 'T', 'MenuItem-10040', 1, 'BOCO001');
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, MENU_NAME, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10031, '平台管理', 'T', 'MenuItem-10031', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10032, 10031, '系统管理', 'T', 'MenuItem-10032', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10035, 10032, '用户管理', '/ridex/s/listUsers.do', 'T', 'MenuItem-10035', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10036, 10032, '角色管理', '/ridex/s/listRoles.do', 'T', 'MenuItem-10036', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10037, 10032, '菜单管理', '/ridex/s/listMenutrees.do', 'T', 'MenuItem-10037', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10038, 10032, '资源管理', '/ridex/s/listPermissions.do', 'T', 'MenuItem-10038', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10039, 10032, '机构管理', '/ridex/s/listOrgtrees.do', 'T', 'MenuItem-10039', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10009, 10031, '报表管理', 'T', 'MenuItem-10009', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10010, 10009, '报表参数', '/ridex/s/listRptParamManagers.do', 'T', 'MenuItem-10010', 1);
+Insert into RIDEX.AL_CORE_MENU_ITEM
+   (ID, PARENT_ID, MENU_NAME, LOCATION, IS_LEAF, IDENTIFIER, VERSION)
+ Values
+   (10011, 10009, '报表信息', '/ridex/s/listRptInfoManagers.do', 'T', 'MenuItem-10011', 1);
+COMMIT;

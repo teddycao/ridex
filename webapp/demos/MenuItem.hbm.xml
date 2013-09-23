@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.MenuItem" table="al_core_menu_item"
+		lazy="false">
+
+		<id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+			<generator class="sequence">   
+                <param name="sequence">RESOURCE_ID_SEQ</param>   
+            </generator>
+		</id>
+
+		<version name="version" column="version" type="long" unsaved-value="null" />
+
+		<many-to-one name="parentItem"
+			class="org.inwiss.platform.model.core.MenuItem" cascade="none"
+			outer-join="false" update="true" insert="true" column="parent_id"
+			not-null="false" />
+
+		<bag name="childItems" lazy="true" inverse="true" cascade="delete"
+			order-by="pos" outer-join="false">
+			<key column="parent_id"/>
+			<one-to-many class="org.inwiss.platform.model.core.MenuItem" />
+
+		</bag>
+
+		<property name="identifier" type="java.lang.String" update="true"
+			insert="true">
+			<column name="identifier" length="252" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="align" type="java.lang.String" update="true" insert="true">
+			<column name="align" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="style" type="java.lang.String" update="true" insert="true">
+			<column name="style" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="styleClass" type="java.lang.String" update="true" insert="true">
+			<column name="style_class" length="252" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="styleId" type="java.lang.String" update="true"	insert="true">
+			<column name="style_id" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="image" type="java.lang.String" update="true"
+			insert="true">
+			<column name="image" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="altImage" type="java.lang.String" update="true"
+			insert="true">
+			<column name="alt_image" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="action" type="java.lang.String" update="true"
+			insert="true">
+			<column name="action" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="forward" type="java.lang.String" update="true"
+			insert="true">
+			<column name="forward" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="location" type="java.lang.String" update="true"
+			insert="true">
+			<column name="location" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="externalLocation" type="true_false" update="true"
+			insert="true" column="external_location" not-null="true" />
+
+		<property name="anchor" type="java.lang.String" update="true"
+			insert="true">
+			<column name="anchor" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="target" type="java.lang.String" update="true"
+			insert="true">
+			<column name="target" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="visibility" type="java.lang.Byte" update="true"
+			insert="true">
+			<column name="visibility" not-null="true" unique="false" />
+		</property>
+
+		<property name="position" type="java.lang.Integer" update="true"
+			insert="true">
+			<column name="pos" not-null="false" unique="false" />
+		</property>
+
+		<property name="onclick" type="java.lang.String" update="true"
+			insert="true">
+			<column name="js_onclick" length="252" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="onmouseover" type="java.lang.String" update="true"
+			insert="true">
+			<column name="js_onmouseover" length="252" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="onmouseout" type="java.lang.String" update="true"
+			insert="true">
+			<column name="js_onmouseout" length="252" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="hreflang" type="java.lang.String" update="true"
+			insert="true">
+			<column name="hreflang" length="252" not-null="false" unique="false" />
+		</property>
+
+		<bag name="roles" table="al_core_menu_item_role" lazy="true"
+			inverse="false" cascade="none" outer-join="false">
+			<cache usage="read-write" />
+			<key column="menu_item_id">
+			</key>
+			<many-to-many class="org.inwiss.platform.model.core.Role"
+				column="rolename" outer-join="false" />
+		</bag>
+
+		<many-to-one name="origItem"
+			class="org.inwiss.platform.model.core.MenuItem" cascade="none"
+			outer-join="false" update="true" insert="true" column="orig_id"
+			not-null="false" />
+
+		<bag name="redefinitionItems" lazy="true" inverse="true" cascade="delete"
+			outer-join="false">
+
+			<key column="orig_id">
+			</key>
+
+			<one-to-many class="org.inwiss.platform.model.core.MenuItem" />
+
+		</bag>
+
+		<many-to-one name="owner"
+			class="org.inwiss.platform.model.core.Localizable" cascade="none"
+			outer-join="false" update="true" insert="true" column="owner_id"
+			not-null="false" />
+
+
+		<!-- bag name="linkedResources" table="al_core_menu_item_resource"
+			lazy="true" inverse="false" cascade="none" outer-join="false">
+
+			<key column="menu_item_id">
+			</key>
+
+			<many-to-many class="org.inwiss.platform.model.core.ContentResource"
+				column="resource_id" outer-join="false" />
+
+		</bag-->
+
+
+
+
+		<!--bag name="linkedPages" table="al_core_menu_item_page" lazy="true"
+			inverse="false" cascade="none" outer-join="false">
+			<key column="menu_item_id">
+			</key>
+			<many-to-many class="org.inwiss.platform.model.core.Page"
+				column="page_id" outer-join="false" />
+		</bag!-->
+
+
+		<!--map name="title" table="al_core_menu_item_title" lazy="true"
+			sort="unsorted" cascade="all" outer-join="false">
+
+			<key column="id">
+			</key>
+
+			<index column="title_identifier" type="string" length="5" />
+
+			<element column="title" type="string" length="252" not-null="false"
+				unique="false" />
+
+		</map!-->
+
+		<!-- map name="toolTip" table="al_core_menu_item_tooltip" lazy="true"
+			sort="unsorted" cascade="all" outer-join="false">
+
+			<key column="id">
+			</key>
+
+			<index column="tooltip_identifier" type="string" length="5" />
+
+			<element column="tooltip" type="string" length="252"
+				not-null="false" unique="false" />
+
+		</map-->
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="Crud">
+
+
+	<resultMap  id="Crud-DataCount-Result"  type="java.lang.Integer">
+		<result property="value" column="COUNT" />
+	</resultMap>
+	
+    	
+	<select id="crud.getDataList" parameterType="String" resultType="java.util.HashMap">
+     ${value}
+	</select>
+	
+	
+
+    
+    <select id="crud.getDataCount" parameterType="String" resultMap="Crud-DataCount-Result">
+     ${value}
+	</select>
+	
+	
+
+    
+    <update id="crud.update"  >
+		${value}
+	</update>
+    
+</mapper>

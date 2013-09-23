@@ -1,0 +1,3 @@
+<%@page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="java.net.URLDecoder"%>
+{"data":{"address":null,"name":"admin","country":null,"version":1,"password":"21232f297a57a5a743894a0e4a801fc3","enabled":true,"fullName":null,"userId":"admin","rolesAsString":"ROLE_USER","updatePassword":null,"confirmPassword":null,"updateConfirmPassword":null,"firstName":null,"lastName":null,"city":null,"province":null,"postalCode":null,"email":"rd@163.com","phoneNumber":"13398726384","website":null,"freeRolesAsString":"","groupsAsString":"g1","niceName":null,"properties":null,"id":null,"persistentClass":"org.inwiss.platform.model.core.User"},"success":true}

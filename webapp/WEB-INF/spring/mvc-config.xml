@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+        
+	<!-- Configures Spring MVC -->
+	<!-- import resource="ctx-service.xml" /-->
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+	<context:annotation-config/> 
+	
+
+	<!-- Forwards requests to the "/" resource to the "welcome" view -->
+	<mvc:view-controller path="/" view-name="index.do"/>
+	<!-- bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" /-->  
+   <!-- bean class="org.springframework.web.servlet.mvc.support.ControllerBeanNameHandlerMapping"/-->
+   <!--bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/-->
+	
+
+	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+	<context:component-scan base-package="org.inwiss.platform.security.controller.**" />
+	<context:component-scan base-package="org.inwiss.platform.report.**" />
+	<context:component-scan base-package="org.inwiss.platform.cache.**" />
+	<context:component-scan base-package="org.inwiss.platform.dashboard.**" />
+
+	<context:component-scan base-package="com.inwiss.springcrud.web" >
+  			<context:include-filter type="regex" expression="/.controller/..*"/>
+	</context:component-scan>
+	
+	<context:component-scan base-package="org.inwiss.platform.ibatis.**" />
+	
+	
+	<context:component-scan base-package="com.inwiss.apps.fee.controller.**" />
+	<context:component-scan base-package="com.inwiss.apps.fee.persistence.**" />
+	
+	
+	
+	<!-- Application Message Bundle -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/messages/messages" />
+		<property name="cacheSeconds" value="0" />
+	</bean>
+
+   
+    	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
+	<bean id="viewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+
+
+	<bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="true"/>
+		<property name="order" value="1" />
+ 	    <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+		<property name="contentType" value="text/html;charset=utf-8" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="requestContextAttribute" value="rc" />
+		<!-- property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/ -->
+	</bean>
+
+	
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+      <!-- .ftl文件存放的根目录-->
+      <property name="templateLoaderPath" value="/WEB-INF/ftls/"/>
+        <property name="freemarkerSettings">
+	      <props>
+	          <prop key="defaultEncoding">UTF-8</prop>
+	          <prop key="template_update_delay">3</prop>
+	      </props>
+	  </property> 
+    <property name="freemarkerVariables">
+        <map>
+          <entry key="xml_escape" value-ref="fmXmlEscape"/>
+        </map>
+    </property>
+      <!--可以增加其他freemarker的配置，详情请参阅FreeMarkerConfigurerAPI-->
+    </bean>
+    
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+
+	<!-- ContentNegotiatingViewResolver spring REST中的内容协商(同一资源,多种展现:xml,json,html) -->
+  <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="defaultContentType" value="application/json" />
+		<!--property name="defaultContentType" value="text/html" / --> 
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="application/x-www-form-urlencoded" />
+				<entry key="html" value="text/html"/>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+				<entry key="ftl" value="text/html"/>
+				<entry key="js" value="application/x-javascript"/>
+
+			</map>
+		</property>
+		<!-- 用于开启 /userinfo/123?format=json的支持 --> 
+		<property name="favorParameter" value="true" />
+		<!-- true，开启扩展名支持，false关闭支持 -->  
+		 <property name="favorPathExtension" value="false"/>
+		<property name="viewResolvers">
+			<list>
+				<ref bean="viewResolver" />
+				<ref bean="freemarkerResolver" />
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+				</bean>
+
+			</list>
+		</property>
+	</bean>
+    
+    
+      
+   	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">		
+		<property name="defaultErrorView" value="/commons/error" />
+		<property name="exceptionMappings">
+			<props>
+			</props>
+		</property>
+	</bean>
+	
+	  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     	<property name="maxUploadSize" value="1000000"/>
+     </bean> 
+	 
+ 
+   <bean id="jacksonMessageConverter"
+	class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jacksonMessageConverter" />
+			</list>
+		</property>
+	</bean>
+ 
+   
+	   <!-- 
+	AbstractController提供了一个最顶层的Controller模板，用来完成一些基本的任务。AbstractController可以注入以下属性。
+	（1）supportedMethods：设定允许的HTTP请求方式，默认为GET和POST。如果需要PUT、HEAD之类的请求，则需要覆盖默认的设定，不过，通常不需要设定其他HTTP请求方式。
+	（2）requireSession：设定是否需要Session支持，默认为false。如果设定为true，则要求当前请求必须和Session关联，这样可以保证子类在任何时候调用request.getSession()时不会得到null。
+	（3）cacheSeconds：设定HTTP响应头的缓存，默认值为-1，表示不添加任何缓存指令到HTTP响应头；如果设为0，表示完全不缓存；如果设为大于0，表示应当缓存的秒数。
+	（4）synchronizeOnSession：表示来自同一用户的请求是否能并行处理，默认值为false，
+		表示允许同一用户同时向服务器发送多个请求。如果设定为true，则同一用户的请求只能被依次处理，这个设置可以有效控制同一用户对服务器的并发请求，例如，禁止使用多线程下载由Controller生成的文件。
+	 
+  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"
+        p:synchronizeOnSession="true" >
+      <property name = "messageConverters">
+		<list>
+			<bean class = "org.springframework.http.converter.StringHttpMessageConverter">
+				<property name = "supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</list>
+	</property>
+ </bean>-->
+
+ <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" p:synchronizeOnSession="true">
+	<property name="messageConverters">
+		<list>
+			<bean id="utf8StringHttpMessageConverter" class="org.inwiss.platform.util.UTF8StringHttpMessageConverter" />
+		</list>
+	</property>
+</bean>
+ 
+</beans>

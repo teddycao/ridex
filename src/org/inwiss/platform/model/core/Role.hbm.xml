@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.Role" table="al_core_role" lazy="false">
+		<cache usage="read-write" />
+
+		<id name="name" column="rolename" type="java.lang.String" length="40"
+			unsaved-value="null">
+			<generator class="assigned"/>
+		</id>
+
+		<version name="version" column="version" type="long"
+			unsaved-value="null" />
+
+		<property name="title" type="java.lang.String" update="true"
+			insert="true">
+			<column name="title" length="63" not-null="true" unique="true" />
+		</property>
+
+		<property name="description" type="java.lang.String" update="true"
+			insert="true" column="description" length="252" />
+
+
+		<bag name="groups" table="al_core_group_role" lazy="true" inverse="true"
+			cascade="none" outer-join="false">
+
+			<key>
+				<column name="rolename" length="40" />
+			</key>
+
+			<many-to-many class="org.inwiss.platform.model.core.Group"
+				column="groupname" outer-join="false" />
+
+		</bag>
+
+     	 <!-- 一方要设置inverse="true" 
+      		另一方要设置inverse="false" inverse="false"的一方保存时，
+      		维护多对多之间的关系，且只要将相互的关系告诉这一方即可 -->
+			<!-- 如果设置了casade="save-update"，只能设置一方，如果双方都设置的话，
+				当更新一方的时候，同时会更新另一方，另一方的更新又会导致一方的更新。 -->
+		<bag name="menuItems" table="al_core_menu_item_role" lazy="true"
+			inverse="false" cascade="none" outer-join="false">
+			<key column="rolename"/>
+			<many-to-many class="org.inwiss.platform.model.core.MenuItem"
+				column="menu_item_id" outer-join="false" />
+		</bag>
+		
+		
+		
+		<bag name="permissions" table="al_core_permission_role" lazy="true" 
+				inverse="false" cascade="none" outer-join="false">
+
+			<key column="rolename"/>
+			<many-to-many class="org.inwiss.platform.model.core.Permission"
+				column="permission_id" outer-join="false" />
+
+		</bag>
+		
+		<bag name="users" table="AL_CORE_USER_ROLE" lazy="true" 
+				inverse="true" cascade="none" outer-join="false">
+			<key column="rolename"/>
+			<many-to-many class="org.inwiss.platform.model.core.User"
+				column="username" outer-join="false" />
+		</bag>
+		
+		
+		<!--bag name="pages" table="al_core_page_role" lazy="true" inverse="true"
+			cascade="none" outer-join="false">
+
+			<key column="rolename">
+			</key>
+
+			<many-to-many class="org.inwiss.platform.model.core.Page"
+				column="page_id" outer-join="false" />
+
+		</bag-->
+
+
+
+
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+            
+	<bean id="alRptInfo" class="com.inwiss.springcrud.metadata.CrudMeta" init-method="init">
+	
+		<property name="title">
+			<value>报表信息</value>
+		</property>
+		<property name="tableName">
+			<value>AL_RPT_INFO</value>
+		</property>
+		<!--<property name="listView">
+			<value>listView</value>
+		</property>-->
+		<property name="dictFactory">
+			<ref bean="dictFactory"/>
+		</property>
+		<property name="otherWantedParameters">
+			<list>
+				<value></value>
+			</list>
+		</property>
+		<property name="columnMetas">
+			<list>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>报表流水号</value>
+					</property>
+					<property name="colName">
+						<value>INTER_ID</value>
+					</property>
+					<property name="primaryKey">
+						<value>true</value>
+					</property>
+					<property name="editable">
+						<value>false</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>报表编号</value>
+					</property>
+					<property name="colName">
+						<value>RPT_ID</value>
+					</property>
+					<property name="primaryKey">
+						<value>false</value>
+					</property>
+					<property name="editable">
+						<value>false</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>报表名称</value>
+					</property>
+					<property name="colName">
+						<value>RPT_NAME</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>URL</value>
+					</property>
+					<property name="colName">
+						<value>RPT_URL</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>报表描述</value>
+					</property>
+					<property name="colName">
+						<value>RPT_DESC</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>所属部门</value>
+					</property>
+					<property name="colName">
+						<value>RPT_ORG</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>报表状态</value>
+					</property>
+					<property name="colName">
+						<value>RPT_STATU</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>上级节点</value>
+					</property>
+					<property name="colName">
+						<value>PARENT_ID</value>
+					</property>
+				</bean>				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>是否叶子节点</value>
+					</property>
+					<property name="colName">
+						<value>IS_LEAF</value>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>	
+</beans>

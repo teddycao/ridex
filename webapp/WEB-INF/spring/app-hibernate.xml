@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	
+	<!-- bean id="dataSource" class="org.springframework.jdbc.datasource.FasterLazyConnectionDataSourceProxy">
+       <property name="targetDataSource" ref="dataSourceTarget"/>
+    </bean-->
+
+  
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    
+   <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="mappingResources">
+            <list>
+               <value>org/inwiss/platform/model/core/Group.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/User.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/Role.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/UserCookie.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/MenuItem.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/Permission.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/Localizable.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/Org.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/RptInfo.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/RptParam.hbm.xml</value>
+                <value>org/inwiss/platform/model/core/RptAndParam.hbm.xml</value>
+                <!-- Do not remove following line: it's a marker used by code generation tools! -->
+                <!--HBM-INSERTION-POINT-->
+            </list>
+        </property>
+        <!-- The property below is commented out b/c it doesn't work when run via
+             Ant in Eclipse.  It works fine for individual JUnit tests and in IDEA ??
+        <property name="mappingJarLocations">
+            <list><value>WEB-INF/lib/atleap-dao.jar</value></list>
+        </property>
+        -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.provider_configuration_file_resource_path">ehcache-hibernate.xml</prop>
+                <prop key="hibernate.query.substitutions"></prop>
+                <prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop>
+                <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+                <prop key="hibernate.binary_or_blob">binary</prop>
+                <prop key="hibernate.jdbc.batch_size">15</prop>
+                <prop key="hibernate.connection.release_mode">on_close</prop>
+                <!--prop key="jta.UserTransaction">java:comp/UserTransaction</prop>
+                <prop key="hibernate.transaction.flush_before_completion">true</prop>
+                <prop key="hibernate.transaction.auto_close_session">true</prop-->
+           </props>
+        </property>
+
+
+    </bean>
+
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+   <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager"/-->
+
+
+    <!-- UserDAO: Hibernate implementation -->
+    <bean id="userDAO" class="org.inwiss.platform.persistence.hibernate.core.UserDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+
+    <!-- RoleDAO: Hibernate implementation -->
+    <bean id="roleDAO" class="org.inwiss.platform.persistence.hibernate.core.RoleDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+        <property name="userDAO">
+            <ref local="userDAO"/>
+        </property>
+    </bean>
+
+    <!-- GroupDAO: Hibernate implementation -->
+    <bean id="groupDAO" class="org.inwiss.platform.persistence.hibernate.core.GroupDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+
+   <!-- MenuDAO: Hibernate implementation -->
+    <bean id="menuDAO" class="org.inwiss.platform.persistence.hibernate.core.MenuDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+
+   <!-- LocalizableDAO: Hibernate implementation -->
+    <bean id="localizableDAO" class="org.inwiss.platform.persistence.hibernate.core.LocalizableDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="permDAO" class="org.inwiss.platform.persistence.hibernate.core.PermissionDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+    
+        <!-- OrgDAO: Hibernate implementation -->
+    <bean id="orgDAO" class="org.inwiss.platform.persistence.hibernate.core.OrgDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+   
+       <bean id="rptInfoDAO" class="org.inwiss.platform.persistence.hibernate.core.RptInfoDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+    
+    <bean id="rptParamDAO" class="org.inwiss.platform.persistence.hibernate.core.RptParamDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+    
+    <bean id="rptAndParamDAO" class="org.inwiss.platform.persistence.hibernate.core.RptAndParamDAOHibernate">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
+    
+    
+    
+    
+    
+    
+    
+    <!--  Transaction template for Managers, from:  -->
+    <!--  Transaction template for Managers, from:                                      -->
+	<!--  http://blog.exis.com/colin/archives/2004/07/31/concise-transaction-definitions-spring-11/ -->
+	<bean id="txProxyTemplate" lazy-init="true" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager"/>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="retrieve*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="list*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- ############################################################################## -->
+	<!--                 Transaction declarations for business services.                -->
+	<!--               To apply a generic transaction proxy to all managers,            -->
+	<!--              you might look into using the BeanNameAutoProxyCreator            -->
+	<!-- ############################################################################## -->
+
+	<!-- User Manager Implementation -->
+	<bean id="userManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.UserManagerImpl">
+				<property name="userDAO">
+					<ref bean="userDAO"/>
+				</property>
+			</bean>
+		</property>
+		<!-- Override default transaction attributes b/c of UserCookie methods -->
+		<property name="transactionAttributes">
+			<props>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="retrieve*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="list*">PROPAGATION_REQUIRED</prop>
+				<prop key="*UserCookie">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Role Manager Implementation -->
+	<bean id="roleManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.RoleManagerImpl">
+				<property name="roleDAO">
+					<ref bean="roleDAO"/>
+				</property>
+				<property name="groupManager">
+					<ref bean="groupManager"/>
+				</property>
+				<property name="userManager">
+					<ref bean="userManager"/>
+				</property>
+			</bean>
+        </property>
+		<!-- Override default transaction attributes b/c of addRolesAndAssignToAdmins method -->
+		<property name="transactionAttributes">
+			<props>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="retrieve*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="list*">PROPAGATION_REQUIRED</prop>
+                <prop key="addRolesAndAssignToAdmins">PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+    </bean>
+
+<!-- Group Manager Implementation -->
+	<bean id="groupManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.GroupManagerImpl">
+				<property name="groupDAO">
+					<ref bean="groupDAO"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+
+	<bean id="permManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.PermissionManagerImpl">
+				<property name="permDAO">
+					<ref bean="permDAO"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+<!-- Menu manager implementation -->
+	<bean id="menuManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.MenuManagerImpl">
+				<property name="menuDAO">
+					<ref bean="menuDAO"/>
+				</property>
+				<property name="localizableDAO">
+					<ref bean="localizableDAO"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Org manager implementation -->
+	<bean id="orgManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.OrgManagerImpl">
+				<property name="orgDAO">
+					<ref bean="orgDAO"/>
+				</property>
+				<property name="localizableDAO">
+					<ref bean="localizableDAO"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+
+<!-- RptInfo manager implementation -->
+	<bean id="rptInfoManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.RptInfoManagerImpl">
+				<property name="rptInfoDAO">
+					<ref bean="rptInfoDAO"/>
+				</property>
+				<property name="rptAndParamDAO">
+					<ref bean="rptAndParamDAO"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- RptParam manager implementation -->
+	<bean id="rptParamManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.RptParamManagerImpl">
+				<property name="rptParamDAO">
+					<ref bean="rptParamDAO"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- RptParam manager implementation -->
+	<bean id="rptAndParamManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="org.inwiss.platform.security.service.impl.RptAndParamManagerImpl">
+				<property name="rptAndParamDAO">
+					<ref bean="rptAndParamDAO"/>
+				</property>
+			</bean>
+		</property>
+	</bean>
+</beans>

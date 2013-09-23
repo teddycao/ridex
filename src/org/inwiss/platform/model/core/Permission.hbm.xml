@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.Permission" table="al_core_permission" lazy="false">
+		<cache usage="read-write" />
+		<id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+			<generator class="sequence">   
+                <param name="sequence">RESOURCE_ID_SEQ</param>   
+            </generator>  
+		</id>
+
+		<property name="name" type="java.lang.String" update="true"
+			insert="true">
+			<column name="name" length="100" not-null="false" unique="false" />
+		</property>
+		
+		<property name="title" type="java.lang.String" update="true" insert="true">
+			<column name="title" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<property name="action" type="java.lang.String" update="true"
+			insert="true">
+			<column name="action" length="252" not-null="false" unique="false" />
+		</property>
+
+
+		<property name="resource" type="java.lang.String" update="true"
+			insert="true">
+			<column name="has_resource" length="252" not-null="false" unique="false" />
+		</property>
+		
+		
+		<property name="lacksResource" type="java.lang.String" update="true"
+			insert="true">
+			<column name="lacks_resource" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="type" type="java.lang.String" update="true"
+			insert="true">
+			<column name="type" length="20" not-null="false" unique="false" />
+		</property>
+		
+
+		<property name="location" type="java.lang.String" update="true"
+			insert="true">
+			<column name="location" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<property name="owner" type="java.lang.String" update="true" insert="true">
+			<column name="OWNER_ID" length="100" not-null="false" unique="false" />
+		</property>
+		
+		<property name="position" type="java.lang.Integer" update="true" insert="true">
+			<column name="pos" not-null="false" unique="false" />
+		</property>
+		
+		<property name="mask" type="java.lang.String" update="true"
+			insert="true">
+			<column name="mask" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<bag name="roles" table="al_core_permission_role" lazy="true"
+			inverse="true" cascade="none" outer-join="false">
+			<cache usage="read-write" />
+			<key column="permission_id"/>
+			
+			<many-to-many class="org.inwiss.platform.model.core.Role"
+				column="rolename" outer-join="false" />
+		</bag>
+
+		
+		
+	</class>
+
+</hibernate-mapping>

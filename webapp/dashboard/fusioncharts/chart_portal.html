@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>FusionWidgets v3 - Demo Application</title>
+<script type="text/javascript" src="js/metrics.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<SCRIPT type="text/javascript" LANGUAGE="Javascript" SRC="js/JSClass/FusionCharts.js"></SCRIPT>
+<SCRIPT type="text/javascript" LANGUAGE="Javascript" SRC="js/JSFunctions.js"></SCRIPT>
+<script type="text/javascript" LANGUAGE="Javascript" >
+	var globalYear =1996;
+	//setting the application extension to automatize JSFinction Drill Down
+	var extn ="asp";
+</script>
+
+</head>
+
+<body>
+<table width="780" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="3" align="left" valign="top" class="left-shadow"><img src="images/left-shadow.gif" alt="" width="3" height="1015" /></td>
+    <td width="774" align="left" valign="top" class="body"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left" valign="top" class="header"><img src="images/header.jpg" alt="" width="774" height="146" /></td>
+      </tr>
+       <tr>
+        <td height="50" align="center" valign="top" class="select-tab">
+	<!-- START Script Block for Chart FG_YearSelector -->
+	<div id='FG_YearSelectorDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_YearSelector = new FusionCharts("Charts/HLinearGauge.swf", "FG_YearSelector", "303", "50", "0", "1");
+		
+		//Provide entire XML data using dataXML method 
+		chart_FG_YearSelector.setDataXML("<chart borderAlpha='0' animation='0' showToolTip='0' editMode='1' lowerLimit='1993.5' upperLimit='1996.49' gaugeRoundRadius='0'  showTickMarks='0'  showGaugeLabels='1' pointerOnTop='1' pointerRadius='9' pointerBgAlpha='80' pointerBorderThickness='1' pointerBorderColor='aa0000' pointerBgColor='cc0000' showToolTip='1' decimals='0' showLimits='1' showValue='0' formatNumber='0' formatNumberScale='0' decimals='0'><value>1996</value><annotations><annotationGroup id='Grp1' showBelow='1'><annotation type='image' x='0' y='0' URL='Images/YearPanel.jpg'/></annotationGroup><annotationGroup id='AnnYear' showBelow='0'><annotation type='text'  x='65' y='30' font='Georgia' size='22' isBold='0' alpha='10' color='FFFFFF' label='1994' /><annotation type='text'  x='155' y='30' font='Georgia' size='22' isBold='0' alpha='10' color='FFFFFF' label='1995' /><annotation type='text'  x='245' y='30' font='Georgia' size='22' isBold='0' alpha='10' color='FFFFFF' label='1996' /></annotationGroup></annotations><styles><definition><style name='Font1' type='font' face='Georgia' size='22' color='FFFFFF' bold='0' /><style name='Shadow1' type='Shadow' color='000000' alpha='50' Distance='2' /></definition><application><apply toObject='AnnYear' styles='Font1,Shadow1' /></application></styles></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_YearSelector.render("FG_YearSelectorDiv");
+	</script>	
+	<!-- END Script Block for Chart FG_YearSelector -->
+	</td>
+      </tr>
+      <tr>
+        <td height="24" align="center" valign="middle" class="stab-info">Please drag the pointer to change year</td>
+      </tr>
+      <tr>
+        <td align="center" valign="top" style="padding:25px 0px 0px 0px;"><table width="729" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="266" align="center" valign="middle" class="gauge-back">
+	<!-- START Script Block for Chart FC_AllYearsData -->
+	<div id='FC_AllYearsDataDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FC_AllYearsData = new FusionCharts("Charts/MSColumn3DLineDY.swf", "FC_AllYearsData", "260", "250", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FC_AllYearsData.setDataXML("<chart showValues='0' numberPrefix='$' formatNumberScale='1' sFormatNumberScale='1'  showYAxisValues='0' caption='Sales Comparison By Year' bgColor='f7f2ea' borderThickness='0'><categories><category label='1994'/><category label='1995'/><category label='1996'/></categories><dataset seriesName='Revenue'><set value='19992870' link='n-DrillMonthSales%2Easp%3Fyear%3D1994' /><set value='62134444' link='n-DrillMonthSales%2Easp%3Fyear%3D1995' /><set value='49799532' link='n-DrillMonthSales%2Easp%3Fyear%3D1996' /></dataset><dataset seriesName='Quantity' parentYaxis='S' ><set value='671671'/><set value='2275637'/><set value='1722539'/></dataset></chart>");
+				
+		//Finally, render the chart.
+		chart_FC_AllYearsData.render("FC_AllYearsDataDiv");
+	</script>	
+	<!-- END Script Block for Chart FC_AllYearsData -->
+	<div class="msgText">Please click on a column to drill-down to detailed charts</div></td>
+                <td width="24" height="272" align="center" valign="middle">&nbsp;</td>
+                <td width="439" align="center" valign="top" class="gauge-back"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="198" height="31" align="center" valign="middle">Average Order Value</td>
+                    <td width="14" align="center" valign="top">&nbsp;</td>
+                    <td width="198" align="center" valign="middle">Average Order Quantity</td>
+                  </tr>
+                  <tr>
+                    <td width="198" height="118" align="center" valign="middle">
+	<!-- START Script Block for Chart FG_AvgRev -->
+	<div id='FG_AvgRevDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_AvgRev = new FusionCharts("Charts/AngularGauge.swf", "FG_AvgRev", "200", "115", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_AvgRev.setDataXML("<chart upperLimit='10000' majorTMNumber='6' majorTMHeight='8' showGaugeBorder='0'  formatNumberScale='1' numberPrefix='$' decimalPrecision='2' tickMarkDecimalPrecision='1' showPivotBorder='1' pivotBorderColor='000000' pivotBorderThickness='5' pivotFillMix='FFFFFF,000000' bgColor='f7f2ea' borderColor='f7f2ea' borderthickness='0' bgAlpha='100' gaugeOuterRadius='60' gaugeOriginX='100' gaugeOriginY='90' gaugeInnerRadius='2'><dials id='avgSRev'><dial value='7201' borderAlpha='0' bgColor='000000' baseWidth='10' topWidth='1' radius='50'/></dials><colorRange><color minValue='0' maxValue='4000' code='B41527'/><color minValue='4000' maxValue='7000' code='E48739'/><color minValue='7000' maxValue='10000' code='399E38'/></colorRange><annotations><annotationGroup><annotation type='circle' xPos='100' yPos='91' radius='62' startAngle='0' endAngle='180' fillPattern='linear' fillAsGradient='1' fillColor='dddddd,666666' fillAlpha='100,100' fillRatio='50,50' fillDegree='0' showBorder='1' borderColor='444444' borderThickness='2'/><annotation type='circle' xPos='100' yPos='91' radius='65' startAngle='0' endAngle='180' fillPattern='linear' fillAsGradient='1' fillColor='666666,ffffff' fillAlpha='100,100' fillRatio='50,50' fillDegree='0'/></annotationGroup></annotations></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_AvgRev.render("FG_AvgRevDiv");
+	</script>	
+	<!-- END Script Block for Chart FG_AvgRev -->
+	</td>
+                    <td width="14" align="center" valign="top">&nbsp;</td>
+                    <td width="198" align="center" valign="middle">
+	<!-- START Script Block for Chart FG_AvgQuan -->
+	<div id='FG_AvgQuanDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_AvgQuan = new FusionCharts("Charts/AngularGauge.swf", "FG_AvgQuan", "200", "115", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_AvgQuan.setDataXML("<chart formatNumberScale='0' majorTMNumber='7' majorTMHeight='8' showGaugeBorder='0'  formatNumberScale='1'  decimalPrecision='2' tickMarkDecimalPrecision='1' showPivotBorder='1' pivotBorderColor='000000' pivotBorderThickness='5' pivotFillMix='FFFFFF,000000' bgColor='f7f2ea' borderColor='f7f2ea' borderthickness='0' bgAlpha='100' gaugeOuterRadius='60' gaugeOriginX='100' gaugeOriginY='90' gaugeInnerRadius='2'><dials id='avgSQ'><dial value='23' borderAlpha='0' bgColor='000000' baseWidth='10' topWidth='1' radius='50'/></dials><colorRange><color minValue='0' maxValue='10' code='B41527'/><color minValue='10' maxValue='20' code='E48739'/><color minValue='20' maxValue='30' code='399E38'/></colorRange><annotations><annotationGroup><annotation type='circle' xPos='100' yPos='91' radius='62' startAngle='0' endAngle='180' fillPattern='linear' fillAsGradient='1' fillColor='dddddd,666666' fillAlpha='100,100' fillRatio='50,50' fillDegree='0' showBorder='1' borderColor='444444' borderThickness='2'/><annotation type='circle' xPos='100' yPos='91' radius='65' startAngle='0' endAngle='180' fillPattern='linear' fillAsGradient='1' fillColor='666666,ffffff' fillAlpha='100,100' fillRatio='50,50' fillDegree='0'/></annotationGroup></annotations></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_AvgQuan.render("FG_AvgQuanDiv");
+	</script>	
+	<!-- END Script Block for Chart FG_AvgQuan -->
+	</td>
+                  </tr>
+                  <tr>
+                    <td height="10" align="center" valign="middle">&nbsp;</td>
+                    <td align="center" valign="top">&nbsp;</td>
+                    <td align="center" valign="middle">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td width="198" height="30" align="center" valign="middle">Monthly Revenue </td>
+                    <td width="14" align="center" valign="top">&nbsp;</td>
+                    <td width="198" align="center" valign="middle">Monthly Sales Quantity</td>
+                  </tr>
+                  <tr>
+                    <td width="198" height="45" align="center" valign="middle">
+	<!-- START Script Block for Chart FG_MonthlyRev -->
+	<div id='FG_MonthlyRevDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_MonthlyRev = new FusionCharts("Charts/SparkColumn.swf", "FG_MonthlyRev", "200", "50", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_MonthlyRev.setDataXML("<chart numberPrefix='$' plotFillColor='106488' highColor='B4D224' lowColor='CD0102'  periodLength='3' periodColor='E8F0F3' periodAlpha='100' clickURL='n%2DDrillToEachProduct%2Easp%3Fop%3Drevenue%26year%3D1996' bgColor='f7f2ea' canvasborderColor='BDBDBB'><dataset><set value='77476' /><set value='96750' /><set value='108666' /><set value='109825' /><set value='140534' /><set value='13995' /><set value='' /><set value='' /><set value='' /><set value='' /><set value='' /><set value='' /></dataset></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_MonthlyRev.render("FG_MonthlyRevDiv");
+	</script>	
+	<!-- END Script Block for Chart FG_MonthlyRev -->
+	</td>
+                    <td width="14" align="center" valign="top">&nbsp;</td>
+                    <td width="198" align="center" valign="middle">
+	<!-- START Script Block for Chart FG_MonthlyQuan -->
+	<div id='FG_MonthlyQuanDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_MonthlyQuan = new FusionCharts("Charts/SparkColumn.swf", "FG_MonthlyQuan", "200", "50", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_MonthlyQuan.setDataXML("<chart formatNumberScale='0' plotFillColor='106488' highColor='B4D224' lowColor='CD0102'  periodLength='3' periodColor='E8F0F3' periodAlpha='100' clickURL='n%2DDrillToEachProduct%2Easp%3Fop%3Dquantity%26year%3D1996' bgColor='f7f2ea' canvasborderColor='BDBDBB' ><dataset><set value='2682' /><set value='3293' /><set value='3288' /><set value='4065' /><set value='4957' /><set value='644' /><set value='' /><set value='' /><set value='' /><set value='' /><set value='' /><set value='' /></dataset></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_MonthlyQuan.render("FG_MonthlyQuanDiv");
+	</script>	
+	<!-- END Script Block for Chart FG_MonthlyQuan -->
+	</td>
+                  </tr>
+                  <tr>
+                    <td width="198" height="31" align="center" valign="middle"><div class="msgText">Click to see product-wise revenue</div></td>
+                    <td width="14" align="center" valign="top">&nbsp;</td>
+                    <td width="198" align="center" valign="middle"><div class="msgText">Click to see product-wise quantity</div></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td height="24" align="left" valign="top">&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="349" align="center" valign="top" class="gauge-back" style="padding:6px 0px 0px 0px;"><table width="336" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="33" align="center" valign="middle" class="gauge-header">Sales By Country (Top 5)</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="middle">
+	<!-- START Script Block for Chart FG_TopCountries -->
+	<div id='FG_TopCountriesDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_TopCountries = new FusionCharts("Charts/Funnel.swf", "FG_TopCountries", "335", "270", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_TopCountries.setDataXML("<chart decimals='0' numberPrefix='$' streamlinedData='0' bgColor='f7f2ea' borderColor='f7f2ea' borderthickness='0'  bgAlpha='100'><set label='USA' value='104254' link='n-DrillCountry%2Easp%3Fyear%3D1996%26Country%3DUSA' /><set label='Germany' value='96299' link='n-DrillCountry%2Easp%3Fyear%3D1996%26Country%3DGermany' /><set label='Austria' value='61577' link='n-DrillCountry%2Easp%3Fyear%3D1996%26Country%3DAustria' /><set label='Brazil' value='53019' link='n-DrillCountry%2Easp%3Fyear%3D1996%26Country%3DBrazil' /><set label='Sweden' value='29393' link='n-DrillCountry%2Easp%3Fyear%3D1996%26Country%3DSweden' /></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_TopCountries.render("FG_TopCountriesDiv");
+	</script>	
+	<!-- END Script Block for Chart FG_TopCountries -->
+	<div class="msgText">Please click on a slice to drill-down to detailed charts</div></td>
+                  </tr>
+                </table></td>
+                <td width="32" height="272" align="center" valign="middle">&nbsp;</td>
+                <td width="349" align="center" valign="top" class="gauge-back" style="padding:6px 0px 0px 0px;"><table width="336" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="33" align="center" valign="middle" class="gauge-header">Sales By Employee (Top 10)</td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="middle">
+	<!-- START Script Block for Chart FG_TopEmployees -->
+	<div id='FG_TopEmployeesDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_TopEmployees = new FusionCharts("Charts/Pyramid.swf", "FG_TopEmployees", "335", "270", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_TopEmployees.setDataXML("<chart decimals='0' numberPrefix='$' isHollow='0' streamlinedData='0'  bgColor='f7f2ea' borderColor='f7f2ea' borderthickness='0'  bgAlpha='100'><set label='Janet' value='100525' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D3' /><set label='Andrew' value='87791' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D2' /><set label='Nancy' value='81898' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D1' /><set label='Margaret' value='76438' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D4' /><set label='Robert' value='57430' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D7' /><set label='Laura' value='55091' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D8' /><set label='Anne' value='43962' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D9' /><set label='Michael' value='22475' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D6' /><set label='Steven' value='21637' link='n-DrillEmployee%2Easp%3Fyear%3D1996%26EmployeeID%3D5' /></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_TopEmployees.render("FG_TopEmployeesDiv");
+	</script>	
+	<!-- END Script Block for Chart FG_TopEmployees -->
+	<div class="msgText">Please click on a slice to drill-down to detailed charts</div></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="272" align="left" valign="top" class="gauge-back" style="padding:6px 6px 0px 6px;"><table width="718" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="33" align="center" valign="middle" class="gauge-header">Top 5 Products : Inventory</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+	<!-- START Script Block for Chart FG_PI1 -->
+	<div id='FG_PI1Div' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_PI1 = new FusionCharts("Charts/Cylinder.swf", "FG_PI1", "140", "250", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_PI1.setDataXML("<chart palette='1' lowerLimit='0' upperLimit='150' chartBottomMargin='100' cylFillColor='1941A5' showValue='0' bgColor='f7f2ea' bgAlpha='100' borderThickness='0' borderColor='f7f2ea'><value>24</value><annotations><annotationGroup><annotation type='text' label='24 Unit(s)' font='Verdana' xPos='60' yPos='180' align='center' vAlign='top' fontcolor='1941A5' fontSize='10' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Konbu' font='Verdana' xPos='65' yPos='195' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Reorder level :5' font='Verdana' xPos='65' yPos='210' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/><annotation type='text' label='Total Sold Quantity :679' font='Verdana' xPos='65' yPos='225' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/></annotationGroup></annotations></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_PI1.render("FG_PI1Div");
+	</script>	
+	<!-- END Script Block for Chart FG_PI1 -->
+	</td><td>
+	<!-- START Script Block for Chart FG_PI2 -->
+	<div id='FG_PI2Div' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_PI2 = new FusionCharts("Charts/Cylinder.swf", "FG_PI2", "140", "250", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_PI2.setDataXML("<chart palette='1' lowerLimit='0' upperLimit='150' chartBottomMargin='100' cylFillColor='CCCC00' showValue='0' bgColor='f7f2ea' bgAlpha='100' borderThickness='0' borderColor='f7f2ea'><value>20</value><annotations><annotationGroup><annotation type='text' label='20 Unit(s)' font='Verdana' xPos='60' yPos='180' align='center' vAlign='top' fontcolor='CCCC00' fontSize='10' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Guaran?Fanttica' font='Verdana' xPos='65' yPos='195' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Reorder level :0' font='Verdana' xPos='65' yPos='210' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/><annotation type='text' label='Total Sold Quantity :586' font='Verdana' xPos='65' yPos='225' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/></annotationGroup></annotations></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_PI2.render("FG_PI2Div");
+	</script>	
+	<!-- END Script Block for Chart FG_PI2 -->
+	</td><td>
+	<!-- START Script Block for Chart FG_PI3 -->
+	<div id='FG_PI3Div' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_PI3 = new FusionCharts("Charts/Cylinder.swf", "FG_PI3", "140", "250", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_PI3.setDataXML("<chart palette='1' lowerLimit='0' upperLimit='150' chartBottomMargin='100' cylFillColor='AFD8F8' showValue='0' bgColor='f7f2ea' bgAlpha='100' borderThickness='0' borderColor='f7f2ea'><value>79</value><annotations><annotationGroup><annotation type='text' label='79 Unit(s)' font='Verdana' xPos='60' yPos='180' align='center' vAlign='top' fontcolor='AFD8F8' fontSize='10' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Raclette Courdavault' font='Verdana' xPos='65' yPos='195' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Reorder level :0' font='Verdana' xPos='65' yPos='210' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/><annotation type='text' label='Total Sold Quantity :578' font='Verdana' xPos='65' yPos='225' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/></annotationGroup></annotations></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_PI3.render("FG_PI3Div");
+	</script>	
+	<!-- END Script Block for Chart FG_PI3 -->
+	</td><td>
+	<!-- START Script Block for Chart FG_PI4 -->
+	<div id='FG_PI4Div' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_PI4 = new FusionCharts("Charts/Cylinder.swf", "FG_PI4", "140", "250", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_PI4.setDataXML("<chart palette='1' lowerLimit='0' upperLimit='150' chartBottomMargin='100' cylFillColor='A66EDD' showValue='0' bgColor='f7f2ea' bgAlpha='100' borderThickness='0' borderColor='f7f2ea'><value>19</value><annotations><annotationGroup><annotation type='text' label='19 Unit(s)' font='Verdana' xPos='60' yPos='180' align='center' vAlign='top' fontcolor='A66EDD' fontSize='10' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Camembert Pierrot' font='Verdana' xPos='65' yPos='195' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Reorder level :0' font='Verdana' xPos='65' yPos='210' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/><annotation type='text' label='Total Sold Quantity :557' font='Verdana' xPos='65' yPos='225' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/></annotationGroup></annotations></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_PI4.render("FG_PI4Div");
+	</script>	
+	<!-- END Script Block for Chart FG_PI4 -->
+	</td><td>
+	<!-- START Script Block for Chart FG_PI5 -->
+	<div id='FG_PI5Div' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FG_PI5 = new FusionCharts("Charts/Cylinder.swf", "FG_PI5", "140", "250", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FG_PI5.setDataXML("<chart palette='1' lowerLimit='0' upperLimit='150' chartBottomMargin='100' cylFillColor='8BBA00' showValue='0' bgColor='f7f2ea' bgAlpha='100' borderThickness='0' borderColor='f7f2ea'><value>125</value><annotations><annotationGroup><annotation type='text' label='125 Unit(s)' font='Verdana' xPos='60' yPos='180' align='center' vAlign='top' fontcolor='8BBA00' fontSize='10' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Rhönbräu Klosterbier' font='Verdana' xPos='65' yPos='195' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='1' wrap='1' wrapWidth='150'/><annotation type='text' label='Reorder level :25' font='Verdana' xPos='65' yPos='210' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/><annotation type='text' label='Total Sold Quantity :522' font='Verdana' xPos='65' yPos='225' align='center' vAlign='top' fontcolor='333333' fontSize='9' isBold='0' wrap='1' wrapWidth='150'/></annotationGroup></annotations></chart>");
+				
+		//Finally, render the chart.
+		chart_FG_PI5.render("FG_PI5Div");
+	</script>	
+	<!-- END Script Block for Chart FG_PI5 -->
+	</td>
+  </tr>
+</table>
+</td>
+                    </tr>
+                </table></td>
+                </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="272" align="left" valign="top" class="gauge-back" style="padding:6px 6px 0px 6px;"><table width="718" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="33" align="center" valign="middle" class="gauge-header">Best Customers</td>
+                    </tr>
+                    <tr>
+                      <td align="center" valign="middle">
+	<!-- START Script Block for Chart FC_TopCustomers -->
+	<div id='FC_TopCustomersDiv' align='center'>
+		Chart.
+		
+	</div>
+		
+	<script type="text/javascript" language="javascript">	
+		//Instantiate the Chart	
+		var chart_FC_TopCustomers = new FusionCharts("Charts/MSColumn3DLineDY.swf", "FC_TopCustomers", "714", "250", "0", "1");
+		
+		//Set the dataURL of the chart
+		chart_FC_TopCustomers.setDataXML("<chart numberPrefix='$' formatNumberScale='1' sFormatNumberScale='1'  xaxisname='Customer Name' pyaxisname='Revenue' syaxisname='Quantity' bgColor='f7f2ea' borderThickness='0'><categories><category label='Roland Mendel'/><category label='Horst Kloss'/><category label='Jose Pavarotti'/><category label='Mario Pontes'/><category label='Patricia McKenna'/><category label='Paula Wilson'/><category label='Philip Cramer'/><category label='Maria Larsson'/><category label='Karl Jablonski'/><category label='Elizabeth Lincoln'/></categories><dataset seriesName='Revenue'><set value='57183'/><set value='42981'/><set value='42806'/><set value='25996'/><set value='22796'/><set value='22355'/><set value='21790'/><set value='21186'/><set value='15279'/><set value='12227'/></dataset><dataset seriesName='Quantity' parentYaxis='S' showValues='0'><set value='2307'/><set value='1266'/><set value='1817'/><set value='508'/><set value='395'/><set value='491'/><set value='465'/><set value='746'/><set value='360'/><set value='421'/></dataset></chart>");
+				
+		//Finally, render the chart.
+		chart_FC_TopCustomers.render("FC_TopCustomersDiv");
+	</script>	
+	<!-- END Script Block for Chart FC_TopCustomers -->
+	</td>
+                    </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td height="25" align="left" valign="top">&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td align="center" valign="middle" class="footer"><br />
+This dashboard was built using <a href="http://www.fusioncharts.com" target="_blank">FusionCharts v3</a> and <a href="http://www.fusioncharts.com/widgets" target="_blank">FusionWidgets v3</a><br />
+&copy; All Rights Reserved. FusionCharts Technologies LLP</td>
+      </tr>
+    </table></td>
+    <td width="3" align="left" valign="top" class="right-shadow"><img src="images/right-shadow.gif" alt="" width="3" height="1015" /></td>
+  </tr>
+</table>
+<script type="text/javascript">
+//minimetrics
+var tok_bs = (objURL['bs'] || objURL['bannersource']);
+if(!tok_bs) tok_bs = '';
+document.write(unescape("%3Cscript src='../../../lib/minimetrics/?tok=Demo_FWv3_BluePrint="+tok_bs+"&ref="+escape(document.referrer)+"' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- Google Analytics Tracker Code Starts -->
+<script type="text/javascript">
+// analytics
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost 
+	+ "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+if (typeof(_gat) == "object") {
+	var pageTracker = _gat._getTracker("UA-215295-3"); pageTracker._initData(); pageTracker._trackPageview();
+}
+</script>
+<!-- Google Analytics Tracker Code Ends --></body>
+</html>

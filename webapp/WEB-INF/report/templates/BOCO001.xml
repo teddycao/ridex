@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jatools Class="jatools.ReportDocument" Name="jatools report template">
+	<VariableContext/>
+	<Page>
+		<Children ItemClass="PagePanel">
+			<Item0>
+				<Width>981</Width>
+				<Height>80</Height>
+				<Type>100</Type>
+			</Item0>
+			<Item1>
+				<Y>802</Y>
+				<Width>981</Width>
+				<Height>280</Height>
+				<Type>103</Type>
+			</Item1>
+			<Item2>
+				<Y>80</Y>
+				<Width>981</Width>
+				<Height>722</Height>
+				<Children ItemClass="Table">
+					<Item0>
+						<NodePath>test</NodePath>
+						<X>34</X>
+						<Y>10</Y>
+						<Children>
+							<Item0 Class="Label">
+								<Text>CITY</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>1</Col>
+								</Cell>
+							</Item0>
+							<Item1 Class="Label">
+								<Text>CELL_NAME</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>2</Col>
+								</Cell>
+							</Item1>
+							<Item2 Class="Label">
+								<Text>CELL_LAC_DEC</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>3</Col>
+								</Cell>
+							</Item2>
+							<Item3 Class="Label">
+								<Text>DI_TYPE</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>4</Col>
+								</Cell>
+							</Item3>
+							<Item4 Class="Label">
+								<Text>BCCH</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>5</Col>
+								</Cell>
+							</Item4>
+							<Item5 Class="Label">
+								<Text>FDATE</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>6</Col>
+								</Cell>
+							</Item5>
+							<Item6 Class="Label">
+								<Text>DD_STAT</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>7</Col>
+								</Cell>
+							</Item6>
+							<Item7 Class="RowPanel">
+								<Cell>
+									<Row>1</Row>
+									<Col>0</Col>
+									<ColSpan>8</ColSpan>
+								</Cell>
+								<Children ItemClass="Text">
+									<Item0>
+										<Variable>=$.CI_DEC</Variable>
+										<Border/>
+										<Font>
+											<Face>宋体</Face>
+											<Style>1</Style>
+											<Size>12</Size>
+										</Font>
+										<Cell>
+											<Row>1</Row>
+											<Col>0</Col>
+										</Cell>
+									</Item0>
+									<Item1>
+										<Variable>=$.CITY</Variable>
+										<Border/>
+										<Cell>
+											<Row>1</Row>
+											<Col>1</Col>
+										</Cell>
+									</Item1>
+									<Item2>
+										<Variable>=$.CELL_NAME</Variable>
+										<Border/>
+										<Cell>
+											<Row>1</Row>
+											<Col>2</Col>
+										</Cell>
+									</Item2>
+									<Item3>
+										<Variable>=$.CELL_LAC_DEC</Variable>
+										<Border/>
+										<Cell>
+											<Row>1</Row>
+											<Col>3</Col>
+										</Cell>
+									</Item3>
+									<Item4>
+										<Variable>=$.DI_TYPE</Variable>
+										<Border/>
+										<Cell>
+											<Row>1</Row>
+											<Col>4</Col>
+										</Cell>
+									</Item4>
+									<Item5>
+										<Variable>=$.BCCH</Variable>
+										<Border/>
+										<Cell>
+											<Row>1</Row>
+											<Col>5</Col>
+										</Cell>
+									</Item5>
+									<Item6>
+										<Variable>=$.FDATE</Variable>
+										<Border/>
+										<Cell>
+											<Row>1</Row>
+											<Col>6</Col>
+										</Cell>
+									</Item6>
+									<Item7>
+										<Variable>=$.DD_STAT</Variable>
+										<Border/>
+										<Cell>
+											<Row>1</Row>
+											<Col>7</Col>
+										</Cell>
+									</Item7>
+								</Children>
+								<NodePath>Row</NodePath>
+							</Item7>
+							<Item8 Class="Label">
+								<Text>总计：</Text>
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>0</Col>
+								</Cell>
+							</Item8>
+							<Item9 Class="Label">
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>1</Col>
+								</Cell>
+							</Item9>
+							<Item10 Class="Label">
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>2</Col>
+								</Cell>
+							</Item10>
+							<Item11 Class="Label">
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>3</Col>
+								</Cell>
+							</Item11>
+							<Item12 Class="Label">
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>4</Col>
+								</Cell>
+							</Item12>
+							<Item13 Class="Label">
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>5</Col>
+								</Cell>
+							</Item13>
+							<Item14 Class="Label">
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>6</Col>
+								</Cell>
+							</Item14>
+							<Item15 Class="Label">
+								<Border>
+									<StyleText>border:1 solid #000000</StyleText>
+								</Border>
+								<Cell>
+									<Row>2</Row>
+									<Col>7</Col>
+								</Cell>
+							</Item15>
+							<Item16 Class="Label">
+								<Text>CI_DEC</Text>
+								<BackColor>-16744193</BackColor>
+								<ForeColor>-1</ForeColor>
+								<Border/>
+								<Font>
+									<Face>宋体</Face>
+									<Style>1</Style>
+									<Size>12</Size>
+								</Font>
+								<HorizontalAlignment>1</HorizontalAlignment>
+								<Cell>
+									<Row>0</Row>
+									<Col>0</Col>
+								</Cell>
+							</Item16>
+						</Children>
+						<ColumnWidths>110,110,110,110,110,110,110,110</ColumnWidths>
+						<RowHeights>40,25,20</RowHeights>
+					</Item0>
+				</Children>
+				<Type>102</Type>
+			</Item2>
+		</Children>
+		<PageFormat>
+			<Width>1021</Width>
+			<Height>1122</Height>
+		</PageFormat>
+	</Page>
+	<NodeSource>
+		<Children ItemClass="DatasetNodeSource">
+			<Item0>
+				<Children ItemClass="RowNodeSource">
+					<Item0/>
+				</Children>
+				<Reader Class="SqlReader">
+					<Name>test</Name>
+					<Sql>select * from FEE_CELL_STATIONS where rownum &lt; 100</Sql>
+					<Description>select * from FEE_CELL_STATIONS where rownum &lt; 100</Description>
+					<Connection>
+						<Driver>oracle.jdbc.driver.OracleDriver</Driver>
+						<User>fee</User>
+						<Password>fee</Password>
+						<Url>jdbc:oracle:thin:@dbserver:1521:report</Url>
+					</Connection>
+				</Reader>
+				<TagName>test</TagName>
+			</Item0>
+		</Children>
+	</NodeSource>
+</jatools>

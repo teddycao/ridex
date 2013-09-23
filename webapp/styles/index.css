@@ -1,0 +1,179 @@
+#ologo {background-color:#0A246A;background: url();width: 229px;height: 70px;position:absolute;left:0;top:0;}
+#north {background: url() 229px top no-repeat;}
+
+#north div strong {position:absolute;right:10px;top:0px;line-height:71px;font-size:18px;font-weight:700;color:#15428B;}
+
+#north .top-title {background-color:#0A246Aheight: 71px;line-height:71px;}
+
+#north p {margin:0;}
+
+a:link {
+	color: #666666;
+	font-size: 9pt;
+	font-family: "Verdana", "Arial", "Helvetica", "sans-serif";
+ }
+a:visited {
+ color: #666666;
+ }
+ 
+ 
+ 
+a:hover {
+ color:#005FA9;
+ text-decoration:underline;
+ }
+ 
+ 
+ 
+  .x-panel-mc {
+        font-family: Helvetica, Arial, sans-serif !important;
+    }
+    
+    #all-demos {
+
+    }
+	
+    #all-demos dd {
+        cursor:pointer;
+        float:left;
+        height:100px;
+        margin:5px 5px 5px 10px;
+        width:300px;
+        zoom:1;
+    }
+	
+    #all-demos dd img {
+        border: 1px solid #ddd;
+        float:left;
+        height:90px;
+        margin:5px 0 0 5px;
+        width:120px;
+    }
+
+    #all-demos dd div {
+        float:left;
+        margin-left:10px;
+        width:160px;
+    }
+
+    #all-demos dd h4 {
+        color:#555;
+        font-size:11px;
+        font-weight:bold;
+    }
+	
+    #all-demos dd p {
+        color:#777;
+    }
+	
+    #all-demos dd.over {
+        background: #F5FDE3 url(shared/extjs/images/sample-over.gif) no-repeat;
+    }
+	
+    #loading-mask{
+        background-color:white;
+        height:100%;
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        z-index:20000;
+    }
+	
+    #loading{
+        height:auto;
+        position:absolute;
+        left:45%;
+        top:40%;
+        padding:2px;
+        z-index:20001;
+    }
+	
+    #loading a {
+        color:#225588;
+    }
+	
+    #loading .loading-indicator{
+        background:white;
+        color:#444;
+        font:bold 13px Helvetica, Arial, sans-serif;
+        height:auto;
+        margin:0;
+        padding:10px;
+    }
+    #loading-msg {
+        font-size: 11pt;
+        font-weight: blod;
+    }
+
+    #all-demos .x-panel-body {
+        background-color:#fff;
+        border:1px solid;
+        border-color:#fafafa #fafafa #fafafa #fafafa;
+    }
+	
+    #sample-ct {
+        border:1px solid;
+        border-color:#dadada #ebebeb #ebebeb #dadada;
+        padding:2px;
+    }
+
+    #all-demos h2 {
+        border-bottom: 2px solid #99bbe8;
+        cursor:pointer;
+        padding-top:6px;
+    }
+	
+    #all-demos h2 div {
+        background:transparent url(../resources/images/default/grid/group-expand-sprite.gif) no-repeat 3px -47px;
+        color:#3764a0;
+        font:bold 11px Helvetica, Arial, sans-serif;
+        padding:4px 4px 4px 17px;
+    }
+	
+    #all-demos .collapsed h2 div {
+        background-position: 3px 3px;
+    }
+	
+    #all-demos .collapsed dl {
+        display:none;
+    }
+	
+    .x-window {
+        text-align:left;
+    }
+	
+    #all-demos dd h4 span.new-sample{
+        color: red;
+    }
+
+    #all-demos dd h4 span.updated-sample{
+        color: blue;
+    }
+
+
+.acc_home {
+	background-image:url(../images/icons/home-icon.png);
+}
+.acc_nav {
+	background-image:url(../images/icons/bricks-icon.png);
+}
+.nav_config {
+	background-image:url('../images/icons/sys/box-config-icon24.png');
+}
+.login_user {
+	background-image:url('../images/icons/sys/check-user-icon.png');
+}
+.nav_index {
+	background-image:url('../images/icons/sys/cottage-icon24.png');
+}
+
+.nav_setting {
+	background-image:url('../images/icons/sys/Settings-icon.png');
+}
+.nav_im {
+	background-image:url('../images/icons/sys/Chat-icon.png');
+}
+.welcome {
+	background-image:url('../images/icons/sys/System-Home-icon.png');
+}

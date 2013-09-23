@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.RptInfo" table="al_rpt_info"
+		lazy="false">
+
+		<id name="id" column="inter_id" type="java.lang.Long" unsaved-value="null">
+			<generator class="sequence">   
+				<param name="sequence">RREPORT_ID_SEQ</param>
+			</generator>
+		</id>
+		
+		<many-to-one name="parentItem"
+			class="org.inwiss.platform.model.core.RptInfo" cascade="none"
+			outer-join="false" update="true" insert="true" column="parent_id"
+			not-null="false" />
+
+		<bag name="childItems" lazy="true" inverse="true" cascade="delete"
+			order-by="rpt_id" outer-join="false">
+			<key column="parent_id"/>
+			<one-to-many class="org.inwiss.platform.model.core.RptInfo" />
+
+		</bag>
+
+		<property name="name" type="java.lang.String" update="true"
+			insert="true">
+			<column name="rpt_name" length="255" not-null="false" unique="false" />
+		</property>
+		
+		
+		<property name="rptDesc" type="java.lang.String" update="true"
+			insert="true">
+			<column name="rpt_desc" length="255" not-null="false" unique="false" />
+		</property>
+		
+		<property name="rptId" type="java.lang.String" update="true"
+			insert="true">
+			<column name="rpt_id" length="20" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="rptUrl" type="java.lang.String" update="true" insert="true">
+			<column name="rpt_url" length="255" not-null="false" unique="false" />
+		</property>
+
+		<property name="rptOrg" type="java.lang.String" update="true" insert="true">
+			<column name="rpt_org" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="rptStatu" type="java.lang.String" update="true"	insert="true">
+			<column name="rpt_statu" length="2" not-null="false" unique="false" />
+		</property>
+			
+		<property name="isLeaf" type="true_false" update="true"
+			insert="true" column="is_leaf" not-null="true" />	
+	</class>
+
+</hibernate-mapping>

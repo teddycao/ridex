@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="FixupFee">
+
+	<!--RESULT MAP DEFINITION-->
+	<resultMap id="FixupFee_resultMap" type="com.inwiss.apps.fee.model.FixupFee">
+		<result property="callType" 	column="CALL_TYPE" 		javaType="String"  jdbcType="VARCHAR"/>
+		<result property="startDate" 	column="START_DATE" 	javaType="String"  jdbcType="VARCHAR"/>
+		<result property="startTime" 	column="START_TIME"  	javaType="String"  jdbcType="VARCHAR"/>
+		<result property="callDuration" column="CALL_DURATION"  javaType="int"     jdbcType="INTEGER"/>
+		<result property="otherParty" 	column="OTHER_PARTY" 	javaType="String"  jdbcType="VARCHAR"/>
+		<result property="originNo" 	column="ORIGIN_NO" 		javaType="String"  jdbcType="VARCHAR"/>
+		<result property="officeCode" 	column="OFFICE_CODE" 	javaType="String"  jdbcType="VARCHAR"/>
+		<result property="bizType" 		column="BIZ_TYPE" 		javaType="String"  jdbcType="VARCHAR"/>
+		<result property="roamType" 	column="ROAM_TYPE" 		javaType="String"  jdbcType="VARCHAR"/>
+		<result property="cfee" 		column="CFEE" 			javaType="double"  jdbcType="DOUBLE"/>
+		<result property="lfee" 		column="LFEE" 			javaType="double"  jdbcType="DOUBLE"/>
+		<result property="totalFee" 	column="TOTAL_FEE" 		javaType="double"  jdbcType="DOUBLE"/>
+		<result property="cellId" 		column="CELL_ID" 		javaType="String"  jdbcType="VARCHAR"/>
+		<result property="vpnId" 		column="VPN_ID" 		javaType="String"  jdbcType="VARCHAR"/>
+		<result property="sourceType" 	column="SOURCE_TYPE" 	javaType="String"  jdbcType="VARCHAR"/>
+		<result property="msisdn" 		column="MSISDN" 		javaType="String"  jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="FixupFee.Columns">
+	    <![CDATA[
+			 CALL_TYPE,
+			 START_DATE,
+			 START_TIME,
+			 CALL_DURATION,
+			 OTHER_PARTY,
+			 ORIGIN_NO,
+			 OFFICE_CODE,
+			 BIZ_TYPE,
+			 ROAM_TYPE,
+			 CFEE,
+			 LFEE,
+			 TOTAL_FEE,
+			 CELL_ID,
+			 VPN_ID,
+			 SOURCE_TYPE,
+			 MSISDN
+	    ]]>
+	</sql>
+	
+	<!-- 根据机主手机号码和通话日期查询固定退费语音清单的Where -->	
+	<sql id="FixupFee.getFixupList.where">
+		<where>
+		  	1=1 
+		  	<if test="@Ognl@isNotEmpty(msisdn)">
+				AND msisdn = #{msisdn} 
+		  	</if>
+		  	<if test="@Ognl@isNotEmpty(startDate)">
+				AND SUBSTR(start_date,1,7) = #{startDate} 
+		  	</if>
+		</where>
+	</sql>
+    
+    <!-- 查询固定退费语音清单 -->
+    <select id="FixupFee.getFixupList.count" resultType="long">
+        SELECT count(1) FROM FEE_GSMDETAIL
+        <include refid="FixupFee.getFixupListByMsisdnAndStartDate.where"/>
+    </select>
+      	  
+	<select id="FixupFee.getFixupList" parameterType="com.inwiss.apps.fee.model.FixupFee" resultMap="FixupFee_resultMap">
+			SELECT <include refid="FixupFee.Columns"/> 
+		  	FROM FEE_GSMDETAIL 
+		  	<include refid="FixupFee.getFixupList.where"/>
+		  	ORDER BY start_date
+	</select>
+	
+	
+	<select id="fee.gmsSendback.cnt" parameterType="String" resultType="java.util.HashMap">
+     ${value}
+	</select>
+	
+</mapper>

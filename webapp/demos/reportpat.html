@@ -1,0 +1,1895 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<link rel="stylesheet" type="text/css" href="http://192.168.162.56:7777/webapp//extcss/main.css" />
+<link rel="stylesheet" type="text/css" href="http://192.168.162.56:7777/webapp//extscrpit/resources/css/ext-all.css" />
+<script type="text/javascript" src="http://192.168.162.56:7777/webapp//extscrpit/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://192.168.162.56:7777/webapp//extscrpit/ext-all.js"></script>
+<script type="text/javascript" src="http://192.168.162.56:7777/webapp//extscrpit/RowExpander.js"></script>
+<script type="text/javascript">Ext.BLANK_IMAGE_URL = 'http://192.168.162.56:7777/webapp//extscrpit/resources/images/default/s.gif'</script>
+<div id="loading-mask" style=""></div>
+		<div id="loading">
+			<div class="loading-indicator">
+				<img src="http://192.168.162.56:7777/webapp//app/img/extanim32.gif" width="32" height="32" style="margin-right:8px;" align="absmiddle" />
+				Loading...
+			</div>
+		</div>
+<SCRIPT LANGUAGE="JavaScript"> 
+<!--
+setTimeout(function() {
+					Ext.get('loading').remove();
+					Ext.get('loading-mask').fadeOut({remove:true});
+				}, 250
+			  );
+//-->
+</SCRIPT>
+ 
+ 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="MultiComboBox.js"></script>
+<title></title>
+<style type="text/css"> 
+table.MsoTableGrid {
+	background-color:#e9f2fc;
+	border-top:1px solid buttonshadow;
+	border-right:1px solid buttonhighlight;
+	border-bottom:1px solid buttonhighlight;
+	border-left: 1px solid buttonshadow;
+	border-top-color:#CEAEA5 ;
+	border-left-color:#CEAEA5 ;
+	font-size: 10pt;
+	font-family: "Times New Roman";
+}
+td.line1 {
+	border-top:1px solid buttonhighlight;
+	border-right:1px solid buttonshadow;
+	border-bottom:1px solid buttonshadow;
+	border-left:1px solid buttonhighlight;
+	border-right-color:#CEAEA5 ;
+	border-bottom-color:#CEAEA5 ;
+}
+</style>
+<SCRIPT LANGUAGE="JavaScript"> 
+<!--
+var yearstore = new Ext.data.SimpleStore({
+       fields: ['year','value'],
+       data :  [
+['2011年','2011']
+ 
+	    ]
+    });
+var monthstore = new Ext.data.SimpleStore({
+       fields: ['month','value'],
+       data :  [['1月','01'],['2月','02'],['3月','03'],['4月','04'],['5月','05'],['6月','06'],['7月','07'],['8月','08'],['9月','09'] ,['10月','10'],['11月','11'],['12月','12']]
+    });
+ 
+var weekstore = new Ext.data.SimpleStore({
+       fields: ['week','value'],
+       data :  [['第1周','1'],['第2周','2'],['第3周','3'],['第4周','4'],['第5周','5'],['第6周','6'],['第7周','7'],['第8周','8'],['第9周','9'],['第10周','10'],['第11周','11'],['第12周','12'],['第13周','13'],['第14周','14'],['第15周','15'],['第16周','16'],['第17周','17'],['第18周','18'],['第19周','19'],['第20周','20'],['第21周','21'],['第22周','22'],['第23周','23'],['第24周','24'],['第25周','25'],['第26周','26'],['第27周','27'],['第28周','28'],['第29周','29'],['第30周','30'],['第31周','31'],['第32周','32'],['第33周','33'],['第34周','34'],['第35周','35'],['第36周','36'],['第37周','37'],['第38周','38'],['第39周','39'],['第40周','40'],['第41周','41'],['第42周','42'],['第43周','43'],['第44周','44'],['第45周','45'],['第46周','46'],['第47周','47'],['第48周','48'],['第49周','49'],['第50周','50'],['第51周','51'],['第52周','52'],['第53周','53']
+]
+    });
+	var quarterstore = new Ext.data.SimpleStore({
+       fields: ['quarter','value'],
+       data :  [['第一季度','1'],['第二季度','2'],['第三季度','3'],['第四季度','4']]
+    });
+	var teendaysstore = new Ext.data.SimpleStore({
+       fields: ['teendays','value'],
+       data :  [['上旬','1'],['中旬','2'],['下旬','3']]
+    });
+	var halfyearstore = new Ext.data.SimpleStore({
+       fields: ['halfyear','value'],
+       data :  [['上半年','5'],['下半年','6']]
+    });
+ var freqstore = new Ext.data.SimpleStore({
+       fields: ['freq','value'],
+        data :  [['日报','6']]
+  });
+	var tabList = new Array();
+	function doBeforeUnL()
+	{
+		destroyAllTabs();
+	}
+//-->
+</SCRIPT>
+</head>
+<body onload="javascript:initDefault();" onUnload="doBeforeUnL();">
+<div id="north1" align="center">
+<form method="post" action="/GetQuery" name="subform" id="subform" >
+<input type="hidden" name="S_ID" value="B_BB005" /> 
+<input type="hidden" name="vm" value="test.vm" /> 
+<input type="hidden" name="rmlpar" value="" /> 
+<input type="hidden" name="url" value="" />
+<input type="hidden" name="date" value="" /> 
+<input type="hidden" name="freqH" value="" />
+<table id="partable" class="MsoTableGrid"  cellspacing="0"  width='99%'>
+<tr><td align='right'  height='25' class='line1' width='24%'><span style='color:red'>*</span>&nbsp;<span style='font: bold 10pt Arial'>频率&nbsp;</span></td><td align='left' width='24%'  class='line1'><input type='text' id='selectfreq' size='15' /></td>
+ 
+			
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+	<td align='right'  class="line1" height='25' width ='24%'>
+		
+		<span style='color:red'>*</span><span style='font: bold 10pt Arial'>起始日期</span>&nbsp;
+		<input type="hidden" name="para2" id="para2">
+	</td>
+	<td  align='left'  class="line1" width ='24%' height='25'>
+		<table cellSpacing=0>
+			<td>
+				<span id="selectday_para2_seq_span" style="width:60"><input type="text" id="selectday_para2_seq" size="15"></span>
+			</td>
+			<td>
+				<span id="selectyear_para2_seq_span" style="width:70"><input type="text" id="selectyear_para2_seq" size="6" ></span>
+			</td>
+			<td>
+				<span id="selectmonth_para2_seq_span" style="width:50"><input type="text" id="selectmonth_para2_seq" size="3" ></span>
+			</td>
+			<td >
+				<span id="selectweek_para2_seq_span" style="width:60"><input type="text" id="selectweek_para2_seq" size="4" ></span>
+			</td>
+			<td>
+				<span id="selectteendays_para2_seq_span" style="width:50"><input type="text" id="selectteendays_para2_seq" size="2" ></span>
+			</td>
+			<td >
+				<span id="selectquarter_para2_seq_span" style="width:60"><input type="text" id="selectquarter_para2_seq" size="6" ></span>
+			</td>
+			<td >
+				<span id="selecthalfyear_para2_seq_span" style="width:60"><input type="text" id="selecthalfyear_para2_seq" size="4" ></span>
+			</td>
+			
+			<input type="hidden" id="year_para2_seq" >
+			<input type="hidden" id="month_para2_seq" >
+			<input type="hidden" id="week_para2_seq" >
+			<input type="hidden" id="teendays_para2_seq" >
+			<input type="hidden" id="quarter_para2_seq" >
+			<input type="hidden" id="halfyear_para2_seq" >
+			<input type="hidden" id="day_para2_seq" >
+		</table>
+	</td>
+  
+ </tr>
+ 
+<SCRIPT LANGUAGE="JavaScript"> 
+//-----------------------日---------------------------
+	var df_para2_seq =new Ext.form.DateField(
+	{
+        format:'Ymd'
+	});
+    df_para2_seq.applyToMarkup('selectday_para2_seq');
+	df_para2_seq.setValue('2011-07-08');
+	document.getElementById("day_para2_seq").value = df_para2_seq.getValue().format('Ymd'); ;
+	df_para2_seq.on("change",dfSelect_para2_seq);
+ 
+	function  dfSelect_para2_seq(  dfx, record, index )
+	{
+		document.getElementById("day_para2_seq").value =""  ;
+		
+		if(dfx.getRawValue()== null ||dfx.getRawValue() ==""){
+			 Ext.Msg.alert('警告信息', '日期为必输项!<br/>');
+		 	 return;
+			}
+		
+		if(dfx.getRawValue() != "" && (dfx.getValue() == null || dfx.getValue() == "")){
+			Ext.Msg.alert('警告信息', '请检查日期格式!<br/>');
+		 	return;
+		}
+	 	if(null !=  dfx.getValue() && '' !=  dfx.getValue()){
+	 		document.getElementById("day_para2_seq").value = dfx.getValue().format('Ymd'); 
+	  	}
+	}
+   
+//---------------------年-----------------------------
+    var yearcombo_para2_seq = new Ext.form.ComboBox({
+        store: yearstore,
+        displayField:'year',
+		valueField:'value',
+		id:'queryyearcomb_para2_seq',
+        typeAhead: true,
+        mode: 'local',
+		width: '100', 
+		triggerAction: 'all',
+		forceSelection:true,
+        selectOnFocus:true,
+		allowblank: false,
+		readOnly: true,
+        applyTo: 'selectyear_para2_seq'
+ 
+    });
+ 
+	yearcombo_para2_seq.on("select",yearcomboSelect_para2_seq);
+ 
+	function  yearcomboSelect_para2_seq( yearcombo_para2_seq, record, index )
+	{
+	  document.getElementById("year_para2_seq").value = "" ;
+	  document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+	 
+	  
+	}
+ 
+//---------------月-----------------------------------
+    var monthcombo_para2_seq = new Ext.form.ComboBox({
+        store: monthstore,
+        displayField:'month',
+		valueField:'value',
+		id:'querymonthcomb_para2_seq',
+        typeAhead: true,
+			 triggerAction: 'all',
+			width: '100', 
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selectmonth_para2_seq'
+ 
+    });
+ 
+ 
+	monthcombo_para2_seq.on("select",monthcomboSelect_para2_seq);
+ 
+ 
+	function  monthcomboSelect_para2_seq( monthcombo_para2_seq, record, index )
+	{
+	 document.getElementById("month_para2_seq").value = ""  ;
+	  document.getElementById("month_para2_seq").value=monthcombo_para2_seq.getValue();
+	}
+//----------------周----------------------------------
+    var weekcombo_para2_seq = new Ext.form.ComboBox({
+        store: weekstore,
+        displayField:'week',
+		valueField:'value',
+		id:'queryweekcomb_para2_seq',
+		triggerAction: 'all',
+        typeAhead: true,
+        mode: 'local',
+		forceSelection :true,
+			readOnly:true,
+        selectOnFocus:true,
+        applyTo: 'selectweek_para2_seq'
+ 
+    });
+ 
+	
+	weekcombo_para2_seq.on("select",weekcomboSelect_para2_seq);
+ 
+	function  weekcomboSelect_para2_seq( weekcombo_para2_seq, record, index )
+	{
+	  document.getElementById("week_para2_seq").value = "" ;
+	  document.getElementById("week_para2_seq").value=weekcombo_para2_seq.getValue();
+	}
+ 
+//-------------------旬-------------------------------
+    var teendayscombo_para2_seq = new Ext.form.ComboBox({
+        store: teendaysstore,
+        displayField:'teendays',
+		valueField:'value',
+		id:'queryteendayscomb_para2_seq',
+			 triggerAction: 'all',
+        typeAhead: true,
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selectteendays_para2_seq'
+ 
+    });
+ 
+ 
+	teendayscombo_para2_seq.on("select",teendayscomboSelect_para2_seq);
+ 
+	function  teendayscomboSelect_para2_seq( teendayscombo_para2_seq, record, index )
+	{
+	 document.getElementById("teendays_para2_seq").value = ""  ;
+	  document.getElementById("teendays_para2_seq").value=teendayscombo_para2_seq.getValue();
+	}
+ 
+//----------------------季度----------------------------
+    var quartercombo_para2_seq = new Ext.form.ComboBox({
+        store: quarterstore,
+        displayField:'quarter',
+		valueField:'value',
+		triggerAction: 'all',
+		id:'queryquartercomb_para2_seq',
+        typeAhead: true,
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selectquarter_para2_seq'
+ 
+    });
+ 
+	quartercombo_para2_seq.on("select",quartercomboSelect_para2_seq);
+ 
+	function  quartercomboSelect_para2_seq( quartercombo_para2_seq, record, index )
+	{
+	  document.getElementById("quarter_para2_seq").value = ""  ;
+	  document.getElementById("quarter_para2_seq").value=quartercombo_para2_seq.getValue();
+	}
+ 
+//----------------------半年----------------------------
+    var halfyearcombo_para2_seq = new Ext.form.ComboBox({
+        store: halfyearstore,
+        displayField:'halfyear',
+		valueField:'value',
+		id:'queryhalfyearcomb_para2_seq',
+        typeAhead: true,
+		triggerAction: 'all',
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selecthalfyear_para2_seq'
+ 
+    });
+	//默认值
+	
+ 
+	halfyearcombo_para2_seq.on("select",halfyearcomboSelect_para2_seq);
+	function  halfyearcomboSelect_para2_seq( halfyearcombo_para2_seq, record, index )
+	{
+	  document.getElementById("halfyear_para2_seq").value = ""  ;
+	  document.getElementById("halfyear_para2_seq").value=halfyearcombo_para2_seq.getValue();
+	}
+ 
+ 
+ 
+ function  freqcomboSelect_para2_seq( freqcombo )
+{
+  
+	  if(freqcombo.getValue()=='6'){
+			document.getElementById("selectday_para2_seq_span").style.display = "block";    
+				  
+			document.getElementById("selectyear_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";		 
+			
+			
+			document.getElementById("selectyear_para2_seq_span").disable;    
+			//document.getElementById("day_para2_seq").value = dfx.getValue().format('Ymd'); 
+			
+			
+		  
+	  } else if (freqcombo.getValue()=='3'){  //月报
+			document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "block";   
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+			
+			
+			
+			yearcombo_para2_seq.setValue('2011');  //年
+			monthcombo_para2_seq.setValue('06');  //月
+			
+			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("month_para2_seq").value=monthcombo_para2_seq.getValue();
+			
+	  } else if (freqcombo.getValue()=='5'){  //周报
+			document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "block";  		  
+		
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+			
+			
+			
+			yearcombo_para2_seq.setValue('2011');  //年
+			weekcombo_para2_seq.setValue('27');   //周
+			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("week_para2_seq").value=weekcombo_para2_seq.getValue();
+			
+		  
+		  
+	  } else if (freqcombo.getValue()=='4') { //旬报
+			document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "block";  	  	
+			document.getElementById("selectteendays_para2_seq_span").style.display = "block";  
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";     
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+			
+			
+			
+			
+			yearcombo_para2_seq.setValue('2011');  //年
+			monthcombo_para2_seq.setValue('06');  //月
+			teendayscombo_para2_seq.setValue('3');//旬
+			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("month_para2_seq").value=monthcombo_para2_seq.getValue();
+ 			document.getElementById("teendays_para2_seq").value=teendayscombo_para2_seq.getValue();
+			
+			  
+	  } else if (freqcombo.getValue()=='2') {  //季报
+			document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectquarter_para2_seq_span").style.display = "block";  	  	
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectweek_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";	
+			
+			
+			
+			
+			yearcombo_para2_seq.setValue('2011');  //年
+			quartercombo_para2_seq.setValue('2');  //季度
+ 
+			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("quarter_para2_seq").value=quartercombo_para2_seq.getValue();
+			
+			  
+	  } else if (freqcombo.getValue()=='1'){ //半年报
+			document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "block"; 	  	
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";	
+			
+			
+			
+			
+			yearcombo_para2_seq.setValue('2011');  //年
+			halfyearcombo_para2_seq.setValue('5');  //半年	
+			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("halfyear_para2_seq").value=halfyearcombo_para2_seq.getValue();
+			
+					  
+	  } else if (freqcombo.getValue()=='0'){  //年报
+	  	    document.getElementById("selectyear_para2_seq_span").style.display = "block";
+ 
+			document.getElementById("selectday_para2_seq_span").style.display = "none";
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none";
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+			
+			
+			yearcombo_para2_seq.setValue('2010');  //年
+			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+	
+			
+	  }
+  }
+ 
+ 
+ function  initcomboSelect_para2_seq()
+ {
+   
+ 	  if(freqcombo.getValue()=='6'){
+ 		 document.getElementById("selectday_para2_seq_span").style.display = "block";    
+		  
+			document.getElementById("selectyear_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";		 
+			
+			
+			document.getElementById("selectyear_para2_seq_span").disable;    
+			//document.getElementById("day_para2_seq").value = dfx.getValue().format('Ymd'); 
+ 	  } else if (freqcombo.getValue()=='3'){  //月报
+ 		 document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "block";   
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+ 			
+ 			
+ 			yearcombo_para2_seq.setValue('2011');  //年
+ 			monthcombo_para2_seq.setValue('06');  //月
+ 			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("month_para2_seq").value=monthcombo_para2_seq.getValue();
+ 			
+ 	  } else if (freqcombo.getValue()=='5'){  //周报
+ 		 document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "block";  		  
+		
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+ 			
+ 			
+ 			yearcombo_para2_seq.setValue('2011');  //年
+ 			weekcombo_para2_seq.setValue('27');   //周
+ 			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("week_para2_seq").value=weekcombo_para2_seq.getValue();
+ 		  
+ 	  } else if (freqcombo.getValue()=='4') { //旬报
+ 		 document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "block";  	  	
+			document.getElementById("selectteendays_para2_seq_span").style.display = "block";  
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";     
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+ 			
+ 			
+ 			yearcombo_para2_seq.setValue('2011');  //年
+ 			monthcombo_para2_seq.setValue('06');  //月
+ 			teendayscombo_para2_seq.setValue('3');//旬
+ 			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("month_para2_seq").value=monthcombo_para2_seq.getValue();
+ 			document.getElementById("teendays_para2_seq").value=teendayscombo_para2_seq.getValue();
+ 			  
+ 	  } else if (freqcombo.getValue()=='2') {  //季报
+ 		 document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selectquarter_para2_seq_span").style.display = "block";  	  	
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectweek_para2_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";	
+ 			
+ 			
+ 			yearcombo_para2_seq.setValue('2011');  //年
+ 			quartercombo_para2_seq.setValue('2');  //季度
+ 			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("quarter_para2_seq").value=quartercombo_para2_seq.getValue();
+ 			
+ 			  
+ 	  } else if (freqcombo.getValue()=='1'){ //半年报
+ 		 document.getElementById("selectyear_para2_seq_span").style.display = "block";     
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "block"; 	  	
+				  
+			document.getElementById("selectday_para2_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none"; 
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";
+ 			
+ 			yearcombo_para2_seq.setValue('2011');  //年
+ 			halfyearcombo_para2_seq.setValue('5');  //半年	
+ 
+ 			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			document.getElementById("halfyear_para2_seq").value=halfyearcombo_para2_seq.getValue();
+ 			
+ 					  
+ 	  } else if (freqcombo.getValue()=='0'){  //年报
+ 		 document.getElementById("selectyear_para2_seq_span").style.display = "block";
+ 
+			document.getElementById("selectday_para2_seq_span").style.display = "none";
+			document.getElementById("selectmonth_para2_seq_span").style.display = "none";
+			document.getElementById("selectweek_para2_seq_span").style.display = "none";
+			document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para2_seq_span").style.display = "none";
+			document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+ 			yearcombo_para2_seq.setValue('2010');  //年
+ 			
+ 			document.getElementById("year_para2_seq").value=yearcombo_para2_seq.getValue();
+ 			
+ 
+ 	  }
+   }
+  
+ 
+  function setDateFieldValue_para2_seq()
+  {
+    if (freqcombo.getValue()=='0') {
+		document.getElementById("para2").value = document.getElementById("year_para2_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='1'){
+		document.getElementById("para2").value = document.getElementById("year_para2_seq").value + document.getElementById("halfyear_para2_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='2'){
+		document.getElementById("para2").value = document.getElementById("year_para2_seq").value + document.getElementById("quarter_para2_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='3'){
+		document.getElementById("para2").value = document.getElementById("year_para2_seq").value + document.getElementById("month_para2_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='4'){
+		document.getElementById("para2").value = document.getElementById("year_para2_seq").value + document.getElementById("month_para2_seq").value + document.getElementById("teendays_para2_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='5'){
+		document.getElementById("para2").value = document.getElementById("year_para2_seq").value + document.getElementById("week_para2_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='6'){
+		
+		if(df_para2_seq.getRawValue()=="" || df_para2_seq.getRawValue()==null){
+			Ext.Msg.alert('警告信息', '日期为必输项<br/>');
+			return false;	
+			}
+			
+		 if(( df_para2_seq.getRawValue()!="")&& (df_para2_seq.getValue()==null || df_para2_seq.getValue()== ""))
+		{			 
+			Ext.Msg.alert('警告信息', '请检查日期格式!<br/>');
+			return false;
+		}
+	    else {
+			if(null != df_para2_seq.getValue() && '' != df_para2_seq.getValue()){
+			document.getElementById("day_para2_seq").value =df_para2_seq.getValue().format('Ymd');  
+			}
+			document.getElementById("para2").value = document.getElementById("day_para2_seq").value;
+			return true;
+		}
+	}
+}
+	document.getElementById("selectyear_para2_seq_span").style.display = "none";
+	document.getElementById("selectmonth_para2_seq_span").style.display = "none";
+	document.getElementById("selectweek_para2_seq_span").style.display = "none";
+	document.getElementById("selectteendays_para2_seq_span").style.display = "none";
+	document.getElementById("selectquarter_para2_seq_span").style.display = "none";
+	document.getElementById("selecthalfyear_para2_seq_span").style.display = "none";
+/**
+		yearcombo_para2_seq.hide();
+	monthcombo_para2_seq.hide();
+	weekcombo_para2_seq.hide();
+	teendayscombo_para2_seq.hide();
+	quartercombo_para2_seq.hide();
+	halfyearcombo_para2_seq.hide();
+*/
+ 
+ 
+</SCRIPT>
+	
+			
+ 
+ 
+ 
+ 
+ 
+ 
+</tr><tr>
+ 
+	<td align='right'  class="line1" height='25' width ='24%'>
+		
+		<span style='color:red'>*</span><span style='font: bold 10pt Arial'>结束日期</span>&nbsp;
+		<input type="hidden" name="para3" id="para3">
+	</td>
+	<td  align='left'  class="line1" width ='24%' height='25'>
+		<table cellSpacing=0>
+			<td>
+				<span id="selectday_para3_seq_span" style="width:60"><input type="text" id="selectday_para3_seq" size="15"></span>
+			</td>
+			<td>
+				<span id="selectyear_para3_seq_span" style="width:70"><input type="text" id="selectyear_para3_seq" size="6" ></span>
+			</td>
+			<td>
+				<span id="selectmonth_para3_seq_span" style="width:50"><input type="text" id="selectmonth_para3_seq" size="3" ></span>
+			</td>
+			<td >
+				<span id="selectweek_para3_seq_span" style="width:60"><input type="text" id="selectweek_para3_seq" size="4" ></span>
+			</td>
+			<td>
+				<span id="selectteendays_para3_seq_span" style="width:50"><input type="text" id="selectteendays_para3_seq" size="2" ></span>
+			</td>
+			<td >
+				<span id="selectquarter_para3_seq_span" style="width:60"><input type="text" id="selectquarter_para3_seq" size="6" ></span>
+			</td>
+			<td >
+				<span id="selecthalfyear_para3_seq_span" style="width:60"><input type="text" id="selecthalfyear_para3_seq" size="4" ></span>
+			</td>
+			
+			<input type="hidden" id="year_para3_seq" >
+			<input type="hidden" id="month_para3_seq" >
+			<input type="hidden" id="week_para3_seq" >
+			<input type="hidden" id="teendays_para3_seq" >
+			<input type="hidden" id="quarter_para3_seq" >
+			<input type="hidden" id="halfyear_para3_seq" >
+			<input type="hidden" id="day_para3_seq" >
+		</table>
+	</td>
+  
+ 
+<SCRIPT LANGUAGE="JavaScript"> 
+//-----------------------日---------------------------
+	var df_para3_seq =new Ext.form.DateField(
+	{
+        format:'Ymd'
+	});
+    df_para3_seq.applyToMarkup('selectday_para3_seq');
+	df_para3_seq.setValue('2011-07-08');
+	document.getElementById("day_para3_seq").value = df_para3_seq.getValue().format('Ymd'); ;
+	df_para3_seq.on("change",dfSelect_para3_seq);
+ 
+	function  dfSelect_para3_seq(  dfx, record, index )
+	{
+		document.getElementById("day_para3_seq").value =""  ;
+		
+		if(dfx.getRawValue()== null ||dfx.getRawValue() ==""){
+			 Ext.Msg.alert('警告信息', '日期为必输项!<br/>');
+		 	 return;
+			}
+		
+		if(dfx.getRawValue() != "" && (dfx.getValue() == null || dfx.getValue() == "")){
+			Ext.Msg.alert('警告信息', '请检查日期格式!<br/>');
+		 	return;
+		}
+	 	if(null !=  dfx.getValue() && '' !=  dfx.getValue()){
+	 		document.getElementById("day_para3_seq").value = dfx.getValue().format('Ymd'); 
+	  	}
+	}
+   
+//---------------------年-----------------------------
+    var yearcombo_para3_seq = new Ext.form.ComboBox({
+        store: yearstore,
+        displayField:'year',
+		valueField:'value',
+		id:'queryyearcomb_para3_seq',
+        typeAhead: true,
+        mode: 'local',
+		width: '100', 
+		triggerAction: 'all',
+		forceSelection:true,
+        selectOnFocus:true,
+		allowblank: false,
+		readOnly: true,
+        applyTo: 'selectyear_para3_seq'
+ 
+    });
+ 
+	yearcombo_para3_seq.on("select",yearcomboSelect_para3_seq);
+ 
+	function  yearcomboSelect_para3_seq( yearcombo_para3_seq, record, index )
+	{
+	  document.getElementById("year_para3_seq").value = "" ;
+	  document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+	 
+	  
+	}
+ 
+//---------------月-----------------------------------
+    var monthcombo_para3_seq = new Ext.form.ComboBox({
+        store: monthstore,
+        displayField:'month',
+		valueField:'value',
+		id:'querymonthcomb_para3_seq',
+        typeAhead: true,
+			 triggerAction: 'all',
+			width: '100', 
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selectmonth_para3_seq'
+ 
+    });
+ 
+ 
+	monthcombo_para3_seq.on("select",monthcomboSelect_para3_seq);
+ 
+ 
+	function  monthcomboSelect_para3_seq( monthcombo_para3_seq, record, index )
+	{
+	 document.getElementById("month_para3_seq").value = ""  ;
+	  document.getElementById("month_para3_seq").value=monthcombo_para3_seq.getValue();
+	}
+//----------------周----------------------------------
+    var weekcombo_para3_seq = new Ext.form.ComboBox({
+        store: weekstore,
+        displayField:'week',
+		valueField:'value',
+		id:'queryweekcomb_para3_seq',
+		triggerAction: 'all',
+        typeAhead: true,
+        mode: 'local',
+		forceSelection :true,
+			readOnly:true,
+        selectOnFocus:true,
+        applyTo: 'selectweek_para3_seq'
+ 
+    });
+ 
+	
+	weekcombo_para3_seq.on("select",weekcomboSelect_para3_seq);
+ 
+	function  weekcomboSelect_para3_seq( weekcombo_para3_seq, record, index )
+	{
+	  document.getElementById("week_para3_seq").value = "" ;
+	  document.getElementById("week_para3_seq").value=weekcombo_para3_seq.getValue();
+	}
+ 
+//-------------------旬-------------------------------
+    var teendayscombo_para3_seq = new Ext.form.ComboBox({
+        store: teendaysstore,
+        displayField:'teendays',
+		valueField:'value',
+		id:'queryteendayscomb_para3_seq',
+			 triggerAction: 'all',
+        typeAhead: true,
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selectteendays_para3_seq'
+ 
+    });
+ 
+ 
+	teendayscombo_para3_seq.on("select",teendayscomboSelect_para3_seq);
+ 
+	function  teendayscomboSelect_para3_seq( teendayscombo_para3_seq, record, index )
+	{
+	 document.getElementById("teendays_para3_seq").value = ""  ;
+	  document.getElementById("teendays_para3_seq").value=teendayscombo_para3_seq.getValue();
+	}
+ 
+//----------------------季度----------------------------
+    var quartercombo_para3_seq = new Ext.form.ComboBox({
+        store: quarterstore,
+        displayField:'quarter',
+		valueField:'value',
+		triggerAction: 'all',
+		id:'queryquartercomb_para3_seq',
+        typeAhead: true,
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selectquarter_para3_seq'
+ 
+    });
+ 
+	quartercombo_para3_seq.on("select",quartercomboSelect_para3_seq);
+ 
+	function  quartercomboSelect_para3_seq( quartercombo_para3_seq, record, index )
+	{
+	  document.getElementById("quarter_para3_seq").value = ""  ;
+	  document.getElementById("quarter_para3_seq").value=quartercombo_para3_seq.getValue();
+	}
+ 
+//----------------------半年----------------------------
+    var halfyearcombo_para3_seq = new Ext.form.ComboBox({
+        store: halfyearstore,
+        displayField:'halfyear',
+		valueField:'value',
+		id:'queryhalfyearcomb_para3_seq',
+        typeAhead: true,
+		triggerAction: 'all',
+        mode: 'local',
+		forceSelection :true,
+        selectOnFocus:true,
+			readOnly:true,
+        applyTo: 'selecthalfyear_para3_seq'
+ 
+    });
+	//默认值
+	
+ 
+	halfyearcombo_para3_seq.on("select",halfyearcomboSelect_para3_seq);
+	function  halfyearcomboSelect_para3_seq( halfyearcombo_para3_seq, record, index )
+	{
+	  document.getElementById("halfyear_para3_seq").value = ""  ;
+	  document.getElementById("halfyear_para3_seq").value=halfyearcombo_para3_seq.getValue();
+	}
+ 
+ 
+ 
+ function  freqcomboSelect_para3_seq( freqcombo )
+{
+  
+	  if(freqcombo.getValue()=='6'){
+			document.getElementById("selectday_para3_seq_span").style.display = "block";    
+				  
+			document.getElementById("selectyear_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";		 
+			
+			
+			document.getElementById("selectyear_para3_seq_span").disable;    
+			//document.getElementById("day_para3_seq").value = dfx.getValue().format('Ymd'); 
+			
+			
+		  
+	  } else if (freqcombo.getValue()=='3'){  //月报
+			document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "block";   
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+			
+			
+			
+			yearcombo_para3_seq.setValue('2011');  //年
+			monthcombo_para3_seq.setValue('06');  //月
+			
+			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("month_para3_seq").value=monthcombo_para3_seq.getValue();
+			
+	  } else if (freqcombo.getValue()=='5'){  //周报
+			document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "block";  		  
+		
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+			
+			
+			
+			yearcombo_para3_seq.setValue('2011');  //年
+			weekcombo_para3_seq.setValue('27');   //周
+			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("week_para3_seq").value=weekcombo_para3_seq.getValue();
+			
+		  
+		  
+	  } else if (freqcombo.getValue()=='4') { //旬报
+			document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "block";  	  	
+			document.getElementById("selectteendays_para3_seq_span").style.display = "block";  
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";     
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+			
+			
+			
+			
+			yearcombo_para3_seq.setValue('2011');  //年
+			monthcombo_para3_seq.setValue('06');  //月
+			teendayscombo_para3_seq.setValue('3');//旬
+			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("month_para3_seq").value=monthcombo_para3_seq.getValue();
+ 			document.getElementById("teendays_para3_seq").value=teendayscombo_para3_seq.getValue();
+			
+			  
+	  } else if (freqcombo.getValue()=='2') {  //季报
+			document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectquarter_para3_seq_span").style.display = "block";  	  	
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectweek_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";	
+			
+			
+			
+			
+			yearcombo_para3_seq.setValue('2011');  //年
+			quartercombo_para3_seq.setValue('2');  //季度
+ 
+			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("quarter_para3_seq").value=quartercombo_para3_seq.getValue();
+			
+			  
+	  } else if (freqcombo.getValue()=='1'){ //半年报
+			document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "block"; 	  	
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";	
+			
+			
+			
+			
+			yearcombo_para3_seq.setValue('2011');  //年
+			halfyearcombo_para3_seq.setValue('5');  //半年	
+			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("halfyear_para3_seq").value=halfyearcombo_para3_seq.getValue();
+			
+					  
+	  } else if (freqcombo.getValue()=='0'){  //年报
+	  	    document.getElementById("selectyear_para3_seq_span").style.display = "block";
+ 
+			document.getElementById("selectday_para3_seq_span").style.display = "none";
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none";
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+			
+			
+			yearcombo_para3_seq.setValue('2010');  //年
+			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+	
+			
+	  }
+  }
+ 
+ 
+ function  initcomboSelect_para3_seq()
+ {
+   
+ 	  if(freqcombo.getValue()=='6'){
+ 		 document.getElementById("selectday_para3_seq_span").style.display = "block";    
+		  
+			document.getElementById("selectyear_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";		 
+			
+			
+			document.getElementById("selectyear_para3_seq_span").disable;    
+			//document.getElementById("day_para3_seq").value = dfx.getValue().format('Ymd'); 
+ 	  } else if (freqcombo.getValue()=='3'){  //月报
+ 		 document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "block";   
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";    
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+ 			
+ 			
+ 			yearcombo_para3_seq.setValue('2011');  //年
+ 			monthcombo_para3_seq.setValue('06');  //月
+ 			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("month_para3_seq").value=monthcombo_para3_seq.getValue();
+ 			
+ 	  } else if (freqcombo.getValue()=='5'){  //周报
+ 		 document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "block";  		  
+		
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+ 			
+ 			
+ 			yearcombo_para3_seq.setValue('2011');  //年
+ 			weekcombo_para3_seq.setValue('27');   //周
+ 			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("week_para3_seq").value=weekcombo_para3_seq.getValue();
+ 		  
+ 	  } else if (freqcombo.getValue()=='4') { //旬报
+ 		 document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "block";  	  	
+			document.getElementById("selectteendays_para3_seq_span").style.display = "block";  
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";     
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+ 			
+ 			
+ 			yearcombo_para3_seq.setValue('2011');  //年
+ 			monthcombo_para3_seq.setValue('06');  //月
+ 			teendayscombo_para3_seq.setValue('3');//旬
+ 			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("month_para3_seq").value=monthcombo_para3_seq.getValue();
+ 			document.getElementById("teendays_para3_seq").value=teendayscombo_para3_seq.getValue();
+ 			  
+ 	  } else if (freqcombo.getValue()=='2') {  //季报
+ 		 document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selectquarter_para3_seq_span").style.display = "block";  	  	
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectweek_para3_seq_span").style.display = "none"; 
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";	
+ 			
+ 			
+ 			yearcombo_para3_seq.setValue('2011');  //年
+ 			quartercombo_para3_seq.setValue('2');  //季度
+ 			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("quarter_para3_seq").value=quartercombo_para3_seq.getValue();
+ 			
+ 			  
+ 	  } else if (freqcombo.getValue()=='1'){ //半年报
+ 		 document.getElementById("selectyear_para3_seq_span").style.display = "block";     
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "block"; 	  	
+				  
+			document.getElementById("selectday_para3_seq_span").style.display = "none";     
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";     
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none"; 
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";
+ 			
+ 			yearcombo_para3_seq.setValue('2011');  //年
+ 			halfyearcombo_para3_seq.setValue('5');  //半年	
+ 
+ 			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			document.getElementById("halfyear_para3_seq").value=halfyearcombo_para3_seq.getValue();
+ 			
+ 					  
+ 	  } else if (freqcombo.getValue()=='0'){  //年报
+ 		 document.getElementById("selectyear_para3_seq_span").style.display = "block";
+ 
+			document.getElementById("selectday_para3_seq_span").style.display = "none";
+			document.getElementById("selectmonth_para3_seq_span").style.display = "none";
+			document.getElementById("selectweek_para3_seq_span").style.display = "none";
+			document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+			document.getElementById("selectquarter_para3_seq_span").style.display = "none";
+			document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+ 			yearcombo_para3_seq.setValue('2010');  //年
+ 			
+ 			document.getElementById("year_para3_seq").value=yearcombo_para3_seq.getValue();
+ 			
+ 
+ 	  }
+   }
+  
+ 
+  function setDateFieldValue_para3_seq()
+  {
+    if (freqcombo.getValue()=='0') {
+		document.getElementById("para3").value = document.getElementById("year_para3_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='1'){
+		document.getElementById("para3").value = document.getElementById("year_para3_seq").value + document.getElementById("halfyear_para3_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='2'){
+		document.getElementById("para3").value = document.getElementById("year_para3_seq").value + document.getElementById("quarter_para3_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='3'){
+		document.getElementById("para3").value = document.getElementById("year_para3_seq").value + document.getElementById("month_para3_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='4'){
+		document.getElementById("para3").value = document.getElementById("year_para3_seq").value + document.getElementById("month_para3_seq").value + document.getElementById("teendays_para3_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='5'){
+		document.getElementById("para3").value = document.getElementById("year_para3_seq").value + document.getElementById("week_para3_seq").value;
+		return true;
+	} else if (freqcombo.getValue()=='6'){
+		
+		if(df_para3_seq.getRawValue()=="" || df_para3_seq.getRawValue()==null){
+			Ext.Msg.alert('警告信息', '日期为必输项<br/>');
+			return false;	
+			}
+			
+		 if(( df_para3_seq.getRawValue()!="")&& (df_para3_seq.getValue()==null || df_para3_seq.getValue()== ""))
+		{			 
+			Ext.Msg.alert('警告信息', '请检查日期格式!<br/>');
+			return false;
+		}
+	    else {
+			if(null != df_para3_seq.getValue() && '' != df_para3_seq.getValue()){
+			document.getElementById("day_para3_seq").value =df_para3_seq.getValue().format('Ymd');  
+			}
+			document.getElementById("para3").value = document.getElementById("day_para3_seq").value;
+			return true;
+		}
+	}
+}
+	document.getElementById("selectyear_para3_seq_span").style.display = "none";
+	document.getElementById("selectmonth_para3_seq_span").style.display = "none";
+	document.getElementById("selectweek_para3_seq_span").style.display = "none";
+	document.getElementById("selectteendays_para3_seq_span").style.display = "none";
+	document.getElementById("selectquarter_para3_seq_span").style.display = "none";
+	document.getElementById("selecthalfyear_para3_seq_span").style.display = "none";
+/**
+		yearcombo_para3_seq.hide();
+	monthcombo_para3_seq.hide();
+	weekcombo_para3_seq.hide();
+	teendayscombo_para3_seq.hide();
+	quartercombo_para3_seq.hide();
+	halfyearcombo_para3_seq.hide();
+*/
+ 
+ 
+</SCRIPT>
+	<td  align='right' class='line1' height='25'><span style='color:red'>*</span><span style='font: bold 10pt Arial'>单位</span>&nbsp;<input type='hidden' value='' name='digit' id='digit'></input></td><td  align='left'  class='line1' id='id_digit'> <input type='text' name='400' id='400' value= '' size='26' /><SCRIPT LANGUAGE='JavaScript'>var store = new Ext.data.SimpleStore({ fields: ['key','value'],data :[['元','1'],['万元','10000'],['亿元','100000000']]}); var combo_digit = new Ext.form.ComboBox({store: store,displayField:'key',valueField:'value',typeAhead: true,allowblank:'false',mode: 'local',forceSelection :true,triggerAction: 'all',readOnly:true,emptyText:'----请选择----',selectOnFocus:true,applyTo: '400'});combo_digit.setValue('1');document.getElementById('digit').value=combo_digit.getValue();combo_digit.on('select',comboSelect_digit);function  comboSelect_digit( combo, record, index ){document.getElementById('digit').value=combo_digit.getValue();}</SCRIPT></td>
+</tr><tr>
+<td  align='right' class='line1' height='25'><span style='color:red'>*</span><span style='font: bold 10pt Arial'>机构</span>&nbsp;<input type='hidden' value='' name='para1' id='para1'></input></td><td  align='left'  class='line1' id='id_para1'> <input type='text' name='500' id='500' value= '' size='26' /><SCRIPT LANGUAGE='JavaScript'>var store = new Ext.data.SimpleStore({ fields: ['key','value'],data :[['1000-成都银行汇总','1000'],['1050-西安分行汇总','1050'],['930100-西安分行营业部汇总','930100'],['9301-西安分行营业部','9301'],['9302-西安分行钟楼支行','9302'],['9303-西安分行碑林路支行','9303'],['939900-西安分行清算中心虚拟','939900'],['9399-西安分行清算中心','9399'],['1010-成都分行汇总','1010'],['020000-双流支行汇总','020000'],['0201-双流支行','0201'],['0205-华阳支行','0205'],['0204-开发区支行','0204'],['0203-机场支行','0203'],['600000-温江支行汇总','600000'],['6001-温江支行','6001'],['6016-柳城支行','6016'],['600200-大邑支行汇总','600200'],['6002-大邑支行','6002'],['600300-邛崃支行汇总','600300'],['6003-邛崃支行','6003'],['600400-都江堰支行汇总','600400'],['6004-都江堰支行','6004'],['6015-大道支行','6015'],['600500-新都支行汇总','600500'],['6005-新都支行','6005'],['600600-青白江支行汇总','600600'],['6006-青白江支行','6006'],['600700-龙泉驿支行汇总','600700'],['6007-龙泉驿支行','6007'],['600800-彭州支行汇总','600800'],['6008-彭州支行','6008'],['601000-郫县支行汇总','601000'],['6010-郫县支行','6010'],['6017-犀浦支行','6017'],['601100-新津支行汇总','601100'],['6011-新津支行','6011'],['601200-崇州支行汇总','601200'],['6012-崇州支行','6012'],['601300-金堂支行汇总','601300'],['6013-金堂支行','6013'],['111100-西御支行汇总','111100'],['1111-西御支行','1111'],['010000-营业部汇总','010000'],['0101-营业部','0101'],['0102-同仁路支行','0102'],['3502-优品道支行','3502'],['510000-天仙桥支行汇总','510000'],['5108-二营财务部','5108'],['5107-天仙桥支行','5107'],['5014-双林中横路支行','5014'],['5007-银都支行','5007'],['2502-红星路支行','2502'],['0401-金沙支行','0401'],['0403-朝阳支行','0403'],['0402-王家坝支行','0402'],['2501-青羊支行','2501'],['190000-琴台支行汇总','190000'],['1901-琴台支行','1901'],['1403-蜀能支行','1403'],['1402-青华路支行','1402'],['1401-菊乐路支行','1401'],['1902-蜀汉路支行','1902'],['0702-广福桥支行','0702'],['030000-洗面桥支行汇总','030000'],['0304-洗面桥支行','0304'],['2404-紫荆北路支行','2404'],['2401-金河支行','2401'],['0301-提督街支行','0301'],['290000-德盛支行汇总','290000'],['2901-德盛支行','2901'],['2902-西延线支行','2902'],['0902-新南支行','0902'],['2904-新华支行','2904'],['2905-羊市街支行','2905'],['0903-新南门支行','0903'],['2907-蜀光路支行','2907'],['120000-锦江支行汇总','120000'],['1201-锦江支行','1201'],['1501-锦江工业园支行','1501'],['3801-盐市口支行','3801'],['5012-光华支行','5012'],['170000-武侯支行汇总','170000'],['1701-武侯支行','1701'],['1702-跳伞塔支行','1702'],['1706-佳灵支行','1706'],['0502-望江支行','0502'],['5009-青羊宫支行','5009'],['1704-川大支行','1704'],['0501-大慈寺支行','0501'],['1707-双楠支行','1707'],['210000-高升桥支行汇总','210000'],['2101-高升桥支行','2101'],['1001-磨子桥支行','1001'],['1002-科华北路支行','1002'],['1003-锦官新城支行','1003'],['2102-玉林南路支行','2102'],['3601-龙祥路支行','3601'],['320000-沙湾支行汇总','320000'],['3201-沙湾支行','3201'],['3202-金府路支行','3202'],['3203-量力支行','3203'],['3204-营门口支行','3204'],['3402-马鞍北路支行','3402'],['230000-龙舟路支行汇总','230000'],['2301-龙舟路支行','2301'],['0703-祥和里支行','0703'],['1601-解放路支行','1601'],['0601-成华支行','0601'],['0701-八里庄支行','0701'],['2302-双林路支行','2302'],['340000-金牛支行汇总','340000'],['3401-金牛支行','3401'],['1802-西一路支行','1802'],['5004-金阳路支行','5004'],['1805-交大路支行','1805'],['1801-西北桥支行','1801'],['200000-高新支行汇总','200000'],['2001-高新支行','2001'],['5110-南城支行','5110'],['2003-红牌楼支行','2003'],['2006-芳草支行','2006'],['2005-新加坡工业园支行','2005'],['2701-实验支行','2701'],['2705-十二桥支行','2705'],['2008-家园支行','2008'],['1503-棕北支行','1503'],['180000-科技支行汇总','180000'],['1804-科技支行','1804'],['280000-长顺支行汇总','280000'],['2801-长顺支行','2801'],['2802-北较场西路支行','2802'],['2803-战旗东路支行','2803'],['2804-抚琴支行','2804'],['2805-石人北路支行','2805'],['1102-正府街支行','1102'],['2201-斌升支行','2201'],['2204-商业街支行','2204'],['310000-华兴支行汇总','310000'],['3101-华兴支行','3101'],['3102-走马街支行','3102'],['1302-五块石支行','1302'],['2601-高地支行','2601'],['3001-李家沱支行','3001'],['3106-建设路支行','3106'],['3107-浣花北路支行','3107'],['3108-同盛路支行','3108'],['3111-九里堤支行','3111'],['370000-百花潭支行汇总','370000'],['3701-百花潭支行','3701'],['3301-永陵路支行','3301'],['3602-城西支行','3602'],['2702-谢家祠支行','2702'],['300000-体育场路支行汇总','300000'],['3104-成大支行','3104'],['3002-体育场路支行','3002'],['1202-九龙广场支行','1202'],['3302-北荷支行','3302'],['1020-重庆分行汇总','1020'],['920100-重庆分行虚拟','920100'],['9201-重庆分行','9201'],['9299-重庆清算中心','9299'],['1030-广安分行汇总','1030'],['605000-广安分行虚拟','605000'],['6050-广安分行','6050'],['1040-总行清算中心虚拟1','1040'],['999900-总行清算中心虚拟2','999900'],['5501-汇通','5501'],['6060-资阳分行','6060'],['2222-国际业务部','2222'],['3333-个人金融部','3333'],['3322-信用卡中心','3322'],['3338-电子银行','3338'],['6070-眉山分行','6070'],['9999-总行清算中心','9999']]}); var combo_para1 = new Ext.form.ComboBox({store: store,displayField:'key',valueField:'value',typeAhead: true,allowblank:'false',mode: 'local',forceSelection :true,triggerAction: 'all',readOnly:true,emptyText:'----请选择----',selectOnFocus:true,applyTo: '500'});combo_para1.setValue('1000');document.getElementById('para1').value=combo_para1.getValue();combo_para1.on('select',comboSelect_para1);function  comboSelect_para1( combo, record, index ){document.getElementById('para1').value=combo_para1.getValue();}</SCRIPT></td>
+<td  align='right' class='line1' height='25'><span style='color:red'>*</span><span style='font: bold 10pt Arial'>币种</span>&nbsp;<input type='hidden' value='' name='para4' id='para4'></input></td><td  align='left'  class='line1' id='id_para4'> <input type='text' name='300' id='300' value= '' size='26' /><SCRIPT LANGUAGE='JavaScript'>var store = new Ext.data.SimpleStore({ fields: ['key','value'],data :[['人民币','CNY'],['港元','HKD'],['日元','JPY'],['欧元','EUR'],['美元','USD']]}); var combo_para4 = new Ext.form.ComboBox({store: store,displayField:'key',valueField:'value',typeAhead: true,allowblank:'false',mode: 'local',forceSelection :true,triggerAction: 'all',readOnly:true,emptyText:'----请选择----',selectOnFocus:true,applyTo: '300'});combo_para4.setValue('CNY');document.getElementById('para4').value=combo_para4.getValue();combo_para4.on('select',comboSelect_para4);function  comboSelect_para4( combo, record, index ){document.getElementById('para4').value=combo_para4.getValue();}</SCRIPT></td>
+</tr>
+ 
+			<tr>
+				<td height="20" colspan="2" align="right" class="line1">
+				<table>
+					<tr>
+						<td>
+							<div id="viewbi"></div>
+						</td>
+						<td>
+							<div id="mendexcel"></div>
+						</td>
+					</tr>
+				</table>
+				</td>
+				<td colspan="2" align="left" class="line1">
+				<table>
+					<tr>
+						<td>
+							<div id="chkblance"></div>
+						</td>
+						<td>
+							<div id="checkBlanceBetweenTables"></div>
+						</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" value="para2|para3|digit|para1|para4|" name="parlist"></input>
+		</form>
+		<input type="hidden" value="para3" name="datepar"></input>
+	</div>
+</body>
+ 
+<script language="javascript"> 
+var mendexcelBut;
+var viewbiBut;
+ 
+var chkblanceBtn;
+var checkBlanceBeBtn;
+var relatedSIDS="";
+var freqcombo = new Ext.form.ComboBox({
+	store: freqstore,
+	displayField:'freq',
+	valueField:'value',
+	id:'queryfreqcomb',
+	typeAhead: true,
+	mode: 'local',
+	triggerAction: 'all',
+	forceSelection :true,
+	selectOnFocus:true,
+	allowblank: false,
+	readOnly: true,
+	applyTo: 'selectfreq'
+ });
+ 
+freqcombo.setValue('6');
+freqcombo.on("select",freqcomboSelected);
+function  freqcomboSelected( varFreqcombo, record, index ){
+   freqcomboSelect_para2_seq(varFreqcombo);
+freqcomboSelect_para3_seq(varFreqcombo);
+ 
+   getRelatedRpt();
+}
+function getRelatedRpt(){
+	Ext.Ajax.request({
+	   url: "getRelatedReport.jsp",
+	   success: sucFunction,
+	   failure: failFunction,
+	   method:'POST',
+	   timeout:'30000',
+	   params: {reportId:'B_BB005',freq:freqcombo.getValue()}
+	});
+}
+function sucFunction(res,opt){
+	relatedSIDS = Ext.util.JSON.decode(res.responseText);
+}
+function failFunction(res,opt){
+	Ext.MessageBox.buttonText.ok="确定";
+	Ext.Msg.alert('信息', '查询表间平衡校验信息失败！');
+}
+var tab = new Ext.TabPanel({
+	region:'center',
+	enableTabScroll:true,
+	title:'报表展示区',
+   	activeTab:0,
+	split:true,
+	defaults: {autoScroll:true}
+});
+ 
+Ext.onReady(function(){
+ 
+var cliwid =document.body.clientWidth ;
+var viewport = new Ext.Viewport({
+	layout:'border',
+	items:[
+		{
+		region:'north',
+		contentEl: 'north1',
+		split:true,
+		height: 135,
+		weight:cliwid,
+		autoScroll:true,
+        collapsible: true,
+        title:'参数输入区',
+        margins:'0 0 0 0'
+		},tab]
+	});
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+viewbiBut = new Ext.Button(
+{
+	text: '查看报表',
+	id: 'viewbi',
+    applyTo:'viewbi',
+	handler: function(){
+		doBiSubmit();
+	}                
+});
+ 
+if(false )
+{
+	viewbiBut.disable();
+}
+ 
+mendexcelBut = new Ext.Button(
+{
+  text: '补录(Excel)',
+  id: 'mendexcel',
+  applyTo:'mendexcel',
+  handler: function(){
+	doMend();
+ }
+ 
+});
+ 
+chkblanceBtn = new Ext.Button(
+{
+	text: '表内平衡检查',
+	id: 'chkblance',
+	applyTo:'chkblance',
+	handler: function(){
+	dochkblance('0');
+}                 
+});
+checkBlanceBeBtn = new Ext.Button(
+{
+	text: '表间平衡检查',
+	id: 'checkBlanceBetweenTables',
+	applyTo:'checkBlanceBetweenTables',
+	handler: function(){
+	dochkblance('1');
+}              
+});
+ 
+//ReportType=0为清单型不能进行补录
+if ( 0==0 )
+{
+	mendexcelBut.disable();
+	chkblanceBtn.disable();
+	checkBlanceBeBtn.disable();
+}else{
+	if(true)
+	{
+		mendexcelBut.disable();
+		//chkblanceBtn.disable();
+	  //checkBlanceBeBtn.disable();
+	}
+}
+ 
+if ( false)
+{
+	mendexcelBut.disable();
+	//chkblanceBtn.disable();
+	//checkBlanceBeBtn.disable();
+}
+ 
+/*new Ext.Button(
+{
+            text: '补录(Html)',
+			id: 'mend',
+			minWidth:20px,
+            applyTo:'mend',
+handler: function(){
+ 
+						dosubmit();
+                    }
+ 
+});*/
+});
+ 
+function dosubmit()
+{
+	setDateFieldValue_para2_seq();
+setDateFieldValue_para3_seq();
+ 
+	var elm=document.forms("subform");
+	document.getElementById("url").value="";
+	elm.action="http://192.168.162.56:7777/webapp//GetQuery";
+	elm.submit();
+}
+ 
+function initDefault(){
+ 
+		document.getElementById("digit").value=combo_digit.getValue();
+		
+		document.getElementById("para1").value=combo_para1.getValue();
+		
+		document.getElementById("para4").value=combo_para4.getValue();
+		
+				initcomboSelect_para2_seq();
+				setDateFieldValue_para2_seq();
+				
+				initcomboSelect_para3_seq();
+				setDateFieldValue_para3_seq();
+				
+}
+ 
+var tabsCnt = 0;
+function doBiSubmit()
+{
+	var b= setDateFieldValue_para2_seq();
+if(!b){
+return ;
+}
+var b= setDateFieldValue_para3_seq();
+if(!b){
+return ;
+}
+ 
+	 if(document.getElementById("selectfreq").value == null || document.getElementById("selectfreq").value =="" ){
+		Ext.MessageBox.buttonText.ok="确定";
+		Ext.Msg.alert('警告信息', '报表频率为必输项!<br/>');
+		return;
+     }
+   	
+			if(document.getElementById("para2").value == null || document.getElementById("para2").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+	        	Ext.Msg.alert('警告信息', '参数:起始日期为必输项!<br/>');
+				return;
+	     	}
+			
+			if(document.getElementById("para3").value == null || document.getElementById("para3").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+	        	Ext.Msg.alert('警告信息', '参数:结束日期为必输项!<br/>');
+				return;
+	     	}
+			
+   		if(combo_digit.getRawValue()==null || combo_digit.getRawValue()==""){
+   			document.getElementById("digit").value = "";
+   			}
+   		
+			if(document.getElementById("digit").value == null || document.getElementById("digit").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+	        	Ext.Msg.alert('警告信息', '参数:单位为必输项!<br/>');
+				return;
+	     	}
+			
+   		if(combo_para1.getRawValue()==null || combo_para1.getRawValue()==""){
+   			document.getElementById("para1").value = "";
+   			}
+   		
+			if(document.getElementById("para1").value == null || document.getElementById("para1").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+	        	Ext.Msg.alert('警告信息', '参数:机构为必输项!<br/>');
+				return;
+	     	}
+			
+   		if(combo_para4.getRawValue()==null || combo_para4.getRawValue()==""){
+   			document.getElementById("para4").value = "";
+   			}
+   		
+			if(document.getElementById("para4").value == null || document.getElementById("para4").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+	        	Ext.Msg.alert('警告信息', '参数:币种为必输项!<br/>');
+				return;
+	     	}
+			
+	var elm = document.forms("subform");
+	var list = document.getElementById("parlist");
+	var par = list.value.split("|");
+	//写日志信息
+	Ext.Ajax.request({
+	   url: 'appendLog.jsp',
+	   //success: someFn, failure: otherFn,
+	   params: { S_ID: 'B_BB005',funType:'1',paralist: list.value,paravalues:getParaValues() }
+	});
+ 
+	var len = par.length;
+	 
+	//ReportType=0为清单型
+	 var url ="http://192.168.162.56:7777/webapp/GetQuery?S_args=B_BB005+B_BB005.rml&react=1";
+	 url = url + "&S_ID=B_BB005&orgcode=1000&vm=single.vm&cxtPath=/webapp";
+	 url = url+"&"+list.name+"="+list.value;
+	 for (var  i=0;i<len-1;i++)
+	 {
+	    var tempElm = document.getElementById(par[i]);
+	    url=url+"&"+tempElm.name+"="+tempElm.value;
+	 }
+	
+ 	var uid = getID('bi');
+ 	var n = tab.getComponent(uid);
+ 	if(!n)
+ 	{
+		if (tabsCnt>=6)
+		{
+			Ext.MessageBox.buttonText.ok="确定";
+			Ext.MessageBox.alert('--提示信息--',"您打开的页签超过出系统限制,请关闭其他页签!");
+			return;
+		}
+	
+	    var n = tab.add({'id' : uid,'title' : '查看报表',
+					listeners: {beforedestroy : handleDestroy},
+					closable:true,
+					html : '<iframe scrolling="auto" frameborder="0" width="100%" height="95%" src="'+url+'"></iframe>'
+					});
+			tabList[tabList.length] = n;
+			tabsCnt++;
+ 	}
+ 	tab.setActiveTab(n);
+}
+ 
+ 
+ 
+function destroyAllTabs()
+{
+	for( i=0 ; i<tabList.length ; i++ )
+	{
+		var tn = tabList[i];
+		if( tn != 0 )
+		{
+				handleDestroy(tn);
+		}
+	}
+}
+ 
+function handleDestroy(tabx){
+	try
+	{
+		tabsCnt--;
+		if( typeof(tabx.body.dom.all[0].contentWindow.content.killReport) == 'function' )
+		{				
+			sentKill( tabx.body.dom.all[0].contentWindow.content.getEngineID() )
+		}
+		for( i=0 ; i<tabList.length ; i++ )
+		{
+			var tn = tabList[i];
+			if(tn.id == tabx.id )
+			{
+				tabList[i] = 0;
+				break;
+			}
+		}
+	}
+	catch(e){}
+}
+ 
+//创建XMLHttpRequest请求
+function createXMLHttpRequest(){
+	if(window.ActiveXObject){//IE浏览器
+		try {
+			xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {}
+		}
+	}else if(window.XMLHttpRequest){//Mozilla浏览器
+		xmlHttp = new XMLHttpRequest();
+	}
+}
+ 
+function sentKill( engineID )
+{
+  	createXMLHttpRequest();
+	var url = "/webapp/servlet/view/default/B_RB004.rpt?cmd=kill&id=" + engineID + "&tempdate="+new Date();
+	xmlHttp.open("GET", url, true);
+	xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xmlHttp.onreadystatechange = processRequest;
+	xmlHttp.send();
+}
+ 
+//处理返回信息的函数
+function processRequest(){
+}
+ 
+function getParaValues(){
+	var rmlpar="";
+	var list = document.getElementById("parlist");
+	var par = list.value.split("|");
+	var datepar = document.getElementById("datepar").value;
+	for(var i=0;i<par.length-1;i++)
+	{
+		var tempElm = document.getElementById(par[i]);
+	  	if (tempElm.name == datepar)
+	  	{
+			document.getElementById("date").value = tempElm.value;
+	  	}
+	   	var tval = tempElm.value;
+		var tname = tempElm.name;
+	   	rmlpar = rmlpar + tval + "|";
+	}
+	return rmlpar;
+}
+function getURLPar()
+{
+	var action ="http://192.168.162.56:7777/webapp/GetQuery?S_args="+urlEncoder('B_BB005+B_BB005.rml');
+	action = action + "&react=1&orgcode=1000&S_ID=B_BB005&vm=single.vm";
+	action = action + "&cxtPath="+encodeURIComponent('/webapp');
+	var url = "";
+	var rmlpar="";
+	var list = document.getElementById("parlist");
+	url = url + "&" + list.name + "=" + list.value;
+	var par = list.value.split("|");
+	len = par.length;
+	var datepar = document.getElementById("datepar").value;
+	for (var  i=0;i<len-1;i++)
+	{
+		var tempElm = document.getElementById(par[i]);
+		if(tempElm.name == datepar)
+		{
+			document.getElementById("date").value = tempElm.value;
+		}
+		var tval = tempElm.value;
+		var tname = tempElm.name;
+		url = url + "&"+tname+"=" + tval;
+		rmlpar = rmlpar + tval + urlEncoder("|");
+	}
+	var date = document.getElementById("date").value;
+	var paraDef = document.getElementById("parlist").value;
+	action = action + url + "&rmlpar="+ rmlpar+"&date="+date+"&paraDef="+paraDef;
+	document.getElementById("url").value=action;
+	document.getElementById("rmlpar").value=rmlpar;
+	return action;
+}
+function doMend()
+{	
+//补录时所有条件都必须输入,否则不能进行补录 	
+	var c= setDateFieldValue_para2_seq();
+if(!c){
+return ;
+}
+var c= setDateFieldValue_para3_seq();
+if(!c){
+return ;
+}
+ 
+	if(document.getElementById("selectfreq").value == null || document.getElementById("selectfreq").value =="" ){
+		Ext.MessageBox.buttonText.ok="确定";
+		Ext.Msg.alert('警告信息', '报表频率为必输项!<br/>');
+		return;
+	}
+	
+		
+		
+			if( document.getElementById("para2").value == null || document.getElementById("para2").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:起始日期为必输项!<br/>');
+				return;
+			}
+		
+		
+		
+			if( document.getElementById("para3").value == null || document.getElementById("para3").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:结束日期为必输项!<br/>');
+				return;
+			}
+		
+		
+			if(combo_digit.getRawValue()==null || combo_digit.getRawValue()==""){ 
+				document.getElementById("digit").value = "";
+			}
+		
+		
+			if( document.getElementById("digit").value == null || document.getElementById("digit").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:单位为必输项!<br/>');
+				return;
+			}
+		
+		
+			if(combo_para1.getRawValue()==null || combo_para1.getRawValue()==""){ 
+				document.getElementById("para1").value = "";
+			}
+		
+		
+			if( document.getElementById("para1").value == null || document.getElementById("para1").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:机构为必输项!<br/>');
+				return;
+			}
+		
+		
+			if(combo_para4.getRawValue()==null || combo_para4.getRawValue()==""){ 
+				document.getElementById("para4").value = "";
+			}
+		
+		
+			if( document.getElementById("para4").value == null || document.getElementById("para4").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:币种为必输项!<br/>');
+				return;
+			}
+		
+	var list = document.getElementById("parlist");
+	Ext.Ajax.request({
+	  url: 'appendLog.jsp',
+	  //success: someFn, failure: otherFn,
+	  params: { S_ID: 'B_BB005',funType:'0',paralist: list.value,paravalues:getParaValues() }
+	});
+ 
+	var action =  getURLPar();
+	action = action+"&adjust=true"
+	var uid = getID('mend');
+	var n = tab.getComponent(uid);
+	if (!n)
+	{
+		var n = tab.add({'id' : uid,'title' : '补录数据',closable:true,
+		html:'<iframe  scrolling="auto" frameborder="0" width="100%" height="95%" src="'+action+'"></iframe>'				
+		});
+	}
+	tab.setActiveTab(n);
+}
+var frmID = "";
+var isInit = false;
+function dochkblance(flag){
+	var b= setDateFieldValue_para2_seq();
+if(!b){
+return ;
+}
+var b= setDateFieldValue_para3_seq();
+if(!b){
+return ;
+}
+	
+	if(document.getElementById("selectfreq").value == null || document.getElementById("selectfreq").value =="" ){
+		Ext.MessageBox.buttonText.ok="确定";
+		Ext.Msg.alert('警告信息', '报表频率为必输项!<br/>');
+		return;
+	}
+	
+		
+		
+			if( document.getElementById("para2").value == null || document.getElementById("para2").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:起始日期为必输项!<br/>');
+				return;
+			}
+		
+		
+		
+			if( document.getElementById("para3").value == null || document.getElementById("para3").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:结束日期为必输项!<br/>');
+				return;
+			}
+		
+		
+			if(combo_digit.getRawValue()==null || combo_digit.getRawValue()==""){ 
+				document.getElementById("digit").value = "";
+			}
+		
+		
+			if( document.getElementById("digit").value == null || document.getElementById("digit").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:单位为必输项!<br/>');
+				return;
+			}
+		
+		
+			if(combo_para1.getRawValue()==null || combo_para1.getRawValue()==""){ 
+				document.getElementById("para1").value = "";
+			}
+		
+		
+			if( document.getElementById("para1").value == null || document.getElementById("para1").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:机构为必输项!<br/>');
+				return;
+			}
+		
+		
+			if(combo_para4.getRawValue()==null || combo_para4.getRawValue()==""){ 
+				document.getElementById("para4").value = "";
+			}
+		
+		
+			if( document.getElementById("para4").value == null || document.getElementById("para4").value =="" ){
+				Ext.MessageBox.buttonText.ok="确定";
+				Ext.Msg.alert('警告信息', '参数:币种为必输项!<br/>');
+				return;
+			}
+		
+   var title = '表内平衡检查';
+   
+   var vParams = getParaValues();
+   //var action = "blcheck.jsp?S_ID=B_BB005&paraDef=para2|para3|digit|para1|para4|&react=1";
+   //action = action +"&rmlpar=" + vParams;
+   var action = getURLPar();
+   action = action.replace("&react=1", "") +"&isblcheck=true&adjust=true";
+ 
+   var uid = getID('blcheck');
+   frmID = "bl"+uid;
+   if(flag == '1'){
+        title = "表间平衡检查";
+	action = "";	 
+	uid = getID('blanceCheckBetweenTables');
+	frmID = "bl"+uid;
+   }
+    var n = tab.getComponent(uid);
+    if (!n)
+    {
+		 var n = tab.add({
+				'id' : uid,
+				'title' : title,
+				closable:true,
+				html : '<iframe  id ='+frmID+' scrolling="auto" frameborder="0" width="100%" height="98%" src="'+action+'"></iframe>'
+				
+				});
+		isInit = true;
+    }else{
+    	isInit = false;
+    }
+   tab.setActiveTab(n);
+   
+   if(flag == '1'){
+		blance();
+   }
+}
+function blance(){
+	  var url = getURLPar();
+	  var prefix = url.substring(0,url.indexOf("?")+1);
+	  var subfix = url.substr(url.indexOf("&"));
+	 
+	  if(relatedSIDS.length == 0){
+		  url = "blanceWarnning.jsp?blanceType=1&reportId=B_BB005";
+		  document.getElementById(frmID).src=url;
+		  return;
+	  }
+		  
+	  var sidArray = relatedSIDS.split("|");
+	  for(var i=0;i<sidArray.length;i++){
+		  url = prefix + urlEncoder("S_args="+sidArray[i]+"+S_args="+sidArray[i]+".rml") +subfix;
+		  url = url.replace("&react=1", "&react=0") +"&isblcheck=true";
+		  url = url.replace("&S_ID=B_BB005", "&S_ID="+sidArray[i]);
+		  url = url.replace("&vm=single.vm", "&vm=blcheck.vm");
+		  url += "&s_sid=B_BB005";
+		  url += "&freq="+freqcombo.getValue();
+		  if(isInit)
+		  	document.getElementById(frmID).src=url;
+		  window.setInterval(function(){}, 500);
+	  }
+}
+function urlEncoder(sStr)
+{
+	return escape(sStr).replace(/\+/g, '%2B').replace(/\"/g,'%22').replace(/\'/g, '%27').replace(/\//g,'%2F');
+}
+function getID(prefix)
+{
+	var list = document.getElementById("parlist");
+	var par = list.value.split("|");
+	len = par.length;
+	for (var  i=0;i<len-1;i++)
+	{
+		prefix=prefix+document.getElementById(par[i]).value;
+	 
+	}
+ 	return prefix;
+}
+ 
+</script>
+ 

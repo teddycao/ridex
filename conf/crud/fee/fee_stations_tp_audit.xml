@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+	<bean name="statrpAudit" id="statrpAudit" class="com.inwiss.springcrud.metadata.CrudMeta" init-method="init">
+		<property name="title" value="边漫基站审批"/>
+		<property name="tableName" value="FEE_STATIONS_TP"/>
+		<property name="listView">
+			<value>hut/fee/listViewStatrpAudit</value>
+		</property>
+		<property name="dictFactory" ref="dictFactory"/>
+		<property name="crudViewMeta">	
+			<bean class="com.inwiss.springcrud.metadata.CrudViewMeta">
+				<property name="dataImportEnabled" value="false"/>
+				<property name="filterWindowEnabled" value="true"/>
+				<property name="editSingleEnabled" value="false"/>
+				<property name="deleteSingleEnabled" value="true"/>
+				<property name="dlgWidth" value="520"/>
+				<property name="dlgHeight" value="550"/>
+			</bean>
+		</property>
+		<property name="columnMetas">
+			<list>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="基站CID"/>
+					<property name="colName" value="CID_DEC"/>
+					<property name="primaryKey" value="true"/>
+					<property name="applyLike" value="false"/>
+					<property name="allowBlank" value="false"/>
+					<property name="config" value="allowBlank:false,style:'margin-top:0px',selectOnFocus: true"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="上报人员"/>
+					<property name="colName" value="REPORTER"/>
+					<property name="useAsDataFilter" value="false"/>	
+					<property name="allowBlank" value="false"/>
+					<property name="config" value="allowBlank:false,style:'margin-top:0px',selectOnFocus: true"/>
+				</bean>
+				<!--
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="问题手机号码"/>
+					<property name="colName" value="MSISDN"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				-->
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="上报时间"/>
+					<property name="colName" value="OPER_DATE"/>
+					<property name="editable" value="false"/>
+					<property name="viewType" value="datefield"/>
+					<property name="allowBlank" value="false"/>
+					<property name="config" value="allowBlank:false,style:'margin-top:0px',selectOnFocus: true,width: 180,format:'Ymd'"/>
+				</bean>
+	
+			    <bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="上报原因"/>
+					<property name="colName" value="REP_REASON"/>
+					<property name="useAsDataFilter" value="false"/>
+					<property name="viewType" value="textarea"/>
+					<property name="allowBlank" value="false"/>
+					<property name="config" value="allowBlank:false,style:'margin-top:0px',selectOnFocus: true,width: 180"/>
+				</bean>
+				
+				<!--bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="审批人员"/>
+					<property name="colName" value="PASSER"/>
+					<property name="useAsDataFilter" value="false"/>
+					<property name="showInAddForm" value="false"/>
+					<property name="showInEditForm" value="false"/>
+					<property name="allowBlank" value="true"/>
+					<property name="config" value="allowBlank:false,style:'margin-top:0px',selectOnFocus: true,value:''"/>
+				</bean-->
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="审批状态"/>
+					<property name="colName" value="STATUS"/>
+					<property name="dictName" value="statrpAudit"/>
+					<property name="viewType" value="hidden"/>
+					<property name="editable" value="false"/>
+					<property name="useAsDataFilter" value="false"/>
+					<property name="renderer" value="renderColAction"/>
+					<property name="config" value="allowBlank:false,style:'margin-top:0px',selectOnFocus: true,width: 180,emptyText:'请选择'"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="审批意见"/>
+					<property name="colName" value="CMT"/>
+					<property name="useAsDataFilter" value="false"/>
+					<property name="showInAddForm" value="false"/>
+					<property name="showInEditForm" value="false"/>
+					<property name="viewType" value="textarea"/>
+					<property name="config" value="allowBlank:false,style:'margin-top:0px',selectOnFocus: true,width: 180,value:''"/>
+				</bean>
+				
+			</list>
+		</property>
+		<property name="defaultDataFilters">
+			<list>
+				<bean class="com.inwiss.springcrud.datafilter.NotEqualFilter">
+					<property name="colName" value="STATUS"/>
+					<property name="colValue" value="0"/>
+					<property name="stringType" value="true"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>

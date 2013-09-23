@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!--导入配置的CrudMeta XML文件-->
+	<import resource="classpath:/crud/**/*.xml"/>
+	<context:property-placeholder location="classpath*:*-conf.properties"/>
+	
+	
+	
+
+	<!-- C3P0数据库配置 -->
+	<!-- C3P0数据库配置 -->
+  <bean id="c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	   <property name="initialPoolSize" value="${c3p0.initialPoolSize}"/>
+    	<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="acquireIncrement" value="${c3p0.acquireIncrement}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+         <property name="acquireRetryDelay" value="${c3p0.acquireRetryDelay}"/>
+  </bean>
+	
+	
+			<!-- oracle数据库 -->
+	<bean id="dataSource" parent="c3p0">
+		<property name="driverClass" value="${oracle.jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${oracle.jdbc.url}" />
+		<property name="user" value="${oracle.jdbc.username}" />
+		<property name="password" value="${oracle.jdbc.password}" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	   <property name="configLocation" value="classpath:MapperConfig.xml"/>
+	   <property name="dataSource" ref="dataSource" />
+	    <property name="mapperLocations" value="classpath*:sqlmap/**/*.xml" />
+	</bean>
+
+
+    <bean id="sqlTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml"/>
+	</bean>
+
+
+    <bean name="paramCache" class="org.inwiss.platform.cache.EhCacheWrapper">
+        <constructor-arg value="org.inwiss.platform.report.param.ParamDictBean" />
+        <constructor-arg ref="cacheManager" />
+    </bean>
+    
+        <!-- 配置上传所允许的文件格式 -->
+     <bean id="uploadConfigBean" class=" com.inwiss.springcrud.util.UploadConfigBean">
+        <property name="archivePath" value="C:\temp\cms"/>
+      <property name="allowsMap">
+          <map>
+              <entry key=".doc" value="allow"/>
+              <entry key=".docx" value="allow"/>
+              <entry key=".xlsx" value="allow"/>
+              <entry key=".xls" value="allow"/>
+              <entry key=".rmvb" value="unallow"/>
+          </map>
+      </property>
+    </bean>
+    
+
+ <!-- =============================================合并opencrud start============================================= -->
+	
+	<!--获取Meta组件定义的组件-->
+	<bean name="metaBeanRetriever" class="com.inwiss.springcrud.context.MetaBeanRetrieverImpl" init-method="init"/>
+	
+	
+	<!--<bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		  abstract="true">
+		<property name="transactionManager"><ref bean="sqlTransactionManager"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>-->
+	
+	<!--CRUD业务逻辑接口组件-->
+	<!--<bean id="crudService" parent="baseTransactionProxy">
+		<property name="target">
+			<bean class="org.springcrud.service.CrudServiceImpl">
+				<property name="crudDao"><ref bean="crudDao"/></property>
+			</bean>
+		</property>
+	</bean>-->
+	
+	<bean id="crudService" class="com.inwiss.springcrud.CrudServiceImpl">
+		<property name="crudDao"><ref bean="crudDao"/></property>
+	</bean>
+	
+	<!--数据库字典工厂-->
+    <bean id="dbDictFactory" class="com.inwiss.springcrud.support.dictionary.DbDictFactoryImpl" init-method="init">
+        <property name="dictDao"><ref bean="dictDao"/></property>
+    </bean>
+    
+    <!--客户端真正使用的组合字典工厂-->
+	<bean id="dictFactory" class="com.inwiss.springcrud.support.dictionary.CompoundFactoryImpl">
+		<property name="dbDictFactory"><ref bean="dbDictFactory"/></property>
+		<!--<property name="textDictFactory"><ref bean="textDictFactory"/></property>-->
+	</bean>
+    
+    <!--字典替换器-->
+    <bean id="dictReplacer" class="com.inwiss.springcrud.support.dictionary.DictReplacerImpl">
+    	<property name="dictFactory"><ref bean="dictFactory"/></property>
+    </bean>
+	
+	<bean id="crudDao" class="com.inwiss.springcrud.dataaccess.CrudDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+		
+	<!--字典存取DAO-->
+	<bean id="dictDao" class="com.inwiss.springcrud.support.dictionary.DictDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="fixupFeeDAO" class="com.inwiss.apps.fee.persistence.impl.FixupFeeDAOImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+</beans>

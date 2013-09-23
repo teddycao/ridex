@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="StationsReport">
+		
+	<update id="StationsReport.updateStationsReport" parameterType="com.inwiss.apps.fee.model.StationsReport">  
+        <![CDATA[
+        	UPDATE FEE_STATIONS_TP  
+            	SET STATUS = #{status} 
+         	WHERE CID_DEC = #{cidDec}
+        ]]>
+	</update>
+	
+</mapper>

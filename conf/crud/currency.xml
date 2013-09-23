@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+            
+	<bean id="currency" class="com.inwiss.springcrud.metadata.CrudMeta" init-method="init">
+	
+		<property name="title">
+			<value>币种参数</value>
+		</property>
+		<property name="tableName">
+			<value>Z_DA_CURRENCY_TYPE</value>
+		</property>
+		<property name="listView">
+			<value>listView</value>
+		</property>
+		<property name="dictFactory">
+			<ref bean="dictFactory"/>
+		</property>
+		<property name="otherWantedParameters">
+			<list>
+				<value></value>
+			</list>
+		</property>
+		<property name="columnMetas">
+			<list>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>币种代码</value>
+					</property>
+					<property name="colName">
+						<value>DICT_CODE</value>
+					</property>
+					<property name="primaryKey">
+						<value>true</value>
+					</property>
+					<property name="editable">
+						<value>false</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>币种名称</value>
+					</property>
+					<property name="colName">
+						<value>DICT_NAME</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>序号</value>
+					</property>
+					<property name="colName">
+						<value>DICT_ORDER</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>生效起始日期</value>
+					</property>
+					<property name="colName">
+						<value>DICT_START_DATE</value>
+					</property>
+				</bean>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title">
+						<value>生效终止日期</value>
+					</property>
+					<property name="colName">
+						<value>DICT_END_DATE</value>
+					</property>
+				</bean>				
+			</list>
+		</property>
+	</bean>	
+</beans>

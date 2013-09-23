@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+	<!--字典定义表-->
+	<bean id="dictMeta" class="com.inwiss.springcrud.metadata.CrudMeta" init-method="init">
+		<property name="title" value="字典定义表"/>
+		<property name="tableName" value="AL_CORE_DICT_DEF"/>
+		<property name="dictFactory" ref="dictFactory"/>
+		<property name="crudViewMeta">	
+			<bean class="com.inwiss.springcrud.metadata.CrudViewMeta">
+				<property name="dataImportEnabled" value="false"/>
+				<property name="filterWindowEnabled" value="true"/>
+			</bean>
+		</property>
+		<property name="columnMetas">
+			<list>
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="字典代码"/>
+					<property name="colName" value="DIC_CODE"/>
+					<property name="primaryKey" value="true"/>
+					<property name="editable" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="字典描述"/>
+					<property name="colName" value="DIC_DES"/>
+					<property name="applyLike" value="true"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="字典类型"/>
+					<property name="colName" value="DIC_TYPE"/>
+					<property name="dictName" value="creditFreq"/>
+					<property name="viewType" value="combo"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="数据来源表表名"/>
+					<property name="colName" value="DIC_TBLNAME"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="作为字典键的字段名"/>
+					<property name="colName" value="DIC_VAL_COLNAME"/>
+					<property name="useAsDataFilter" value="false"/>
+
+				</bean>
+								
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="作为字典值的字段名"/>
+					<property name="colName" value="DIC_DES_COLNAME"/>
+					<property name="editable" value="true"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>			
+			</list>
+		</property>
+	</bean>	
+</beans>

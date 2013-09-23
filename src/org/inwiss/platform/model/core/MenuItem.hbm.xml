@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.MenuItem" table="al_core_menu_item"
+		lazy="false">
+
+		<id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+			<generator class="sequence">   
+                <param name="sequence">RESOURCE_ID_SEQ</param>   
+            </generator>
+		</id>
+
+		<version name="version" column="version" type="long" unsaved-value="null" />
+		<many-to-one name="parentItem"
+			class="org.inwiss.platform.model.core.MenuItem" cascade="none"
+			outer-join="false" update="true" insert="true" column="parent_id"
+			not-null="false" />
+
+		<bag name="childItems" lazy="true" inverse="true" cascade="delete"
+			order-by="pos" outer-join="false">
+			<key column="parent_id"/>
+			<one-to-many class="org.inwiss.platform.model.core.MenuItem" />
+
+		</bag>
+
+		<property name="name" type="java.lang.String" update="true"
+			insert="true">
+			<column name="menu_name" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<property name="action" type="java.lang.String" update="true"
+			insert="true">
+			<column name="action" length="252" not-null="false" unique="false" />
+		</property>
+		
+
+		<property name="forward" type="java.lang.String" update="true"
+			insert="true">
+			<column name="forward" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="location" type="java.lang.String" update="true"
+			insert="true">
+			<column name="location" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<property name="position" type="java.lang.Integer" update="true" insert="true">
+			<column name="pos" not-null="false" unique="false" />
+		</property>
+		
+		
+		<property name="text" type="java.lang.String" update="true"
+			insert="true">
+			<column name="menu_text" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<property name="identifier" type="java.lang.String" update="true"
+			insert="true">
+			<column name="identifier" length="252" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="align" type="java.lang.String" update="true" insert="true">
+			<column name="align" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="style" type="java.lang.String" update="true" insert="true">
+			<column name="style" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="styleClass" type="java.lang.String" update="true" insert="true">
+			<column name="style_class" length="252" not-null="false"
+				unique="false" />
+		</property>
+
+		<property name="iconCls" type="java.lang.String" update="true"	insert="true">
+			<column name="ICON_CLS" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="image" type="java.lang.String" update="true"
+			insert="true">
+			<column name="image" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="altImage" type="java.lang.String" update="true"
+			insert="true">
+			<column name="alt_image" length="252" not-null="false" unique="false" />
+		</property>
+
+		
+		<property name="qtip" type="java.lang.String" update="true"
+			insert="true">
+			<column name="qtip" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="target" type="java.lang.String" update="true"
+			insert="true">
+			<column name="target" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<property name="descn" type="java.lang.String" update="true"
+			insert="true">
+			<column name="desc_cn" length="252" not-null="false" unique="false" />
+		</property>
+
+ 
+		<property name="onclick" type="java.lang.String" update="true"
+			insert="true">
+			<column name="js_onclick" length="252" not-null="false"
+				unique="false" />
+		</property>
+     	 <!-- 一方要设置inverse="true" 
+      		另一方要设置inverse="false" inverse="false"的一方保存时，
+      		维护多对多之间的关系，且只要将相互的关系告诉这一方即可 -->
+			<!-- 如果设置了casade="save-update"，只能设置一方，如果双方都设置的话，
+				当更新一方的时候，同时会更新另一方，另一方的更新又会导致一方的更新。 -->
+		<bag name="roles" table="al_core_menu_item_role" lazy="true"
+			inverse="true" cascade="none"  outer-join="false">
+			<cache usage="read-write" />
+			<key column="menu_item_id"/>
+			<many-to-many  class="org.inwiss.platform.model.core.Role"
+				column="rolename" outer-join="false" />
+		</bag>
+
+		<many-to-one name="origItem"
+			class="org.inwiss.platform.model.core.MenuItem" cascade="none"
+			outer-join="false" update="true" insert="true" column="orig_id"
+			not-null="false" />
+
+
+		<many-to-one name="owner"
+			class="org.inwiss.platform.model.core.Localizable" cascade="none"
+			outer-join="false" update="true" insert="true" column="owner_id"
+			not-null="false" />
+			
+		<property name="isLeaf" type="true_false" update="true"
+			insert="true" column="is_Leaf" not-null="true" />	
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paramdef>
+
+	<param code="100" type="ENUM" default="6">
+		<entry key="日报">DAY_6</entry>
+		<entry key="周报">WEEK_5</entry>
+		<entry key="月报">MONTH_3</entry>
+		<entry key="旬报">DAYOFTEN_4</entry>
+		<entry key="季报">QUARTER_2</entry>
+		<entry key="半年报">HALFYEAR_1</entry>
+		<entry key="年报">YEAR_0</entry>
+	</param>
+	
+	<param code="200" type="XSQL" default=""   datasource="dataSource">
+		<entry >select ORG_CODE ,ORG_CODE||'-'||ORG_NAME
+			ORG_NAME,UP_ORG from fin.fin_sys_org_info</entry>
+	</param>
+
+	
+	<param code="230" type="XSQL" default=""  datasource="dataSource">
+		<entry>SELECT org_code, org_code || '-' || org_name
+			org_name, up_org FROM fin.fin_sys_org_info WHERE IS_CHARGE='Y'
+			START WITH org_code = '${ORG_CODE}' CONNECT BY up_org = PRIOR org_code AND
+			statu = '1' ORDER BY org_seq
+		</entry>
+	</param>
+
+		
+	<param code="600" type="ENUM" default="1">
+		<entry key="元">1</entry>
+		<entry key="万元">10000</entry>
+		<entry key="亿元">100000000</entry>
+	</param>
+	
+	<param code="680" type="ENUM" default="1" desc="币种">
+		<entry key="人民币">CCY</entry>
+		<entry key="美元">USD</entry>
+		<entry key="欧元">EUR</entry>
+	</param>
+
+	<param code="765" type="SQL" default="" datasource="dataSource">
+		<entry>select ID,MENU_NAME from AL_CORE_MENU_ITEM</entry>
+	</param>
+
+
+	<param code="800" type="ENUM" default="">
+		<entry key="个人业务">\'100\',\'Y\'</entry>
+		<entry key="公司业务">\'400\',\'N\'</entry>
+	</param>
+
+	<param code="1000" type="ENUM" default="100">
+		<entry key="100">宝鸡</entry>
+		<entry key="200">汉中</entry>
+	</param>
+
+
+</paramdef>
+

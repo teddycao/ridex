@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GB2312" ?> 
+<chart palette="1" caption="" subCaption="" shownames="1" showvalues="0" decimals="2" labelDisplay="WRAP" formatNumberScale="0" useRoundEdges="1" showDual="1" labelStepDual="5" numDivLines="7" yAxisName="百万">
+  <set label="禹州支行" value="29.36" color="80ccfe" link="n-drillrb.jsp?name=1" /> 
+  <set label="颖目路支行" value="90.36" color="80ccfe" link="n-drillrb.jsp?name=2" /> 
+  <set label="新兴路支行" value="31.31" color="80ccfe" link="n-drillrb.jsp?name=3" /> 
+  <set label="连城大道支行" value="89.00" color="80ccfe" link="n-drillrb.jsp?name=4" /> 
+  <set label="一台路支行" value="19.36" color="80ccfe" link="n-drillrb.jsp?name=5" /> 
+  <set label="五一路支行" value="20.16" color="80ccfe" link="n-drillrb.jsp?name=6" /> 
+  <set label="起义路支行" value="49.07" color="80ccfe" link="n-drillrb.jsp?name=7" /> 
+  <set label="六一路行" value="50.30" color="80ccfe" link="n-drillrb.jsp?name=8" /> 
+  <set label="南大街支行" value="25.36" color="80ccfe" link="n-drillrb.jsp?name=9" /> 
+  <set label="北大街支行" value="27.88" color="80ccfe" link="n-drillrb.jsp?name=10" /> 
+  <set label="西大街支行" value="39.57" color="80ccfe" link="n-drillrb.jsp?name=11" /> 
+  <set label="东大街支行" value="29.00" color="80ccfe" link="n-drillrb.jsp?name=12" /> 
+</chart>

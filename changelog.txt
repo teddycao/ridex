@@ -1,0 +1,2 @@
+修改 
+org.pentaho.di.www.SlaveServerTransStatus 添加中文支持

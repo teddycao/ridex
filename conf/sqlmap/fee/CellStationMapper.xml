@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CellStation">
+		
+	<insert id="CellStation.insertCellStation" parameterType="com.inwiss.apps.fee.model.CellStation">  
+        <![CDATA[
+        	INSERT INTO fee_cell_stations 
+        		(ci_dec
+        		,city
+        		,cell_name
+        		,cell_lac_dec
+        		,bcch
+        		,bsic
+        		,bsc_name
+        		,site_type
+        		,st_level
+        		,fdate
+        		,di_type
+        		,dd_stat) 
+         	VALUES
+         		(#{ciDec}
+         		,#{city}
+         		,#{cellName}
+         		,#{cellLacDec}
+         		,#{bcch}
+         		,#{bsic}
+         		,#{bscName}
+         		,#{siteType}
+         		,#{stLevel}
+         		,#{fdate}
+         		,#{diType}
+         		,#{ddStat})
+        ]]>
+	</insert>
+	
+	<insert id="CellStation.insertCellStationOfReport" parameterType="com.inwiss.apps.fee.model.CellStation">  
+        <![CDATA[
+        	INSERT INTO fee_cell_stations 
+        		(ci_dec
+        		,fdate) 
+         	VALUES
+         		(#{ciDec}
+         		,#{fdate})
+        ]]>
+	</insert>
+	
+	<select id="CellStation.checkCellStationByCID" parameterType="String" resultType="int">
+        <![CDATA[
+        	SELECT count(1) 
+        	FROM fee_cell_stations 
+        	WHERE ci_dec = #{ciDec}
+        ]]>
+    </select>
+	
+</mapper>

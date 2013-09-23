@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.inwiss.apps.fee">
+
+
+	<parameterMap type="hashmap" id="paramsMap">
+		<parameter mode="IN"   property="p_i_msisdn" javaType="java.lang.String"  jdbcType="VARCHAR" />
+		<parameter mode="IN"   property="p_i_bill_date" javaType="java.lang.String"  jdbcType="VARCHAR" />
+		<parameter mode="IN"   property="p_i_isdouble" javaType="java.lang.String"  jdbcType="VARCHAR" />
+		<parameter mode="IN"   property="p_i_product" javaType="java.lang.String"  jdbcType="VARCHAR" />
+		<parameter mode="IN"   property="p_i_product_v" javaType="java.lang.String"  jdbcType="VARCHAR" />
+		<!-- ResultSet需要resultMap参数-->
+		<parameter mode="OUT"   property="p_o_result" javaType="java.lang.String"  jdbcType="VARCHAR"  />
+		
+	</parameterMap>
+
+ 
+
+        
+	<select id="callAllFeeSendback"  statementType="CALLABLE">
+    	{ CALL pack_fee_sendback.pr_all_feesenback(
+	    	#{p_i_msisdn, mode=IN, jdbcType=VARCHAR},
+	    	#{p_i_bill_date, mode=IN, jdbcType=VARCHAR},
+	    	#{p_i_isdouble, mode=IN, jdbcType=VARCHAR},
+	    	#{p_i_product, mode=IN, jdbcType=VARCHAR},
+	    	#{p_i_product_v, mode=IN, jdbcType=VARCHAR},
+	    	#{p_o_result, mode=OUT, jdbcType=VARCHAR})}
+	</select>
+	
+
+	<!-- /**统计通话记录数*/ -->
+	<select id="list.AllLimitCall" parameterType="String" resultType="map">  
+        <![CDATA[
+    SELECT GSM.MSISDN ,
+ 	GSM.BILL_DATE ,
+  	GSM.CALL_TYPE,
+  	GSM.START_DATE ,
+ 	GSM.START_TIME,
+ 	GSM.CALL_DURATION,
+ 	GSM.OTHER_PARTY,
+ 	GSM.ORIGIN_NO,
+ 	GSM.OFFICE_CODE ,
+ 	GSM.BIZ_TYPE ,
+ 	GSM.ROAM_TYPE,
+ 	GSM.CFEE,
+ 	GSM.LFEE,
+ 	GSM.TOTAL_FEE,
+ 	GSM.CALL_TYPE,
+ 	GSM.CELL_ID,
+ 	GSM.VPN_ID
+   	FROM FEE_GSMDETAIL_TP GSM, FEE_CELL_STATIONS STAT
+               WHERE STAT.CI_DEC = GSM.CELL_ID AND GSM.LFEE > 0 AND GSM.MSISDN = '13809178008' AND GSM.BILL_DATE = '201109' 
+    	 
+     ]]>
+	</select>
+	
+		<!-- /**统计边漫通话记录数*/ -->
+	<insert id="insert.FEE_SENDBACK_HIS" parameterType="String">  
+        <![CDATA[
+    	INSERT INTO FEE_SENDBACK_HIS ( MSISDN, BILL_DATE, OPT_USER, AMT, CALLS_CNT, LIMIT_CNT, IS_DOUBLE, IS_TREBLE, OPER_DATE, OPER_TIME, CMT )
+	 								VALUES ( #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn}, #{msisdn})	
+	 		  ]]>
+	</insert>
+	
+</mapper>

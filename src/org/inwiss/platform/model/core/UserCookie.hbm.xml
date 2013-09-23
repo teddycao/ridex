@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.UserCookie" table="al_core_user_cookie"
+		lazy="false">
+
+		<id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+			<generator class="increment"/>
+		</id>
+
+		<many-to-one name="user" class="org.inwiss.platform.model.core.User"
+			cascade="none" outer-join="false" update="true" insert="true" column="username"
+			not-null="false" />
+
+		<property name="cookieId" type="java.lang.String" update="true"
+			insert="true" column="cookie_id" length="100" not-null="true" />
+
+		<property name="dateCreated" type="java.util.Date" update="true"
+			insert="true" column="date_created" not-null="true" />
+
+	</class>
+
+</hibernate-mapping>

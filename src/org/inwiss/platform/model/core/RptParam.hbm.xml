@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.RptParam" table="al_rpt_param_def"
+		lazy="false">
+
+		<id name="id" column="inter_id" type="java.lang.Long" unsaved-value="null">
+			<generator class="sequence">   
+				<param name="sequence">RREPORT_PARAM_ID_SEQ</param>
+			</generator>
+		</id>
+		
+		<property name="rptId" type="java.lang.String" update="true"
+			insert="true">
+			<column name="rpt_id" length="100" not-null="false"
+				unique="false" />
+		</property>
+		
+		<property name="rptName" type="java.lang.String" update="true"
+			insert="true">
+			<column name="rpt_name" length="100" not-null="false" unique="false" />
+		</property>		
+		
+		<property name="paramName" type="java.lang.String" update="true"
+			insert="true">
+			<column name="param_name" length="100" not-null="false" unique="false" />
+		</property>
+		
+		<property name="paramTitle" type="java.lang.String" update="true"
+			insert="true">
+			<column name="param_title" length="100" not-null="false" unique="false" />
+		</property>
+		
+		<property name="paramDesc" type="java.lang.String" update="true"
+			insert="true">
+			<column name="param_desc" length="100" not-null="false" unique="false" />
+		</property>
+		
+		<property name="paramType" type="java.lang.String" update="true"
+			insert="true">
+			<column name="param_type" length="20" not-null="false" unique="false" />
+		</property>
+		
+		<property name="paramRef" type="java.lang.String" update="true"
+			insert="true">
+			<column name="param_ref" length="20" not-null="false" unique="false" />
+		</property>
+		
+		<property name="inclVals" type="java.lang.String" update="true"
+			insert="true">
+			<column name="incl_vals" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="exclVals" type="java.lang.String" update="true" insert="true">
+			<column name="excl_vals" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="paramFormat" type="java.lang.String" update="true" insert="true">
+			<column name="param_format" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="paramJson" type="java.lang.String" update="true"	insert="true">
+			<column name="param_json" length="252" not-null="false" unique="false" />
+		</property>
+			
+		<property name="paramTip" type="java.lang.String" update="true"	insert="true">
+			<column name="param_tip" length="252" not-null="false" unique="false" />
+		</property>
+		
+		<property name="dftVal" type="java.lang.String" update="true"	insert="true">
+			<column name="dft_val" length="100" not-null="false" unique="false" />
+		</property>
+		
+		<property name="pSort" type="java.lang.Long" update="true"	insert="true">
+			<column name="p_sort" not-null="false" unique="false" />
+		</property>
+		
+		<property name="isNeed" type="java.lang.String" update="true"	insert="true">
+			<column name="is_need" length="1" not-null="false" unique="false" />
+		</property>
+		
+		<property name="isPrompt" type="java.lang.String" update="true"	insert="true">
+			<column name="is_prompt" length="1" not-null="false" unique="false" />
+		</property>
+		
+		<property name="isDisplay" type="java.lang.String" update="true"	insert="true">
+			<column name="is_display" length="1" not-null="false" unique="false" />
+		</property>
+		
+	</class>
+
+</hibernate-mapping>

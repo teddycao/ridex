@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Dictionary">
+
+	<!--RESULT MAP DEFINITION-->
+	<resultMap id="DictMetaData-Result" type="com.inwiss.springcrud.support.dictionary.DictMetaData">
+		<id property="dictName" column="DIC_CODE" javaType="String" jdbcType="VARCHAR"/>
+		<result property="dictType" column="DIC_TYPE" javaType="String" jdbcType="VARCHAR"/>
+		<result property="dictTableName" column="DIC_TBLNAME" javaType="String" jdbcType="VARCHAR"/>
+		<result property="identifyColName" column="DIC_ID_COLNAME" javaType="String" jdbcType="VARCHAR"/>
+		<result property="identifyColValue" column="DIC_IDVALUE" javaType="String" jdbcType="VARCHAR"/>
+		<result property="codeColName" column="DIC_VAL_COLNAME" javaType="String" jdbcType="VARCHAR"/>
+		<result property="valueColName" column="DIC_DES_COLNAME" javaType="String" jdbcType="VARCHAR"/>
+	</resultMap>
+      	   
+	<resultMap id="DictItem-Result" type="com.inwiss.springcrud.support.dictionary.DictBean">
+		<result property="code" column="CODE" javaType="String" jdbcType="VARCHAR"/>
+		<result property="value" column="VALUE" javaType="String" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!--
+		<resultMap id="DictItem-Result-With-ColIndex" type="com.inwiss.springcrud.support.dictionary.DictBean">
+		  <result property="code" columnIndex="1" />
+		  <result property="value" columnIndex="2" />
+		</resultMap>
+		-->
+	<!--MAPPED STATEMENT DEFINITION-->
+	<!--获取所有字典的元数据信息-->
+	<select id="getAllDictMetaData" resultMap="DictMetaData-Result">
+       select DIC_CODE, DIC_TYPE, DIC_TBLNAME, DIC_ID_COLNAME, DIC_IDVALUE, DIC_VAL_COLNAME, DIC_DES_COLNAME from AL_CORE_DICT_DEF
+	</select>
+	
+	<!--从独立的一张表中获取某个字典的所有字典项-->
+	<select id="getDictItemsFromIndependentTable" parameterType="Map" resultMap="DictItem-Result">
+       select ${codeColName} as CODE ,${valueColName} as VALUE from ${targetTableName} order by CODE
+	</select>
+    
+	<!--从多个字典共用的表中获取某个字典的所有字典项-->
+	<select id="getDictItemsFromShareableTable" parameterType="Map" resultMap="DictItem-Result">
+       select ${codeColName} as CODE ,${valueColName} as VALUE from ${targetTableName} where ${identifyColName} = #{identifyColValue} order by CODE
+	</select>
+    
+	<!--直接使用sql获取字典数据-->
+	<!--<select id="getDictItemsWithSql" parameterType="String" resultMap="DictItem-Result-With-ColIndex">
+		   $value$
+		</select>-->
+    
+</mapper>

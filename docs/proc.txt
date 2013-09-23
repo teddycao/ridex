@@ -1,0 +1,58 @@
+DECLARE 
+  P_I_MSISDN VARCHAR2(200);
+  P_I_BILL_DATE VARCHAR2(200);
+  P_I_ISDOUBLE VARCHAR2(200);
+  P_I_PRODUCT VARCHAR2(200);
+  P_I_PRODUCT_V VARCHAR2(200);
+  P_O_RESULT VARCHAR2(200);
+
+BEGIN 
+  P_I_MSISDN := '13809178008';
+  P_I_BILL_DATE := '201109';
+  P_I_ISDOUBLE := 'false';
+  P_I_PRODUCT := '99220014';
+  P_I_PRODUCT_V := '100011';
+  P_O_RESULT := NULL;
+
+  FEE.PACK_FEE_SENDBACK.PR_ALL_FEESENBACK ( P_I_MSISDN, P_I_BILL_DATE, P_I_ISDOUBLE, P_I_PRODUCT, P_I_PRODUCT_V, P_O_RESULT );
+  COMMIT; 
+END; 
+
+
+
+查询及删除重复记录的SQL语句 
+1、查找表中多余的重复记录，重复记录是根据单个字段（peopleId）来判断 
+select * from people 
+where peopleId in (select   peopleId from   people group by   peopleId having count(peopleId) > 1) 
+2、删除表中多余的重复记录，重复记录是根据单个字段（peopleId）来判断，只留有rowid最小的记录 
+delete from people 
+where peopleId in (select   peopleId from people group by   peopleId   having count(peopleId) > 1) 
+and rowid not in (select min(rowid) from   people group by peopleId having count(peopleId )>1) 
+
+
+查询重复记录
+     select *
+          from FEE_CELL_STATIONS  u
+         where u.ci_dec in (select u.ci_dec 
+                                 from FEE_CELL_STATIONS u
+                                group by u.ci_dec    having count(u.ci_dec) > 8);
+                                
+                                
+                                
+select *
+          from FEE_CELL_STATIONS  u where  u.ci_dec='7524';
+
+
+
+delete from FEE_CELL_STATIONS 
+where CI_DEC in (select   CI_DEC from FEE_CELL_STATIONS group by   CI_DEC   having count(CI_DEC) > 1) 
+and rowid not in (select min(rowid) from   FEE_CELL_STATIONS group by CI_DEC having count(CI_DEC )>1) 
+
+
+
+    select sum(cfee) from FEE_GSMDETAIL_TP where MSISDN='15891690652' and  BILL_DATE ='201109';
+---------------------------------------------------------------------------------------
+
+delete from FEE_CELL_STATIONS 
+where CI_DEC in (select   CI_DEC from FEE_CELL_STATIONS group by   CI_DEC   having count(CI_DEC) > 1) 
+and rowid not in (select min(rowid) from   FEE_CELL_STATIONS group by CI_DEC having count(CI_DEC )>1) 

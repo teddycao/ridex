@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.User" table="al_core_user"
+		lazy="false" dynamic-update="true" dynamic-insert="true">
+		<cache usage="read-write" />
+
+		<id name="name" column="username" type="java.lang.String" length="20"
+			unsaved-value="null">
+			<generator class="assigned"/>
+		</id>
+
+					
+		<version name="version" column="version" type="long" unsaved-value="null" />
+
+		<property name="password" type="java.lang.String" update="true"
+			insert="true" column="password" length="252" not-null="true" />
+
+		<property name="firstName" type="java.lang.String" update="true"
+			insert="true" column="first_name" length="50" not-null="false" />
+
+		<property name="lastName" type="java.lang.String" update="true"
+			insert="true" column="last_name" length="50" not-null="false" />
+
+		<property name="address" type="java.lang.String" update="true"
+			insert="true" column="address" length="150" not-null="false" />
+
+		<property name="city" type="java.lang.String" update="true"
+			insert="true" column="city" length="50" not-null="false" />
+
+		<property name="province" type="java.lang.String" update="true"
+			insert="true" column="province" length="100" not-null="false" />
+
+		<property name="country" type="java.lang.String" update="true"
+			insert="true" column="country" length="100" not-null="false" />
+
+		<property name="postalCode" type="java.lang.String" update="true"
+			insert="true" column="postal_code" length="15" not-null="false" />
+
+		<property name="email" type="java.lang.String" update="true" insert="true">
+			<column name="email" length="252" not-null="false" unique="false" />
+		</property>
+
+		<property name="phoneNumber" type="java.lang.String" update="true"
+			insert="true" column="phone_number" length="252" not-null="false" />
+
+		<property name="website" type="java.lang.String" update="true"
+			insert="true" column="website" length="252" not-null="false" />
+			
+		<property name="fullName" type="java.lang.String" update="true"
+			insert="true" column="fullName" length="60" not-null="false" />
+			
+			
+		<property name="niceName" type="java.lang.String" update="true"
+			insert="true" column="niceName" length="60" not-null="false" />
+			
+		<property name="userId" type="java.lang.String" update="true"
+			insert="true" column="userId" length="60" not-null="false" />
+
+		<bag name="rolesAssociations" table="al_core_user_role" lazy="true" cascade="none">
+			<key>
+				<column name="username" length="20" />
+			</key>
+
+			<composite-element class="org.inwiss.platform.model.core.UserRoleAssociation">
+				<parent name="user" />
+				<many-to-one name="role" class="org.inwiss.platform.model.core.Role"
+					cascade="none" outer-join="auto" update="true" insert="true"
+					column="rolename" not-null="true" />
+				<many-to-one name="group"
+					class="org.inwiss.platform.model.core.Group" cascade="none"
+					outer-join="auto" update="true" insert="true" column="groupname"
+					not-null="false" />
+			</composite-element>
+		</bag>
+
+		<bag name="groups" table="al_core_group_user" lazy="true" inverse="false"
+			cascade="none" outer-join="false">
+			<key>
+				<column name="username" length="20" />
+			</key>
+			<many-to-many class="org.inwiss.platform.model.core.Group"
+				column="groupname" outer-join="false" />
+		</bag>
+		
+		
+
+		<property name="enabled" type="true_false" update="true"
+			insert="true" column="enabled" not-null="true" />
+		
+		<property name="dept" type="java.lang.String" update="true"
+			insert="true" column="dept" not-null="false" />
+	</class>
+
+</hibernate-mapping>

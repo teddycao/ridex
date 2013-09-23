@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+	<!--用户退费语音详单-->
+	<bean name="gsmdetail" id="gsmdetail" class="com.inwiss.springcrud.metadata.CrudMeta" init-method="init">
+		<property name="title" value="基站上报"/>
+		<property name="tableName" value="fee_gsmdetail_tp"/>
+		<property name="dictFactory" ref="dictFactory"/>
+		<property name="columnMetas">
+			<list>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="手机号码"/>
+					<property name="colName" value="MSISDN"/>
+					<property name="primaryKey" value="true"/>
+					<property name="applyLike" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="通话日期"/>
+					<property name="colName" value="BILL_DATE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="呼叫类型"/>
+					<property name="colName" value="CALL_TYPE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="通话开始日期"/>
+					<property name="colName" value="START_DATE"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="通话开始时间"/>
+					<property name="colName" value="START_TIME"/>
+					
+				</bean>
+			   
+			   <bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="通话时长"/>
+					<property name="colName" value="CALL_DURATION"/>
+					
+				</bean>
+				
+	
+			  <bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="对方号码"/>
+					<property name="colName" value="OTHER_PARTY"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="前转号码"/>
+					<property name="colName" value="ORIGIN_NO"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				
+					<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="归属市县"/>
+					<property name="colName" value="OFFICE_CODE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="话单业务类型"/>
+					<property name="colName" value="BIZ_TYPE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="漫游类型"/>
+					<property name="colName" value="ROAM_TYPE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="基本通话费"/>
+					<property name="colName" value="CFEE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>	
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="长途通话费"/>
+					<property name="colName" value="LFEE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>	
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="总费用"/>
+					<property name="colName" value="TOTAL_FEE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>	
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="基站号"/>
+					<property name="colName" value="CELL_ID"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>	
+				
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="网络标识"/>
+					<property name="colName" value="VPN_ID"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>	
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="数据源类型"/>
+					<property name="colName" value="SOURCE_TYPE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>	
+			</list>
+		</property>
+	</bean>	
+	
+	
+	 <bean name="gsmdetailImportMeta" class="com.inwiss.springcrud.metadata.ImportMeta">
+		<property name="crudMeta" ref="gsmdetail"/>
+		<!-- 值从1开始,1代表0,因为int默认值为0 -->
+		<property name="excludeColumnNames">
+			<map>
+				<entry  key ="MSISDN" value="1" /> 
+				<entry  key ="BILL_DATE" value="2" /> 
+				<entry  key ="VPN_ID" value="16" /> 
+				<entry  key ="SOURCE_TYPE" value="17" />     
+			</map>
+		</property>
+		
+		
+		<property name="excelImportMeta">
+			<bean class="com.inwiss.springcrud.support.excelinput.ExcelImportMeta" >
+				<property name="startRow" value="1"/>
+				<property name="maskEndRow" value="$#rownum#-1"/>
+				<property name="startColumn" value="0"/>
+				<property name="sheetName" >
+					<list><value>0</value></list>
+				</property>
+			</bean>
+		</property>
+		
+		<property name="fileResolver">
+			<bean class="com.inwiss.springcrud.support.excelinput.ExceDirectResolverImpl" />
+		</property>
+
+	</bean>
+</beans>

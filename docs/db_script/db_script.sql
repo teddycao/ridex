@@ -1,0 +1,499 @@
+
+
+DROP SEQUENCE RESOURCE_ID_SEQ;
+
+CREATE SEQUENCE RESOURCE_ID_SEQ
+  START WITH 10000
+  MAXVALUE 999999999999
+  MINVALUE 1
+  NOCYCLE
+  NOCACHE
+  NOORDER;
+/
+
+DROP SEQUENCE ORG_ID_SEQ;
+
+CREATE SEQUENCE ORG_ID_SEQ
+  START WITH 10000
+  MAXVALUE 999999999999
+  MINVALUE 1
+  NOCYCLE
+  NOCACHE
+  NOORDER;
+/
+
+DROP TABLE al_core_user CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE AL_CORE_USER
+(
+  USERNAME      VARCHAR2(20 CHAR)               NOT NULL,
+  USERID        VARCHAR2(60 CHAR)               NOT NULL,
+  DEPT		VARCHAR2(50 CHAR),
+  PASSWORD      VARCHAR2(252 CHAR),
+  FULLNAME      VARCHAR2(50 CHAR),
+  NICENAME      VARCHAR2(50 CHAR),
+  FIRST_NAME    VARCHAR2(50 CHAR),
+  LAST_NAME     VARCHAR2(50 CHAR),
+  ADDRESS       VARCHAR2(150 CHAR),
+  CITY          VARCHAR2(50 CHAR),
+  PROVINCE      VARCHAR2(100 CHAR),
+  COUNTRY       VARCHAR2(100 CHAR),
+  POSTAL_CODE   VARCHAR2(15 CHAR),
+  EMAIL         VARCHAR2(252 CHAR),
+  PHONE_NUMBER  VARCHAR2(252 CHAR),
+  WEBSITE       VARCHAR2(252 CHAR),
+  VERSION       NUMBER(19),
+  ENABLED       CHAR(1 CHAR)                    DEFAULT 'T'                   NOT NULL
+);
+
+
+ALTER TABLE AL_CORE_USER ADD (
+  PRIMARY KEY
+ (USERNAME));
+/
+
+
+DROP TABLE al_core_role CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE al_core_role
+(
+  rolename     VARCHAR2(40 CHAR)              NOT NULL,
+  version      NUMBER(19),
+  title        VARCHAR2(63 CHAR)              NOT NULL,
+  description  VARCHAR2(252 CHAR)
+);
+
+
+ALTER TABLE al_core_role ADD (
+  PRIMARY KEY
+ (rolename),
+  UNIQUE (title));
+
+
+/
+
+
+DROP TABLE al_core_group CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE al_core_group
+(
+  groupname    VARCHAR2(20 CHAR)              NOT NULL,
+  title        VARCHAR2(63 CHAR)              NOT NULL,
+  version      NUMBER(19),
+  description  VARCHAR2(252 CHAR)
+);
+
+
+ALTER TABLE al_core_group ADD (
+  PRIMARY KEY
+ (groupname),
+  UNIQUE (title));
+
+/
+
+DROP TABLE al_core_user_cookie CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_user_cookie
+(
+  id            NUMBER(19)                    NOT NULL,
+  username      VARCHAR2(20 CHAR),
+  cookie_id     VARCHAR2(100 CHAR)            NOT NULL,
+  date_created  TIMESTAMP(6)                  NOT NULL
+);
+
+
+ALTER TABLE al_core_user_cookie ADD (
+  PRIMARY KEY
+ (id));
+
+ALTER TABLE al_core_user_cookie ADD (
+  CONSTRAINT FK608ABA4CB181EB49 
+ FOREIGN KEY (username) 
+ REFERENCES al_core_user (username));
+
+/
+
+DROP TABLE al_core_user_role CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_user_role
+(
+  username   VARCHAR2(20 CHAR)                NOT NULL,
+  rolename   VARCHAR2(40 CHAR)                NOT NULL,
+  groupname  VARCHAR2(20 CHAR)
+);
+
+
+ALTER TABLE al_core_user_role ADD (
+  CONSTRAINT FKBCBB0A5EB181EB49 
+ FOREIGN KEY (username) 
+ REFERENCES al_core_user (username),
+  CONSTRAINT FKBCBB0A5EB17EC71F 
+ FOREIGN KEY (rolename) 
+ REFERENCES al_core_role (rolename),
+  CONSTRAINT FKBCBB0A5E10956E61 
+ FOREIGN KEY (groupname) 
+ REFERENCES al_core_group (groupname));
+
+/
+
+DROP TABLE al_core_group_role CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_group_role
+(
+  groupname  VARCHAR2(20 CHAR)                NOT NULL,
+  rolename   VARCHAR2(40 CHAR)                NOT NULL
+);
+
+
+ALTER TABLE al_core_group_role ADD (
+  CONSTRAINT FKB3D422C2B17EC71F 
+ FOREIGN KEY (rolename) 
+ REFERENCES al_core_role (rolename),
+  CONSTRAINT FKB3D422C210956E61 
+ FOREIGN KEY (groupname) 
+ REFERENCES al_core_group (groupname));
+/
+
+
+DROP TABLE al_core_group_user CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_group_user
+(
+  groupname  VARCHAR2(20 CHAR)                NOT NULL,
+  username   VARCHAR2(20 CHAR)                NOT NULL
+);
+
+
+ALTER TABLE al_core_group_user ADD (
+  CONSTRAINT FKB3D58E17B181EB49 
+ FOREIGN KEY (username) 
+ REFERENCES al_core_user (username),
+  CONSTRAINT FKB3D58E1710956E61 
+ FOREIGN KEY (groupname) 
+ REFERENCES al_core_group (groupname));
+
+/
+
+
+DROP TABLE al_core_localizable CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE al_core_localizable
+(
+  id          NUMBER(19)                      NOT NULL,
+  version     NUMBER(19),
+  class_name  VARCHAR2(252 CHAR)
+);
+
+
+ALTER TABLE al_core_localizable ADD (
+  PRIMARY KEY
+ (id));
+/
+
+
+
+DROP TABLE al_core_menu_item CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_menu_item
+(
+  id                 NUMBER(19)               NOT NULL,
+  parent_id          NUMBER(19),
+  action             VARCHAR2(252 CHAR),
+  menu_name             VARCHAR2(252 CHAR),
+  menu_text             VARCHAR2(252 CHAR),
+  forward            VARCHAR2(252 CHAR),
+  location           VARCHAR2(252 CHAR),
+   IS_LEAF          CHAR(1 CHAR),   
+  image              VARCHAR2(252 CHAR),
+  alt_image          VARCHAR2(252 CHAR),
+  target             VARCHAR2(252 CHAR),
+  pos                NUMBER(10),
+  align              VARCHAR2(252 CHAR),
+  style              VARCHAR2(252 CHAR),
+  style_class        VARCHAR2(252 CHAR),
+  ICON_CLS           VARCHAR2(252 CHAR),
+  identifier         VARCHAR2(252 CHAR),
+  qtip               VARCHAR2(252 CHAR),
+  js_onclick         VARCHAR2(252 CHAR),
+   desc_cn           VARCHAR2(252 CHAR),
+  version            NUMBER(19),
+  orig_id            NUMBER(19),
+  owner_id            NUMBER(19)
+);
+
+
+ALTER TABLE al_core_menu_item ADD (
+  PRIMARY KEY
+ (id));
+
+ALTER TABLE al_core_menu_item ADD (
+  CONSTRAINT FK4D79B7E765082F93 
+ FOREIGN KEY (orig_id) 
+ REFERENCES al_core_menu_item (id),
+  CONSTRAINT FK4D79B7E7281AD08A 
+ FOREIGN KEY (parent_id) 
+ REFERENCES al_core_menu_item (id),
+  CONSTRAINT FK4D79B7E7BBA3DFB5 
+ FOREIGN KEY (owner_id) 
+ REFERENCES al_core_localizable (id));
+ /
+
+
+
+
+DROP TABLE al_core_menu_item_role CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_menu_item_role
+(
+  menu_item_id  NUMBER(19)                    NOT NULL,
+  rolename      VARCHAR2(40 CHAR)             NOT NULL
+);
+
+
+ALTER TABLE al_core_menu_item_role ADD (
+  CONSTRAINT FKCA059CEB17EC71F 
+ FOREIGN KEY (rolename) 
+ REFERENCES al_core_role (rolename));
+
+ALTER TABLE al_core_menu_item_role ADD (
+  CONSTRAINT FKCA059CE7719C6A1 
+ FOREIGN KEY (menu_item_id) 
+ REFERENCES al_core_menu_item (id));
+
+ /
+
+
+
+
+DROP TABLE al_core_permission CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_permission
+(
+  id                 NUMBER(19)               NOT NULL,
+  type		     VARCHAR2(8 CHAR),
+  name		     VARCHAR2(100 CHAR),
+  title		     VARCHAR2(100 CHAR),
+  has_resource	     VARCHAR2(252 CHAR),
+  lacks_resource     VARCHAR2(252 CHAR),
+  action	     VARCHAR2(252 CHAR),
+  identifier         VARCHAR2(252 CHAR),
+  location           VARCHAR2(252 CHAR),
+  POS                NUMBER(10),
+  owner_id           VARCHAR2(100 CHAR),
+  mask	             VARCHAR2(252 CHAR)
+  
+);
+
+
+
+
+DROP TABLE al_core_permission_role CASCADE CONSTRAINTS PURGE;
+CREATE TABLE al_core_permission_role
+(
+  permission_id  VARCHAR2(100 CHAR)                NOT NULL,
+  rolename   VARCHAR2(100 CHAR)                NOT NULL
+);
+/
+
+
+DROP TABLE AL_CORE_ORG CASCADE CONSTRAINTS PURGE;
+
+
+CREATE TABLE AL_CORE_ORG
+(
+  ID           NUMBER(19)                       NOT NULL,
+  PARENT_ID    NUMBER(19),
+  ACTION       VARCHAR2(252 CHAR),
+  ORG_NAME     VARCHAR2(252 CHAR),
+  ORG_TEXT     VARCHAR2(252 CHAR),
+  FORWARD      VARCHAR2(252 CHAR),
+  LOCATION     VARCHAR2(252 CHAR),
+  IS_LEAF      CHAR(1 CHAR),
+  IMAGE        VARCHAR2(252 CHAR),
+  ALT_IMAGE    VARCHAR2(252 CHAR),
+  TARGET       VARCHAR2(252 CHAR),
+  POS          NUMBER(10),
+  ALIGN        VARCHAR2(252 CHAR),
+  STYLE        VARCHAR2(252 CHAR),
+  STYLE_CLASS  VARCHAR2(252 CHAR),
+  ICON_CLS     VARCHAR2(252 CHAR),
+  IDENTIFIER   VARCHAR2(252 CHAR),
+  QTIP         VARCHAR2(252 CHAR),
+  JS_ONCLICK   VARCHAR2(252 CHAR),
+  DESC_CN      VARCHAR2(252 CHAR),
+  VERSION      NUMBER(19),
+  ORIG_ID      NUMBER(19),
+  OWNER_ID     NUMBER(19),
+  ORG_LEVEL    VARCHAR2(10 CHAR),
+  STATE        CHAR(1 BYTE)
+);
+
+
+ALTER TABLE AL_CORE_ORG ADD (
+  PRIMARY KEY
+ (ID));
+
+ /
+
+DROP TABLE AL_RPT_PARAM_DEF CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE AL_RPT_PARAM_DEF
+(
+  INTER_ID     INTEGER                          NOT NULL,
+  RPT_ID       VARCHAR2(100 CHAR)               NOT NULL,
+  RPT_NAME     VARCHAR2(100 CHAR),
+  PARAM_NAME   VARCHAR2(100 CHAR)               NOT NULL,
+  PARAM_TITLE  VARCHAR2(100 CHAR)               NOT NULL,
+  PARAM_DESC   VARCHAR2(100 CHAR),
+  PARAM_TYPE   VARCHAR2(20 CHAR),
+  PARAM_REF    VARCHAR2(20 CHAR),
+  INCL_VALS     VARCHAR2(252 CHAR),
+  EXCL_VALS     VARCHAR2(252 CHAR),
+  PARAM_FORMAT    VARCHAR2(252 CHAR),
+  PARAM_JSON    VARCHAR2(252 CHAR),
+  PARAM_TIP    VARCHAR2(252 CHAR),
+  DFT_VAL      VARCHAR2(100 CHAR),
+  P_SORT       INTEGER,
+  IS_NEED      VARCHAR2(1 CHAR)                 DEFAULT 'Y'                   NOT NULL,
+  IS_PROMPT    VARCHAR2(1 CHAR)                 DEFAULT 'Y'                   NOT NULL,
+  IS_DISPLAY   VARCHAR2(1 CHAR)                 DEFAULT 'Y'                   NOT NULL
+);
+
+COMMENT ON COLUMN AL_RPT_PARAM_DEF.DFT_VAL IS '默认值';
+
+COMMENT ON COLUMN AL_RPT_PARAM_DEF.IS_NEED IS '是否必输;';
+
+COMMENT ON COLUMN AL_RPT_PARAM_DEF.IS_PROMPT IS '是否是提示类型参数';
+
+COMMENT ON COLUMN AL_RPT_PARAM_DEF.IS_DISPLAY IS '是否显示';
+
+
+CREATE UNIQUE INDEX AL_RPT_PARAM_DEF_PK ON AL_RPT_PARAM_DEF
+(INTER_ID)
+LOGGING
+NOPARALLEL;
+
+
+ALTER TABLE AL_RPT_PARAM_DEF ADD (
+  CONSTRAINT AL_RPT_PARAM_DEF_PK
+ PRIMARY KEY
+ (INTER_ID));
+/
+
+
+DROP TABLE al_core_menu_item CASCADE CONSTRAINTS PURGE;
+CREATE TABLE AL_CORE_MENU_ITEM
+(
+  ID           NUMBER(19)                       NOT NULL,
+  PARENT_ID    NUMBER(19),
+  ACTION       VARCHAR2(252 CHAR),
+  MENU_NAME    VARCHAR2(252 CHAR),
+  MENU_TEXT    VARCHAR2(252 CHAR),
+  FORWARD      VARCHAR2(252 CHAR),
+  LOCATION     VARCHAR2(252 CHAR),
+  IS_LEAF      CHAR(1 CHAR),
+  IMAGE        VARCHAR2(252 CHAR),
+  ALT_IMAGE    VARCHAR2(252 CHAR),
+  TARGET       VARCHAR2(252 CHAR),
+  POS          NUMBER(10),
+  ALIGN        VARCHAR2(252 CHAR),
+  STYLE        VARCHAR2(252 CHAR),
+  STYLE_CLASS  VARCHAR2(252 CHAR),
+  ICON_CLS     VARCHAR2(252 CHAR),
+  IDENTIFIER   VARCHAR2(252 CHAR),
+  QTIP         VARCHAR2(252 CHAR),
+  JS_ONCLICK   VARCHAR2(252 CHAR),
+  DESC_CN      VARCHAR2(252 CHAR),
+  VERSION      NUMBER(19),
+  ORIG_ID      NUMBER(19),
+  OWNER_ID     NUMBER(19),
+  RPT_ID       VARCHAR2(100 CHAR)
+);
+
+
+ALTER TABLE AL_CORE_MENU_ITEM ADD (
+  PRIMARY KEY
+ (ID));
+
+
+ALTER TABLE AL_CORE_MENU_ITEM ADD (
+  CONSTRAINT FK4D79B7E765082F93 
+ FOREIGN KEY (ORIG_ID) 
+ REFERENCES AL_CORE_MENU_ITEM (ID));
+
+ALTER TABLE AL_CORE_MENU_ITEM ADD (
+  CONSTRAINT FK4D79B7E7281AD08A 
+ FOREIGN KEY (PARENT_ID) 
+ REFERENCES AL_CORE_MENU_ITEM (ID));
+
+ALTER TABLE AL_CORE_MENU_ITEM ADD (
+  CONSTRAINT FK4D79B7E7BBA3DFB5 
+ FOREIGN KEY (OWNER_ID) 
+ REFERENCES AL_CORE_LOCALIZABLE (ID));
+
+
+
+DROP SEQUENCE RREPORT_ID_SEQ;
+
+CREATE SEQUENCE RREPORT_ID_SEQ
+  START WITH 10001
+  MAXVALUE 999999999999
+  MINVALUE 1
+  NOCYCLE
+  NOCACHE
+  NOORDER;
+
+
+DROP TABLE AL_RPT_INFO CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE AL_RPT_INFO 
+(
+  INTER_ID   NUMBER                             NOT NULL,
+  RPT_ID     VARCHAR2(20 CHAR)                  NOT NULL,
+  RPT_NAME   VARCHAR2(255 CHAR)                 NOT NULL,
+  RPT_URL    VARCHAR2(255 CHAR),
+  RPT_DESC   VARCHAR2(255 CHAR),
+  RPT_ORG    VARCHAR2(10 CHAR),
+  RPT_STATU  VARCHAR2(2 CHAR),
+  PARENT_ID  NUMBER,
+  IS_LEAF    VARCHAR2(1 CHAR)
+);
+
+COMMENT ON COLUMN AL_RPT_INFO.INTER_ID IS '流水号';
+
+COMMENT ON COLUMN AL_RPT_INFO.RPT_ID IS '报表编号';
+
+COMMENT ON COLUMN AL_RPT_INFO.RPT_NAME IS '报表名称';
+
+COMMENT ON COLUMN AL_RPT_INFO.RPT_URL IS '报表对应的URL';
+
+COMMENT ON COLUMN AL_RPT_INFO.RPT_DESC IS '报表描述信息';
+
+COMMENT ON COLUMN AL_RPT_INFO.RPT_ORG IS '报表所属机构或者部门';
+
+COMMENT ON COLUMN AL_RPT_INFO.RPT_STATU IS '0-正常 1-非正常';
+
+
+ALTER TABLE AL_RPT_INFO ADD (
+  CONSTRAINT PK_AL_RPT_INFO
+ PRIMARY KEY
+ (INTER_ID));
+
+
+
+DROP SEQUENCE RREPORT_PARAM_ID_SEQ;
+
+CREATE SEQUENCE RREPORT_PARAM_ID_SEQ
+  START WITH 10030
+  MAXVALUE 999999999999
+  MINVALUE 1
+  NOCYCLE
+  NOCACHE
+  NOORDER;
+
+
+
+
+DROP TABLE AL_RPT_INFO_PARAM CASCADE CONSTRAINTS PURGE;
+CREATE TABLE AL_RPT_INFO_PARAM
+(
+  RPT_INFO_INTER_ID   NUMBER                    NOT NULL,
+  RPT_ID     VARCHAR2(20 CHAR)                  NOT NULL
+);
+
+COMMENT ON COLUMN AL_RPT_INFO_PARAM.RPT_INFO_INTER_ID IS '报表信息表中的流水号(INTER_ID)';
+
+COMMENT ON COLUMN AL_RPT_INFO_PARAM.RPT_ID IS '报表编号 与报表信息表和报表参数表中的RPT_ID保持一致';

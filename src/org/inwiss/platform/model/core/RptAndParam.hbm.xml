@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.inwiss.platform.model.core.RptAndParam" table="al_rpt_info_param"
+		lazy="false">
+
+		<id name="rptInfoInterId" column="rpt_info_inter_id" type="java.lang.Long">
+			<generator class="assigned">
+			</generator>
+		</id>
+		
+		<property name="rptId" type="java.lang.String" update="true"
+			insert="true">
+			<column name="rpt_id" length="100" not-null="false"
+				unique="false" />
+		</property>
+		
+	</class>
+
+</hibernate-mapping>

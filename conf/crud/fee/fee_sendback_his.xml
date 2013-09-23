@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+	<!--退费记录查询-->
+	<bean name="sendbackhis" id="sendbackhis" class="com.inwiss.springcrud.metadata.CrudMeta" init-method="init">
+		<property name="title" value="用户退费记录"/>
+		<property name="tableName" value="FEE_SENDBACK_HIS"/>
+		<property name="dictFactory" ref="dictFactory"/>
+		<property name="crudViewMeta">	
+			<bean class="com.inwiss.springcrud.metadata.CrudViewMeta">
+				<property name="dataImportEnabled" value="false"/>
+				<property name="filterWindowEnabled" value="true"/>
+				<property name="addEnabled" value="false"/>
+				<property name="editSingleEnabled" value="false"/>
+				<property name="deleteSingleEnabled" value="false"/>
+				
+			</bean>
+		</property>
+		
+		<property name="columnMetas">
+			<list>				
+				<!-- bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="流水号"/>
+					<property name="colName" value="ID"/>
+					<property name="primaryKey" value="true"/>
+					<property name="applyLike" value="false"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean-->
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="手机号码"/>
+					<property name="colName" value="MSISDN"/>
+					<property name="primaryKey" value="true"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="账单日期"/>
+					<property name="colName" value="BILL_DATE"/>
+					<property name="primaryKey" value="true"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="退费金额"/>
+					<property name="colName" value="AMT"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+					<property name="title" value="退费人"/>
+					<property name="colName" value="OPT_USER"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="退费日期"/>
+					<property name="colName" value="OPER_DATE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+	
+	
+				 <bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="当前状态"/>
+					<property name="colName" value="STATUS"/>
+					<property name="useAsDataFilter" value="true"/>
+				</bean>
+				
+			    <bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="是否双倍返还"/>
+					<property name="colName" value="IS_DOUBLE"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+				
+				<bean class="com.inwiss.springcrud.metadata.ColumnMeta">
+				    <property name="title" value="备注"/>
+					<property name="colName" value="CMT"/>
+					<property name="useAsDataFilter" value="false"/>
+				</bean>
+			</list>
+		</property>
+		
+		<property name="defaultDataFilters">
+			<list>
+				<bean class="com.inwiss.springcrud.datafilter.EqualFilter">
+					<property name="colName" value="STATUS"/>
+					<property name="colValue" value="1"/>
+				</bean>
+			</list>
+		</property>
+		
+	</bean>	
+</beans>
